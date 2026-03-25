@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Claude Code — Session Guide | Kaizen Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A1A18;
+    --cream: #F5F0E8;
+    --gold: #C9A84C;
+    --gold-dark: #A8893D;
+    --gold-light: #E8DDB8;
+    --gold-pale: #F5F0DC;
+    --charcoal: #2E2E2A;
+    --stone: #8C8778;
+    --parchment: #EDE8DC;
+    --white: #FEFDFB;
+    --black: #0F0F0D;
+    --green: #5A9E6F;
+    --green-light: #E8F2EB;
+    --amber: #C4964A;
+    --amber-light: #F5EFE0;
+    --red: #C45B4A;
+    --neutral-50: #FAF9F7;
+    --neutral-100: #F0EDE8;
+    --neutral-200: #E0DBD3;
+    --neutral-300: #C7C1B7;
+    --neutral-400: #A39D93;
+    --neutral-500: #7A756C;
+    --neutral-600: #5C5850;
+    --neutral-700: #3D3A35;
+    --neutral-800: #2A2825;
+    --neutral-900: #1A1917;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
+  /* ============================================
+     TOP BAR
+     ============================================ */
+  .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--ink);
+    border-bottom: 1px solid var(--charcoal);
+  }
+
+  .top-bar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand-logo {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .brand-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--neutral-700);
+  }
+
+  .brand-context {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .tab-nav {
+    display: flex;
+    gap: 0;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--neutral-500);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 24px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .tab-btn:hover { color: var(--neutral-300); }
+  .tab-btn.active { color: var(--cream); }
+
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .tab-btn .tab-number {
+    font-size: 9px;
+    color: var(--neutral-600);
+    margin-right: 6px;
+    font-weight: 600;
+  }
+
+  .tab-btn.active .tab-number { color: var(--gold); }
+
+  /* ============================================
+     PAGES & SECTIONS
+     ============================================ */
+  .page {
+    display: none;
+    padding-top: 68px;
+    min-height: 100vh;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    min-height: calc(100vh - 68px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 20%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 36px;
+    font-weight: 500;
+    opacity: 0;
+    animation: slideUp 0.7s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 5.5vw, 68px);
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: slideUp 0.7s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--stone);
+    max-width: 520px;
+    margin: 0 auto 52px;
+    font-weight: 300;
+    line-height: 1.75;
+    opacity: 0;
+    animation: slideUp 0.7s ease 0.6s forwards;
+  }
+
+  .hero-line {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: slideUp 0.5s ease 0.8s forwards;
+  }
+
+  .hero-session {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--neutral-500);
+    font-weight: 500;
+    opacity: 0;
+    animation: slideUp 0.5s ease 1s forwards;
+  }
+
+  /* ============================================
+     SECTION HEADERS
+     ============================================ */
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-number {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-dark);
+  }
+
+  .section-subtitle {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--stone);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* ============================================
+     DARK SECTION
+     ============================================ */
+  .section-dark {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .section-dark .section-number { color: var(--gold); }
+  .section-dark .section-title { color: var(--cream); }
+  .section-dark .section-subtitle { color: var(--stone); }
+
+  /* ============================================
+     PARCHMENT SECTION
+     ============================================ */
+  .section-parchment {
+    background: var(--parchment);
+  }
+
+  /* ============================================
+     PAIN / SHIFT CARDS
+     ============================================ */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .pain-card {
+    background: var(--charcoal);
+    padding: 36px 40px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    transition: background 0.3s ease;
+  }
+
+  .pain-card:hover {
+    background: var(--neutral-800);
+  }
+
+  .pain-number {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+  }
+
+  .pain-content h3 {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .pain-content p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--neutral-400);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ============================================
+     SOLUTION STACK
+     ============================================ */
+  .solution-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .solution-card {
+    background: var(--white);
+    border: 1px solid var(--neutral-200);
+    padding: 40px;
+    position: relative;
+  }
+
+  .solution-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+
+  .solution-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .solution-card h3 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .solution-card p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--neutral-600);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ============================================
+     BRIEF / CODE BLOCKS
+     ============================================ */
+  .brief-block {
+    background: var(--charcoal);
+    padding: 40px;
+    margin-top: 32px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--neutral-300);
+    white-space: pre-wrap;
+    position: relative;
+    border-left: 3px solid var(--gold);
+  }
+
+  .brief-block .brief-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .brief-key {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .brief-value {
+    color: var(--cream);
+  }
+
+  /* ============================================
+     CALLOUT BLOCKS
+     ============================================ */
+  .callout-dark {
+    background: var(--ink);
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+  }
+
+  .callout-dark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25%;
+    right: 25%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    opacity: 0.4;
+  }
+
+  .callout-dark p {
+    font-family: var(--font-heading);
+    font-size: clamp(20px, 2.5vw, 28px);
+    color: var(--cream);
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .callout-dark em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .callout-warm {
+    background: var(--parchment);
+    border-left: 3px solid var(--gold);
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+
+  .callout-warm p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--neutral-700);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .callout-warm strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ============================================
+     SETUP CHECKLIST
+     ============================================ */
+  .setup-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .setup-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--charcoal);
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .setup-item:hover {
+    border-left-color: var(--gold);
+  }
+
+  .setup-check {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--neutral-600);
+    border-radius: 4px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .setup-check.checked {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .setup-check.checked::after {
+    content: '\2713';
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .setup-item-content h4 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 2px;
+  }
+
+  .setup-item-content p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--neutral-500);
+    font-weight: 300;
+  }
+
+  .setup-item-content code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    background: var(--neutral-800);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--gold-light);
+  }
+
+  /* ============================================
+     STEP LIST (for First Build)
+     ============================================ */
+  .step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: var(--gold-dark);
+    font-weight: 400;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 32px;
+    padding-top: 4px;
+  }
+
+  .step-content h4 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--neutral-600);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .step-content code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    background: var(--neutral-100);
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: var(--neutral-700);
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .pack-footer {
+    background: var(--ink);
+    padding: 48px 40px;
+    text-align: center;
+    border-top: 1px solid var(--charcoal);
+  }
+
+  .pack-footer .brand-logo {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .pack-footer p {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--neutral-600);
+    letter-spacing: 0.06em;
+  }
+
+  /* ============================================
+     DIVIDER
+     ============================================ */
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    max-width: 200px;
+    margin: 0 auto;
+    opacity: 0.5;
+  }
+
+  /* ============================================
+     RESPONSIVE — TABLET
+     ============================================ */
+  @media (max-width: 1024px) {
+    .top-bar-inner { padding: 0 20px; }
+    .tab-btn { padding: 24px 14px; font-size: 10px; letter-spacing: 0.1em; }
+    .section { padding: 64px 32px; }
+  }
+
+  /* ============================================
+     RESPONSIVE — MOBILE
+     ============================================ */
+  @media (max-width: 768px) {
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .top-bar-inner {
+      flex-direction: column;
+      height: auto;
+      padding: 0;
+      gap: 0;
+    }
+
+    .brand {
+      width: 100%;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--charcoal);
+      justify-content: center;
+    }
+
+    .brand-context { display: none; }
+    .brand-divider { display: none; }
+    .brand-logo { font-size: 13px; }
+
+    .tab-nav {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      justify-content: flex-start;
+      padding: 0 8px;
+      gap: 0;
+      flex-wrap: nowrap;
+    }
+
+    .tab-nav::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      padding: 14px 14px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab-btn .tab-number {
+      font-size: 8px;
+      margin-right: 4px;
+    }
+
+    .page {
+      padding-top: 100px;
+    }
+
+    .hero {
+      padding: 48px 24px;
+      min-height: calc(100vh - 100px);
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 8vw, 42px);
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      margin-bottom: 24px;
+    }
+
+    .section {
+      padding: 48px 20px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 6vw, 32px);
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+    }
+
+    .pain-card {
+      flex-direction: column;
+      gap: 8px;
+      padding: 24px 20px;
+    }
+
+    .pain-number {
+      font-size: 24px;
+    }
+
+    .pain-content h3 {
+      font-size: 17px;
+    }
+
+    .pain-content p {
+      font-size: 13px;
+    }
+
+    .solution-card {
+      padding: 28px 24px;
+    }
+
+    .solution-card h3 {
+      font-size: 19px;
+    }
+
+    .brief-block {
+      padding: 20px;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    .callout-dark {
+      padding: 40px 24px;
+    }
+
+    .callout-dark p {
+      font-size: clamp(17px, 4vw, 22px);
+    }
+
+    .callout-warm {
+      padding: 20px 24px;
+    }
+
+    .setup-item {
+      padding: 16px 20px;
+    }
+
+    .setup-item-content h4 {
+      font-size: 14px;
+    }
+
+    .setup-item-content p {
+      font-size: 12px;
+    }
+
+    .step-item {
+      gap: 12px;
+    }
+
+    .step-number {
+      font-size: 20px;
+      width: 24px;
+    }
+
+    .step-content h4 {
+      font-size: 14px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+    }
+
+    .pack-footer {
+      padding: 36px 20px;
+    }
+
+    .section p[style*="font-size: 16px"],
+    .section p[style*="font-size: 15px"] {
+      font-size: 14px !important;
+    }
+  }
+
+  /* ============================================
+     RESPONSIVE — SMALL MOBILE
+     ============================================ */
+  @media (max-width: 400px) {
+    .tab-btn {
+      padding: 12px 10px;
+      font-size: 9px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-title {
+      font-size: 26px;
+    }
+
+    .section-title {
+      font-size: 22px;
+    }
+
+    .brief-block {
+      font-size: 11px;
+      padding: 16px;
+    }
+
+    .pain-card {
+      padding: 20px 16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     TOP BAR
+     ============================================ -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="brand">
+      <span class="brand-logo">Kaizen Collective</span>
+      <div class="brand-divider"></div>
+      <span class="brand-context">Claude Code</span>
+    </div>
+    <nav class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('shift')">
+        <span class="tab-number">01</span>The Shift
+      </button>
+      <button class="tab-btn" onclick="showTab('builds')">
+        <span class="tab-number">02</span>What It Builds
+      </button>
+      <button class="tab-btn" onclick="showTab('power')">
+        <span class="tab-number">03</span>Power Tools
+      </button>
+      <button class="tab-btn" onclick="showTab('setup')">
+        <span class="tab-number">04</span>Setup
+      </button>
+      <button class="tab-btn" onclick="showTab('first-build')">
+        <span class="tab-number">05</span>First Build
+      </button>
+      <button class="tab-btn" onclick="showTab('next')">
+        <span class="tab-number">06</span>What's Next
+      </button>
+    </nav>
+  </div>
+</div>
+
+<!-- ============================================
+     TAB 1: THE SHIFT
+     ============================================ -->
+<div id="shift" class="page active">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Claude 101 — Claude Code</div>
+    <h1 class="hero-title">Stop <em>Using</em> AI.<br>Start <em>Building</em> With It.</h1>
+    <p class="hero-subtitle">You've been using AI to work faster. This guide shows you how to use it to build things — tools, systems, pages — that run permanently inside your business. No coding required.</p>
+    <div class="hero-line"></div>
+    <div class="hero-session">Claude 101 · Claude Code · Kaizen Collective</div>
+  </div>
+
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">01 — The Shift</div>
+      <div class="section-title" style="color: var(--cream);">From Asking to <em>Building</em></div>
+      <div class="section-subtitle">There's a ceiling to what AI chat can do for you. This is how you break through it.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Up until now, you've been having conversations with AI. Ask a question, get an answer. Describe a task, get a draft. That's useful — genuinely. But it's still one task at a time, one conversation at a time.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Claude Code is different. Instead of chatting back and forth, you describe what you want to exist — and Claude builds it. A landing page. A reporting tool. An automated system that pulls data from your platforms every morning and sends you a summary before you've finished your coffee.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">You don't write the code. You describe the outcome in plain English. Claude writes the code, runs it, tests it, fixes it, and delivers a finished product. That's not a productivity hack — it's a completely different category of tool.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-number">1</div>
+        <div class="pain-content">
+          <h3>AI Chat: Claude drafts your content</h3>
+          <p>Claude Code: Claude builds a content engine that pulls from your brand guidelines, creates a week's worth of posts, generates matching visuals, and schedules them — every week, without you touching it. The difference between asking someone to write a caption and hiring someone to run your content department.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-number">2</div>
+        <div class="pain-content">
+          <h3>AI Chat: Claude checks your dashboard</h3>
+          <p>Claude Code: Claude builds a dashboard that checks itself. It logs into your platforms, pulls the numbers, compares them to last week, flags anything that needs attention, and sends you a report. You don't open a browser. You don't remember to check. The system does it for you.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-number">3</div>
+        <div class="pain-content">
+          <h3>AI Chat: Claude writes one email</h3>
+          <p>Claude Code: Claude builds an email system. Welcome sequences. Follow-up triggers. Re-engagement campaigns. All written in your voice, all connected to your CRM, all running automatically. You built it once. It works forever.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-dark">
+    <p>Chat taught Claude <em>who you are</em>. Cowork taught Claude <em>what to do</em>. Code teaches Claude <em>how to build</em>.</p>
+  </div>
+
+</div>
+
+<!-- ============================================
+     TAB 2: WHAT IT CAN BUILD
+     ============================================ -->
+<div id="builds" class="page">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">02 — What It Can Build</div>
+      <div class="section-title">These Aren't <em>Hypotheticals</em></div>
+      <div class="section-subtitle">These are systems running inside real businesses right now. Built with Claude Code. By people who don't write code.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">I built every one of these for my own business. Some of them replaced a full-time hire. Some of them replaced a process I'd been doing manually for two years. All of them started the same way: I described what I wanted, and Claude built it.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Here's what that looks like in practice.</p>
+
+    <div class="solution-stack">
+      <div class="solution-card">
+        <div class="solution-label">Live System</div>
+        <h3>Pulse — Automated Client Health Reports</h3>
+        <p>Every morning at 7am, I get a Slack message that tells me exactly which clients need attention. Not a generic summary — a diagnostic. It pulls data from our CRM, the member management platform, and ad accounts. It compares this week to last week. It flags drops in lead flow, missed payments, declining attendance. It even tells me what to focus on in my next coaching call. I used to spend two hours every morning opening dashboards and doing this manually. Now I wake up and it's done.</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-label">Live System</div>
+        <h3>Website Builds — Described, Built, Deployed</h3>
+        <p>I describe what I want — a landing page, a session guide, a full marketing site — and Claude builds it. Not a draft. Not a wireframe. A finished, styled, responsive page that works on every device. Then it deploys to a live URL. The page you're reading right now was built this way. I didn't write a single line of code. I described the structure, the content, the brand system — and Claude built the whole thing. Live on the internet. Under an hour.</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-label">Live System</div>
+        <h3>Core Reports — Data That Pulls Itself</h3>
+        <p>We manage gym locations that use Hapana Core for member management. Every day, we need attendance reports, membership numbers, revenue data, cancellation records. That used to mean someone logging in, setting date filters, downloading CSVs, and cleaning up the data in a spreadsheet. Now Claude does it at 1am. It opens the browser, logs in, navigates to the right reports, downloads everything, processes it, and delivers clean summaries. The 45-minute Monday morning ritual? It runs itself while you sleep.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-dark">
+    <p>Every one of these was built by describing what was needed in plain English. No developers. No agencies. <em>No waiting.</em></p>
+  </div>
+
+</div>
+
+<!-- ============================================
+     TAB 3: POWER TOOLS
+     ============================================ -->
+<div id="power" class="page">
+
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">03 — The Power Tools</div>
+      <div class="section-title" style="color: var(--cream);">The Features That <em>Change Everything</em></div>
+      <div class="section-subtitle">These are the features that separate casual users from people who build real leverage. They're not in the getting-started guide. They probably should be.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Claude Code out of the box is already powerful. But there are three capabilities that most people don't know about — and they change what's possible. I use all three of these every single day.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-number">1</div>
+        <div class="pain-content">
+          <h3>The Trust Flag</h3>
+          <p>By default, Claude asks your permission before it reads a file, runs a command, or makes any change. That's responsible. It's also slow. When you're building something new and you trust the process, you can run <code style="font-family: 'SF Mono', monospace; font-size: 12px; background: var(--neutral-800); padding: 1px 6px; border-radius: 3px; color: var(--gold-light);">claude --dangerously-skip-permissions</code> — and Claude just goes. It plans the work, executes it, tests it, fixes issues — all without stopping to ask. A 20-minute build that would take 45 minutes with constant approvals. It's like the difference between micromanaging a new hire and trusting a senior employee. Use it when you're building something new. Not when you're changing something critical.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-number">2</div>
+        <div class="pain-content">
+          <h3>Your Mac, Claude's Hands</h3>
+          <p>This is the one that surprises people. Claude can control your actual Mac applications through AppleScript. It can open Chrome, navigate to your member management dashboard, click through to the reports section, set date ranges, download files, and come back with the data. No API needed. No developer integration. Just Claude using your computer the way you would. I use this to log into Hapana Core, pull CSV reports, extract data from GoHighLevel, and navigate platforms that don't have API access. If you can do it on your Mac, Claude can do it for you.</p>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-number">3</div>
+        <div class="pain-content">
+          <h3>If You Can See It, Claude Can Use It</h3>
+          <p>Computer Use is the fallback when there's no API and no AppleScript shortcut. Claude can see your screen and interact with it directly — clicking, typing, scrolling, reading text from images. It's slower than AppleScript, but it means the answer to "can Claude do this?" is almost always yes. Platform-specific dashboards, proprietary tools, anything with a visual interface — Claude can navigate it. Nothing is completely off-limits.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-dark">
+    <p>Most people use Claude Code like a fancy text editor. These three features turn it into a <em>remote employee</em> with access to everything on your computer.</p>
+  </div>
+
+</div>
+
+<!-- ============================================
+     TAB 4: SETUP
+     ============================================ -->
+<div id="setup" class="page">
+
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">04 — Setup</div>
+      <div class="section-title" style="color: var(--cream);">Get <em>Set Up</em></div>
+      <div class="section-subtitle">This takes about 10 minutes. Each step unlocks more of what Code can do for you.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">Put a podcast on, grab a coffee, and knock these out in one sitting. You'll thank yourself later.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 32px;">Tap each item to check it off as you go.</p>
+
+    <div class="setup-list">
+      <div class="setup-item" onclick="toggleCheck(this)">
+        <div class="setup-check"></div>
+        <div class="setup-item-content">
+          <h4>Open Terminal</h4>
+          <p>Press <code>Cmd + Space</code>, type "Terminal", hit Enter. That's it. It looks like a hacker movie — don't worry, you'll only need to paste a few commands.</p>
+        </div>
+      </div>
+      <div class="setup-item" onclick="toggleCheck(this)">
+        <div class="setup-check"></div>
+        <div class="setup-item-content">
+          <h4>Install Node.js (if needed)</h4>
+          <p>Paste <code>node --version</code> and hit Enter. See a number like v20.x.x? Skip this step. If not: go to <strong style="color: var(--cream); font-weight: 500;">nodejs.org</strong>, click the big green button, run the installer, done.</p>
+        </div>
+      </div>
+      <div class="setup-item" onclick="toggleCheck(this)">
+        <div class="setup-check"></div>
+        <div class="setup-item-content">
+          <h4>Install Claude Code</h4>
+          <p>Paste this into Terminal and hit Enter: <code>npm install -g @anthropic-ai/claude-code</code> — wait for the progress bar to finish.</p>
+        </div>
+      </div>
+      <div class="setup-item" onclick="toggleCheck(this)">
+        <div class="setup-check"></div>
+        <div class="setup-item-content">
+          <h4>Sign In</h4>
+          <p>Type <code>claude</code> and hit Enter. Follow the prompts to sign in with your Anthropic account. You'll see a welcome message when you're connected.</p>
+        </div>
+      </div>
+      <div class="setup-item" onclick="toggleCheck(this)">
+        <div class="setup-check"></div>
+        <div class="setup-item-content">
+          <h4>Run Your First Command</h4>
+          <p>Type <code>cd ~/Desktop</code> then <code>claude</code>. Ask it: "Create a file called hello.txt that says Claude Code is working." If the file appears on your desktop — you're live.</p>
+        </div>
+      </div>
+      <div class="setup-item" onclick="toggleCheck(this)">
+        <div class="setup-check"></div>
+        <div class="setup-item-content">
+          <h4>Create Your CLAUDE.md (Optional)</h4>
+          <p>A file that tells Claude who you are, what your business does, and how you work. Every conversation starts with this context. Create it at <code>~/.claude/CLAUDE.md</code> with your business name, services, key platforms, and brand voice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================
+     TAB 5: FIRST BUILD
+     ============================================ -->
+<div id="first-build" class="page">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">05 — Your First Build</div>
+      <div class="section-title">Build Something <em>Right Now</em></div>
+      <div class="section-subtitle">You've got Claude Code installed. Let's use it. This takes about 5 minutes.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">This is the moment it clicks. You're going to describe something in plain English — and watch Claude turn it into a working tool on your computer.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 40px;">We're going to build a Revenue Calculator. Something you could actually use with a client or on your own business. Follow these steps exactly.</p>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Open Terminal</h4>
+          <p>Same as before — <code>Cmd + Space</code>, type "Terminal", hit Enter.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Create a project folder</h4>
+          <p>Paste this and hit Enter: <code>mkdir ~/Desktop/my-first-build && cd ~/Desktop/my-first-build</code></p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Launch Claude</h4>
+          <p>Type <code>claude</code> and hit Enter. Wait for the prompt to appear.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Paste this prompt</h4>
+          <p>Copy the entire block below and paste it into Claude.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-block">
+      <span class="brief-label">Your First Prompt</span>Build me a single HTML page — a Revenue Calculator for a fitness business.
+
+It should ask:
+- How many members do you have?
+- What's your average membership price per week?
+- What's your average retention (months)?
+- How many new leads per month?
+- What's your conversion rate?
+
+Then calculate and display:
+- Current monthly revenue
+- Current annual revenue
+- Projected revenue if you improve conversion by 10%
+- Projected revenue if you improve retention by 2 months
+- The combined impact of both improvements
+
+Make it look clean and professional. Dark background, modern fonts,
+mobile responsive. Add a "Reset" button. Save it as index.html.</div>
+
+    <div class="step-list" style="margin-top: 32px;">
+      <div class="step-item">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h4>Watch Claude build it</h4>
+          <p>Claude will plan the build, write the code, and create the file. This takes 1–2 minutes. You don't need to do anything — just watch.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h4>Open it in your browser</h4>
+          <p>Go to your Desktop, open the <strong style="font-weight: 500; color: var(--ink);">my-first-build</strong> folder, and double-click <strong style="font-weight: 500; color: var(--ink);">index.html</strong>. That's your finished tool — working, styled, responsive.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-warm">
+      <p>That's a working tool on your computer. You described it in English, Claude built it in code. You could send this to a client, embed it on your website, or use it in a sales conversation. <strong>And it took less time than writing a caption.</strong></p>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-top: 48px; margin-bottom: 16px;"><strong style="font-weight: 500; color: var(--ink);">Want to try something else?</strong> Here are a few more prompts you can run the same way:</p>
+
+    <div class="solution-stack" style="margin-top: 24px;">
+      <div class="solution-card">
+        <div class="solution-label">Try This</div>
+        <h3>A Landing Page for Your Next Offer</h3>
+        <p>"Build a landing page for a 6-week transformation challenge. Include a hero section, three benefit blocks, social proof placeholder, and a sign-up form. Use [your brand colours]. Make it mobile responsive."</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-label">Try This</div>
+        <h3>A Lead Magnet Opt-in Page</h3>
+        <p>"Build an opt-in page for a free PDF guide called '5 Things Killing Your Gym Revenue.' Include a headline, 3 bullet points about what's inside, an email capture form, and a download button. Clean, professional design."</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-label">Try This</div>
+        <h3>A Client Readiness Quiz</h3>
+        <p>"Build an interactive quiz called 'Is Your Business Ready to Scale?' with 8 multiple choice questions about systems, revenue, team, and marketing. Show a score at the end with a personalised recommendation."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-dark">
+    <p>You just built something that would have cost <em>$500–2,000</em> from a freelancer. It took 5 minutes and a sentence.</p>
+  </div>
+
+</div>
+
+<!-- ============================================
+     TAB 6: WHAT'S NEXT
+     ============================================ -->
+<div id="next" class="page">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">06 — What's Next</div>
+      <div class="section-title">Keep <em>Building</em></div>
+      <div class="section-subtitle">You've got the tool. Here's how to make it compound.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">The Revenue Calculator was a proof of concept. The real value starts when you build things that solve actual problems in your business — the report you pull manually every Monday, the landing page you've been meaning to build for three months, the onboarding flow that's still in a Google Doc.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Every time you build something with Claude Code, it gets better at understanding your business. Your CLAUDE.md file is the key — keep adding to it. What platforms you use. What your brand sounds like. What your clients care about. The more context Claude has, the less you need to explain every time.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">The progression looks like this: you start with single builds (pages, tools, calculators). Then you move to recurring automations (reports that run themselves, data that pulls itself). Then you build full systems — connected infrastructure that makes your business run without you being the bottleneck.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">If you haven't explored Claude Cowork yet, start at <a href="https://cowork.kaizencollective.com.au" style="color: var(--gold-dark); text-decoration: underline; font-weight: 400;">cowork.kaizencollective.com.au</a> — it's the delegation layer that pairs with what you've just learned here. Cowork handles the tasks. Code builds the systems. Together, they change how you operate.</p>
+
+    <div class="callout-warm">
+      <p>If you want help building more complex systems — automated reporting, client onboarding flows, tools that connect your platforms — <strong>that's what we do at Kaizen.</strong> Reach out when you're ready.</p>
+    </div>
+
+    <p style="font-size: 16px; color: var(--ink); font-weight: 400; line-height: 1.85; max-width: 700px; margin-top: 48px;">Don't just read this guide — build something.</p>
+  </div>
+
+  <div class="pack-footer">
+    <span class="brand-logo">Kaizen Collective</span>
+    <p>Claude Code Guide · 2026</p>
+  </div>
+
+</div>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+  function showTab(tabId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    document.getElementById(tabId).classList.add('active');
+
+    const tabs = ['shift', 'builds', 'power', 'setup', 'first-build', 'next'];
+    const index = tabs.indexOf(tabId);
+    const activeBtn = document.querySelectorAll('.tab-btn')[index];
+    activeBtn.classList.add('active');
+
+    activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleCheck(item) {
+    const check = item.querySelector('.setup-check');
+    check.classList.toggle('checked');
+  }
+
+  document.addEventListener('touchmove', function(e) {}, { passive: true });
+
+  (function() {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const tabs = ['shift', 'builds', 'power', 'setup', 'first-build', 'next'];
+
+    document.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) < 80) return;
+
+      const currentTab = document.querySelector('.page.active');
+      if (!currentTab) return;
+      const currentIndex = tabs.indexOf(currentTab.id);
+
+      if (diff > 0 && currentIndex < tabs.length - 1) {
+        showTab(tabs[currentIndex + 1]);
+      } else if (diff < 0 && currentIndex > 0) {
+        showTab(tabs[currentIndex - 1]);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>
