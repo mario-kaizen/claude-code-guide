@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="350" viewBox="0 0 700 350"
+     font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif">
+
+  <!-- Window shadow / background -->
+  <rect width="700" height="350" rx="10" ry="10" fill="#d0d0d0" />
+
+  <!-- Window body -->
+  <rect x="0" y="0" width="700" height="350" rx="10" ry="10" fill="#ffffff" />
+
+  <!-- ===== macOS Title Bar ===== -->
+  <rect x="0" y="0" width="700" height="38" rx="10" ry="10" fill="#ebebeb" />
+  <rect x="0" y="22" width="700" height="16" fill="#ebebeb" />
+  <!-- Bottom border of title bar -->
+  <line x1="0" y1="38" x2="700" y2="38" stroke="#cccccc" stroke-width="1" />
+
+  <!-- Traffic lights -->
+  <circle cx="22" cy="19" r="6" fill="#FF5F56" />
+  <circle cx="44" cy="19" r="6" fill="#FFBD2E" />
+  <circle cx="66" cy="19" r="6" fill="#27C93F" />
+
+  <!-- URL bar -->
+  <rect x="180" y="8" width="200" height="22" rx="11" ry="11" fill="#ffffff" stroke="#c8c8c8" stroke-width="1" />
+  <!-- Lock icon (simple path) -->
+  <text x="192" y="22" font-size="10" fill="#666">🔒</text>
+  <text x="280" y="23" font-size="12" fill="#444" text-anchor="middle" dominant-baseline="middle">nodejs.org</text>
+
+  <!-- ===== Page content area ===== -->
+  <rect x="0" y="38" width="700" height="312" fill="#ffffff" />
+
+  <!-- ===== Node.js Hero ===== -->
+  <!-- Light grey background strip -->
+  <rect x="0" y="38" width="700" height="88" fill="#f8f8f8" />
+  <line x1="0" y1="126" x2="700" y2="126" stroke="#eeeeee" stroke-width="1" />
+
+  <!-- Node.js hexagon logo -->
+  <polygon points="350,50 368,60 368,82 350,92 332,82 332,60" fill="#339933" />
+  <text x="350" y="77" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">JS</text>
+
+  <!-- Node.js name -->
+  <text x="350" y="116" font-size="20" font-weight="700" fill="#222222" text-anchor="middle">Node.js®</text>
+
+  <!-- Tagline -->
+  <text x="350" y="145" font-size="12" fill="#777777" text-anchor="middle">Run JavaScript Everywhere</text>
+
+  <!-- ===== Download Section Label ===== -->
+  <text x="350" y="172" font-size="13" font-weight="600" fill="#444444" text-anchor="middle">Download Node.js</text>
+
+  <!-- ===== LEFT: LTS Button (GREEN — highlighted) ===== -->
+  <rect x="148" y="182" width="182" height="60" rx="6" ry="6" fill="#339933" />
+  <!-- Button text -->
+  <text x="239" y="203" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">Download Node.js 22</text>
+  <text x="239" y="219" font-size="11" font-weight="600" fill="#ffffff" text-anchor="middle">(LTS)</text>
+  <text x="239" y="234" font-size="10" fill="#c0e8c0" text-anchor="middle">Recommended For Most Users</text>
+
+  <!-- ===== RIGHT: Current Button (grey — muted) ===== -->
+  <rect x="370" y="182" width="182" height="60" rx="6" ry="6" fill="#e8e8e8" />
+  <text x="461" y="203" font-size="13" font-weight="600" fill="#888888" text-anchor="middle">Download Node.js 23</text>
+  <text x="461" y="219" font-size="11" font-weight="500" fill="#999999" text-anchor="middle">(Current)</text>
+  <text x="461" y="234" font-size="10" fill="#aaaaaa" text-anchor="middle">Latest Features</text>
+
+  <!-- ===== Gold Callout: dashed border around LTS ===== -->
+  <rect x="141" y="175" width="196" height="74" rx="10" ry="10"
+        fill="none" stroke="#C9A84C" stroke-width="2.5" stroke-dasharray="7,4" />
+
+  <!-- Arrow: curved path from label up to LTS button bottom-centre -->
+  <!-- Arrow shaft -->
+  <path d="M 239 295 C 239 275 239 260 239 252"
+        stroke="#C9A84C" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <!-- Arrowhead (triangle pointing up) -->
+  <polygon points="239,248 233,262 245,262" fill="#C9A84C" />
+
+  <!-- "Click this one" pill label -->
+  <rect x="178" y="296" width="122" height="30" rx="15" ry="15" fill="#C9A84C" />
+  <text x="239" y="316" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">👆 Click this one</text>
+
+  <!-- ===== Footer note ===== -->
+  <text x="350" y="340" font-size="11" fill="#bbbbbb" text-anchor="middle">
+    LTS = Long Term Support — stable, reliable, and safe for everyday use
+  </text>
+
+</svg>

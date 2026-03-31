@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <defs>
+    <!-- Callout arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#C9A84C" />
+    </marker>
+    <!-- Glow for highlight -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background (outside window area) -->
+  <rect width="300" height="400" fill="#1e1e1e" rx="10" ry="10"/>
+
+  <!-- macOS window chrome -->
+  <rect x="0" y="0" width="300" height="28" fill="#3c3c3c" rx="10" ry="10"/>
+  <!-- Bottom corners of title bar (no radius) -->
+  <rect x="0" y="18" width="300" height="10" fill="#3c3c3c"/>
+
+  <!-- Traffic lights -->
+  <!-- Close (red) -->
+  <circle cx="18" cy="14" r="6" fill="#FF5F57"/>
+  <!-- Minimize (yellow) -->
+  <circle cx="36" cy="14" r="6" fill="#FFBD2E"/>
+  <!-- Fullscreen (green) -->
+  <circle cx="54" cy="14" r="6" fill="#28C840"/>
+
+  <!-- Activity bar background -->
+  <rect x="0" y="28" width="48" height="372" fill="#333333" rx="0"/>
+  <!-- Round bottom-left corner of activity bar -->
+  <rect x="0" y="388" width="48" height="12" fill="#333333"/>
+  <rect x="0" y="28" width="8" height="372" fill="#333333"/>
+
+  <!-- ===== ACTIVITY BAR ICONS ===== -->
+
+  <!-- Icon 1: Explorer / Files (two overlapping documents) -->
+  <g transform="translate(24, 62)" opacity="0.6">
+    <!-- Back page -->
+    <rect x="-7" y="-9" width="11" height="14" rx="1" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Front page -->
+    <rect x="-4" y="-6" width="11" height="14" rx="1" fill="#333333" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Lines on front page -->
+    <line x1="-1" y1="-1" x2="4" y2="-1" stroke="#cccccc" stroke-width="1"/>
+    <line x1="-1" y1="2" x2="4" y2="2" stroke="#cccccc" stroke-width="1"/>
+    <line x1="-1" y1="5" x2="2" y2="5" stroke="#cccccc" stroke-width="1"/>
+  </g>
+
+  <!-- Icon 2: Search (magnifying glass) -->
+  <g transform="translate(24, 116)" opacity="0.6">
+    <circle cx="-1" cy="-2" r="7" fill="none" stroke="#cccccc" stroke-width="1.8"/>
+    <line x1="4.5" y1="3.5" x2="8" y2="7" stroke="#cccccc" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Icon 3: Source Control / Git (branch icon) -->
+  <g transform="translate(24, 170)" opacity="0.6">
+    <!-- Commit dot top -->
+    <circle cx="-4" cy="-7" r="2.5" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Commit dot bottom -->
+    <circle cx="-4" cy="7" r="2.5" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Branch dot right -->
+    <circle cx="5" cy="-2" r="2.5" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Main line -->
+    <line x1="-4" y1="-4.5" x2="-4" y2="4.5" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Branch curve -->
+    <path d="M -4 -4.5 Q -4 -2 5 -2" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+  </g>
+
+  <!-- Icon 4: Run & Debug (play button with bug) -->
+  <g transform="translate(24, 224)" opacity="0.6">
+    <!-- Bug body -->
+    <ellipse cx="0" cy="1" rx="6" ry="6" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Bug head -->
+    <circle cx="0" cy="-6" r="3" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Bug legs -->
+    <line x1="-6" y1="-2" x2="-9" y2="-4" stroke="#cccccc" stroke-width="1.3"/>
+    <line x1="-6" y1="1" x2="-9" y2="1" stroke="#cccccc" stroke-width="1.3"/>
+    <line x1="-6" y1="4" x2="-9" y2="6" stroke="#cccccc" stroke-width="1.3"/>
+    <line x1="6" y1="-2" x2="9" y2="-4" stroke="#cccccc" stroke-width="1.3"/>
+    <line x1="6" y1="1" x2="9" y2="1" stroke="#cccccc" stroke-width="1.3"/>
+    <line x1="6" y1="4" x2="9" y2="6" stroke="#cccccc" stroke-width="1.3"/>
+  </g>
+
+  <!-- ===== ICON 5: EXTENSIONS — HIGHLIGHTED ===== -->
+
+  <!-- Gold highlight circle (glow effect) -->
+  <circle cx="24" cy="278" r="22" fill="rgba(201, 168, 76, 0.2)" filter="url(#glow)"/>
+  <!-- Gold highlight ring -->
+  <circle cx="24" cy="278" r="20" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+
+  <!-- Extensions icon: 4 squares (2x2 grid) with one slightly offset (top-right offset up-right) -->
+  <g transform="translate(24, 278)">
+    <!-- Bottom-left square -->
+    <rect x="-9" y="-1" width="8" height="8" rx="1" fill="#cccccc"/>
+    <!-- Bottom-right square -->
+    <rect x="1" y="-1" width="8" height="8" rx="1" fill="#cccccc"/>
+    <!-- Top-left square -->
+    <rect x="-9" y="-11" width="8" height="8" rx="1" fill="#cccccc"/>
+    <!-- Top-right square (slightly offset — the "puzzle piece popping out") -->
+    <rect x="3" y="-13" width="8" height="8" rx="1" fill="#C9A84C"/>
+  </g>
+
+  <!-- ===== CALLOUT LABEL ===== -->
+
+  <!-- Arrow line from label to icon -->
+  <line x1="195" y1="278" x2="52" y2="278" stroke="#C9A84C" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Label background pill -->
+  <rect x="195" y="258" width="95" height="42" rx="8" fill="#C9A84C"/>
+
+  <!-- Label text -->
+  <text x="242" y="275" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif" font-size="11" font-weight="700" fill="#1a1200" text-anchor="middle">Click here</text>
+  <text x="242" y="291" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif" font-size="11" font-weight="700" fill="#1a1200" text-anchor="middle">→ Extensions</text>
+
+  <!-- Icon 6: Account / User (at bottom of activity bar) -->
+  <g transform="translate(24, 332)" opacity="0.5">
+    <circle cx="0" cy="-4" r="5" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <path d="M -8 8 Q -8 2 0 2 Q 8 2 8 8" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+  </g>
+
+  <!-- Icon 7: Settings / Gear (at very bottom) -->
+  <g transform="translate(24, 376)" opacity="0.5">
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#cccccc" stroke-width="1.5"/>
+    <!-- Gear teeth (8 positions) -->
+    <line x1="0" y1="-8" x2="0" y2="-5" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="0" y1="5" x2="0" y2="8" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-8" y1="0" x2="-5" y2="0" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="5" y1="0" x2="8" y2="0" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-5.7" y1="-5.7" x2="-3.5" y2="-3.5" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="3.5" y1="3.5" x2="5.7" y2="5.7" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="5.7" y1="-5.7" x2="3.5" y2="-3.5" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-3.5" y1="3.5" x2="-5.7" y2="5.7" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Thin right border on activity bar (VS Code style separator) -->
+  <line x1="48" y1="28" x2="48" y2="400" stroke="#252525" stroke-width="1"/>
+
+  <!-- Bottom left rounded corner fix -->
+  <rect x="0" y="390" width="10" height="10" fill="#333333"/>
+  <rect x="0" y="390" width="48" height="10" fill="#333333" rx="0"/>
+
+</svg>

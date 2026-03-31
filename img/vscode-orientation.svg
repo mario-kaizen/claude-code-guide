@@ -1,0 +1,273 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 450" width="700" height="450" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif">
+
+  <!-- Window shadow -->
+  <rect x="4" y="4" width="696" height="446" rx="10" fill="rgba(0,0,0,0.4)"/>
+
+  <!-- Window background -->
+  <rect x="0" y="0" width="696" height="446" rx="10" fill="#1E1E1E"/>
+
+  <!-- ===================== TITLE BAR ===================== -->
+  <rect x="0" y="0" width="696" height="32" rx="10" fill="#3C3C3C"/>
+  <rect x="0" y="20" width="696" height="12" fill="#3C3C3C"/>
+
+  <!-- Traffic lights -->
+  <!-- Red -->
+  <circle cx="18" cy="16" r="6" fill="#FF5F57"/>
+  <circle cx="18" cy="16" r="6" fill="none" stroke="#E0443E" stroke-width="0.5"/>
+  <!-- Yellow -->
+  <circle cx="38" cy="16" r="6" fill="#FFBD2E"/>
+  <circle cx="38" cy="16" r="6" fill="none" stroke="#DEA123" stroke-width="0.5"/>
+  <!-- Green -->
+  <circle cx="58" cy="16" r="6" fill="#28CA41"/>
+  <circle cx="58" cy="16" r="6" fill="none" stroke="#1AAB29" stroke-width="0.5"/>
+
+  <!-- Title text -->
+  <text x="348" y="21" text-anchor="middle" font-size="12" fill="#CCCCCC" font-weight="400" letter-spacing="0.2">Visual Studio Code</text>
+
+  <!-- ===================== ACTIVITY BAR (far left, ~48px) ===================== -->
+  <rect x="0" y="32" width="48" height="414" fill="#333333"/>
+
+  <!-- Activity bar icons -->
+  <!-- Files icon (two stacked pages shape) -->
+  <g transform="translate(14, 52)">
+    <rect x="2" y="0" width="14" height="18" rx="1" fill="none" stroke="#CCCCCC" stroke-width="1.5" opacity="0.9"/>
+    <rect x="6" y="4" width="14" height="18" rx="1" fill="#333333" stroke="#CCCCCC" stroke-width="1.5" opacity="0.9"/>
+    <line x1="9" y1="10" x2="17" y2="10" stroke="#CCCCCC" stroke-width="1" opacity="0.9"/>
+    <line x1="9" y1="14" x2="17" y2="14" stroke="#CCCCCC" stroke-width="1" opacity="0.9"/>
+  </g>
+
+  <!-- Search icon -->
+  <g transform="translate(15, 94)">
+    <circle cx="8" cy="8" r="7" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <line x1="13" y1="13" x2="19" y2="19" stroke="#858585" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Source control icon (branch shape) -->
+  <g transform="translate(15, 136)">
+    <circle cx="4" cy="4" r="3.5" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <circle cx="4" cy="18" r="3.5" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <circle cx="16" cy="8" r="3.5" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <line x1="4" y1="7.5" x2="4" y2="14.5" stroke="#858585" stroke-width="1.5"/>
+    <path d="M4 7 Q4 4 8 4 L12.5 4 Q16 4 16 8" fill="none" stroke="#858585" stroke-width="1.5"/>
+  </g>
+
+  <!-- Extensions icon (4 squares puzzle) -->
+  <g transform="translate(14, 178)">
+    <rect x="0" y="0" width="8" height="8" rx="1" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <rect x="10" y="0" width="8" height="8" rx="1" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <rect x="0" y="10" width="8" height="8" rx="1" fill="none" stroke="#858585" stroke-width="1.5"/>
+    <rect x="10" y="10" width="8" height="8" rx="1" fill="none" stroke="#858585" stroke-width="1.5"/>
+  </g>
+
+  <!-- ===================== SIDEBAR (~200px) ===================== -->
+  <rect x="48" y="32" width="160" height="414" fill="#252526"/>
+
+  <!-- Sidebar header -->
+  <text x="58" y="54" font-size="10" fill="#BBBBBB" font-weight="600" letter-spacing="1.5" text-transform="uppercase">EXPLORER</text>
+
+  <!-- File tree items -->
+  <!-- Folder open icon + label -->
+  <g transform="translate(58, 66)">
+    <!-- Open folder icon -->
+    <path d="M0 4 Q0 2 2 2 L6 2 L8 0 L18 0 Q20 0 20 2 L20 14 Q20 16 18 16 L2 16 Q0 16 0 14 Z" fill="#DCAD6E" opacity="0.85"/>
+    <text x="24" y="12" font-size="11" fill="#CCCCCC">my-project</text>
+  </g>
+
+  <!-- File: index.html -->
+  <g transform="translate(72, 87)">
+    <rect x="0" y="1" width="12" height="14" rx="1" fill="none" stroke="#E44D26" stroke-width="1.2"/>
+    <text x="1.5" y="11" font-size="7" fill="#E44D26" font-weight="700">H</text>
+    <text x="16" y="12" font-size="11" fill="#CCCCCC">index.html</text>
+  </g>
+
+  <!-- File: style.css -->
+  <g transform="translate(72, 107)">
+    <rect x="0" y="1" width="12" height="14" rx="1" fill="none" stroke="#1572B6" stroke-width="1.2"/>
+    <text x="1.5" y="11" font-size="7" fill="#1572B6" font-weight="700">C</text>
+    <text x="16" y="12" font-size="11" fill="#CCCCCC">style.css</text>
+  </g>
+
+  <!-- File: README.md -->
+  <g transform="translate(72, 127)">
+    <rect x="0" y="1" width="12" height="14" rx="1" fill="none" stroke="#888888" stroke-width="1.2"/>
+    <text x="2" y="11" font-size="7" fill="#888888" font-weight="700">M</text>
+    <text x="16" y="12" font-size="11" fill="#CCCCCC">README.md</text>
+  </g>
+
+  <!-- File: app.js -->
+  <g transform="translate(72, 147)">
+    <rect x="0" y="1" width="12" height="14" rx="1" fill="none" stroke="#F7DF1E" stroke-width="1.2"/>
+    <text x="2" y="11" font-size="7" fill="#9A8800" font-weight="700">J</text>
+    <text x="16" y="12" font-size="11" fill="#CCCCCC">app.js</text>
+  </g>
+
+  <!-- Folder: images -->
+  <g transform="translate(72, 167)">
+    <path d="M0 3 Q0 1 2 1 L5 1 L7 -1 L14 -1 Q16 -1 16 1 L16 11 Q16 13 14 13 L2 13 Q0 13 0 11 Z" fill="#DCAD6E" opacity="0.7"/>
+    <text x="20" y="10" font-size="11" fill="#CCCCCC">images</text>
+  </g>
+
+  <!-- ===================== EDITOR AREA (main center) ===================== -->
+  <rect x="208" y="32" width="488" height="312" fill="#1E1E1E"/>
+
+  <!-- Editor tab bar -->
+  <rect x="208" y="32" width="488" height="36" fill="#2D2D2D"/>
+
+  <!-- Active tab -->
+  <rect x="208" y="32" width="110" height="36" fill="#1E1E1E"/>
+  <rect x="208" y="32" width="110" height="2" fill="#007ACC"/>
+  <g transform="translate(218, 46)">
+    <rect x="0" y="-8" width="10" height="12" rx="1" fill="none" stroke="#E44D26" stroke-width="1"/>
+    <text x="0.5" y="0" font-size="6" fill="#E44D26" font-weight="700">H</text>
+  </g>
+  <text x="232" y="55" font-size="12" fill="#FFFFFF">index.html</text>
+  <text x="308" y="55" font-size="12" fill="#888888">×</text>
+
+  <!-- Inactive tab -->
+  <rect x="320" y="32" width="100" height="36" fill="#2D2D2D"/>
+  <g transform="translate(330, 46)">
+    <rect x="0" y="-8" width="10" height="12" rx="1" fill="none" stroke="#1572B6" stroke-width="1"/>
+    <text x="0.5" y="0" font-size="6" fill="#1572B6" font-weight="700">C</text>
+  </g>
+  <text x="344" y="55" font-size="12" fill="#888888">style.css</text>
+  <text x="410" y="55" font-size="12" fill="#888888">×</text>
+
+  <!-- Line numbers gutter -->
+  <rect x="208" y="68" width="36" height="276" fill="#1E1E1E"/>
+
+  <!-- Editor content with code lines -->
+  <!-- Line numbers -->
+  <text x="232" y="91" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">1</text>
+  <text x="232" y="109" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">2</text>
+  <text x="232" y="127" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">3</text>
+  <text x="232" y="145" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">4</text>
+  <text x="232" y="163" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">5</text>
+  <text x="232" y="181" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">6</text>
+  <text x="232" y="199" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">7</text>
+  <text x="232" y="217" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">8</text>
+  <text x="232" y="235" text-anchor="end" font-size="12" fill="#5A5A5A" font-family="'Courier New', Courier, monospace">9</text>
+
+  <!-- Code content -->
+  <text x="252" y="91" font-size="12" fill="#808080" font-family="'Courier New', Courier, monospace">&lt;!DOCTYPE html&gt;</text>
+  <text x="252" y="109" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#569CD6">&lt;html</tspan>
+    <tspan fill="#9CDCFE"> lang</tspan>
+    <tspan fill="#D4D4D4">=</tspan>
+    <tspan fill="#CE9178">"en"</tspan>
+    <tspan fill="#569CD6">&gt;</tspan>
+  </text>
+  <text x="252" y="127" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#D4D4D4">  </tspan>
+    <tspan fill="#569CD6">&lt;head&gt;</tspan>
+  </text>
+  <text x="252" y="145" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#D4D4D4">    </tspan>
+    <tspan fill="#569CD6">&lt;title&gt;</tspan>
+    <tspan fill="#D4D4D4">My Site</tspan>
+    <tspan fill="#569CD6">&lt;/title&gt;</tspan>
+  </text>
+  <text x="252" y="163" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#569CD6">  &lt;/head&gt;</tspan>
+  </text>
+  <text x="252" y="181" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#569CD6">  &lt;body&gt;</tspan>
+  </text>
+  <text x="252" y="199" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#D4D4D4">    </tspan>
+    <tspan fill="#569CD6">&lt;h1&gt;</tspan>
+    <tspan fill="#D4D4D4">Hello World</tspan>
+    <tspan fill="#569CD6">&lt;/h1&gt;</tspan>
+  </text>
+  <text x="252" y="217" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#569CD6">  &lt;/body&gt;</tspan>
+  </text>
+  <text x="252" y="235" font-size="12" font-family="'Courier New', Courier, monospace">
+    <tspan fill="#569CD6">&lt;/html&gt;</tspan>
+  </text>
+
+  <!-- Cursor blink on line 9 -->
+  <rect x="252" y="239" width="2" height="14" fill="#AEAFAD"/>
+
+  <!-- ===================== BOTTOM PANEL (terminal) ===================== -->
+  <rect x="208" y="344" width="488" height="102" fill="#1E1E1E"/>
+
+  <!-- Panel top border -->
+  <rect x="208" y="344" width="488" height="1" fill="#474747"/>
+
+  <!-- Panel tab bar -->
+  <rect x="208" y="344" width="488" height="28" fill="#252526"/>
+
+  <!-- Terminal tab active -->
+  <text x="225" y="362" font-size="12" fill="#FFFFFF" font-weight="500">TERMINAL</text>
+  <rect x="218" y="371" width="70" height="2" fill="#007ACC"/>
+
+  <!-- Output / Problems tabs -->
+  <text x="302" y="362" font-size="12" fill="#888888">OUTPUT</text>
+  <text x="368" y="362" font-size="12" fill="#888888">PROBLEMS</text>
+
+  <!-- Close/minimize panel icons -->
+  <text x="658" y="362" font-size="14" fill="#888888">⊞</text>
+  <text x="675" y="362" font-size="14" fill="#888888">×</text>
+
+  <!-- Terminal content area -->
+  <rect x="208" y="372" width="488" height="74" fill="#1E1E1E"/>
+
+  <!-- Terminal text -->
+  <text x="224" y="394" font-size="12" fill="#4EC9B0" font-family="'Courier New', Courier, monospace">user@macbook</text>
+  <text x="320" y="394" font-size="12" fill="#D4D4D4" font-family="'Courier New', Courier, monospace">:</text>
+  <text x="328" y="394" font-size="12" fill="#569CD6" font-family="'Courier New', Courier, monospace">~/my-project</text>
+  <text x="436" y="394" font-size="12" fill="#D4D4D4" font-family="'Courier New', Courier, monospace">$</text>
+  <text x="452" y="394" font-size="12.5" fill="#FFFFFF" font-family="'Courier New', Courier, monospace" font-weight="500">claude</text>
+
+  <!-- Cursor after claude -->
+  <rect x="510" y="380" width="8" height="15" fill="#AEAFAD" opacity="0.8"/>
+
+  <!-- Second terminal line (response start) -->
+  <text x="224" y="414" font-size="11.5" fill="#888888" font-family="'Courier New', Courier, monospace">✓  Claude Code ready. How can I help?</text>
+
+  <!-- ===================== STATUS BAR ===================== -->
+  <rect x="0" y="432" width="696" height="14" rx="0" fill="#007ACC"/>
+  <text x="58" y="443" font-size="9.5" fill="#FFFFFF" opacity="0.9">main</text>
+  <text x="78" y="443" font-size="9.5" fill="#FFFFFF" opacity="0.7">⎇</text>
+  <text x="90" y="443" font-size="9.5" fill="#FFFFFF" opacity="0.9">0 errors  0 warnings</text>
+  <text x="570" y="443" font-size="9.5" fill="#FFFFFF" opacity="0.9">HTML  UTF-8  Ln 9, Col 1</text>
+
+  <!-- Bottom status bar radius fix -->
+  <rect x="0" y="438" width="696" height="8" fill="#007ACC"/>
+  <rect x="0" y="438" width="696" height="8" rx="0" fill="#007ACC"/>
+  <!-- Round bottom corners -->
+  <path d="M0 438 L0 446 Q0 446 10 446 L686 446 Q696 446 696 446 L696 438 Z" fill="#007ACC"/>
+
+  <!-- ===================== CALLOUT LABELS ===================== -->
+
+  <!-- === LABEL 1: LEFT SIDEBAR === -->
+  <!-- Callout box -->
+  <rect x="4" y="228" width="154" height="46" rx="6" fill="#1A1A1A" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="81" y="246" text-anchor="middle" font-size="13" fill="#C9A84C" font-weight="700">LEFT SIDEBAR</text>
+  <text x="81" y="264" text-anchor="middle" font-size="11" fill="#DDDDDD">Your Files (like Finder)</text>
+
+  <!-- Arrow from label to sidebar -->
+  <line x1="128" y1="251" x2="200" y2="165" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="200" cy="165" r="3" fill="#C9A84C"/>
+
+  <!-- === LABEL 2: MAIN EDITOR AREA === -->
+  <!-- Callout box positioned above editor -->
+  <rect x="305" y="78" width="188" height="46" rx="6" fill="#1A1A1A" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="399" y="96" text-anchor="middle" font-size="13" fill="#C9A84C" font-weight="700">MAIN AREA</text>
+  <text x="399" y="114" text-anchor="middle" font-size="11" fill="#DDDDDD">Your Code / Content</text>
+
+  <!-- Arrow from label pointing down into editor -->
+  <line x1="399" y1="124" x2="399" y2="155" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="399" cy="155" r="3" fill="#C9A84C"/>
+
+  <!-- === LABEL 3: TERMINAL / BOTTOM PANEL === -->
+  <!-- Callout box to the right side -->
+  <rect x="420" y="276" width="262" height="52" rx="6" fill="#1A1A1A" stroke="#C9A84C" stroke-width="1.5"/>
+  <text x="551" y="297" text-anchor="middle" font-size="13" fill="#C9A84C" font-weight="700">BOTTOM PANEL</text>
+  <text x="551" y="315" text-anchor="middle" font-size="11" fill="#DDDDDD">Terminal (Claude Code runs here)</text>
+
+  <!-- Arrow from label down to terminal panel -->
+  <line x1="551" y1="328" x2="470" y2="375" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <circle cx="470" cy="375" r="3" fill="#C9A84C"/>
+
+</svg>
