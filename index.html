@@ -916,6 +916,678 @@
   }
 
   /* ============================================
+     EVIDENCE BLOCK
+     ============================================ */
+  .evidence-block {
+    margin: 64px 0;
+    position: relative;
+  }
+
+  .evidence-browser {
+    background: var(--charcoal);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--neutral-700);
+    position: relative;
+  }
+
+  .evidence-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    background: var(--neutral-800);
+    border-bottom: 1px solid var(--neutral-700);
+  }
+
+  .evidence-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--neutral-600);
+  }
+
+  .evidence-dot:nth-child(1) { background: #C45B4A; }
+  .evidence-dot:nth-child(2) { background: #C4964A; }
+  .evidence-dot:nth-child(3) { background: #5A9E6F; }
+
+  .evidence-url {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--neutral-400);
+    background: var(--neutral-900);
+    padding: 6px 16px;
+    border-radius: 4px;
+    flex: 1;
+    margin-left: 8px;
+  }
+
+  .evidence-body {
+    padding: 40px;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .evidence-body-text {
+    font-family: var(--font-heading);
+    font-size: clamp(20px, 2.5vw, 28px);
+    color: var(--cream);
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 540px;
+  }
+
+  .evidence-body-text em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .evidence-annotation {
+    position: absolute;
+    bottom: -48px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .evidence-annotation-line {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .evidence-annotation-text {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ============================================
+     THREE MODES DIAGRAM
+     ============================================ */
+  .modes-diagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: start;
+    margin: 64px 0 48px;
+  }
+
+  .mode-column {
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .mode-icon-wrap {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--neutral-700);
+    border-radius: 12px;
+    background: var(--charcoal);
+  }
+
+  .mode-column.mode-active .mode-icon-wrap {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    box-shadow: 0 0 24px rgba(201,168,76,0.1);
+  }
+
+  .mode-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--neutral-500);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .mode-column.mode-active .mode-label {
+    color: var(--gold);
+  }
+
+  .mode-name {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  .mode-column.mode-active .mode-name {
+    color: var(--gold);
+  }
+
+  .mode-detail {
+    text-align: left;
+    padding: 0;
+  }
+
+  .mode-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--neutral-800);
+    gap: 16px;
+  }
+
+  .mode-detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .mode-detail-key {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--neutral-600);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .mode-detail-val {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--neutral-400);
+    font-weight: 300;
+    text-align: right;
+  }
+
+  .mode-column.mode-active .mode-detail-val {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .mode-arrow-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  .mode-arrow-svg {
+    opacity: 0.4;
+  }
+
+  /* ============================================
+     BUILD ONCE VISUAL
+     ============================================ */
+  .build-once-visual {
+    margin: 48px auto;
+    max-width: 860px;
+  }
+
+  .build-once-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ============================================
+     COMPARISON VISUAL (Earn While You Learn)
+     ============================================ */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 48px 0;
+  }
+
+  .comparison-col {
+    padding: 40px;
+    border-radius: 4px;
+  }
+
+  .comparison-col-dev {
+    background: var(--white);
+    border: 1px solid var(--neutral-200);
+  }
+
+  .comparison-col-code {
+    background: var(--ink);
+    border: 1px solid var(--charcoal);
+  }
+
+  .comparison-col-header {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
+
+  .comparison-col-dev .comparison-col-header {
+    color: var(--stone);
+    border-bottom: 1px solid var(--neutral-200);
+  }
+
+  .comparison-col-code .comparison-col-header {
+    color: var(--gold);
+    border-bottom: 1px solid var(--charcoal);
+  }
+
+  .comparison-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--neutral-100);
+  }
+
+  .comparison-col-code .comparison-row {
+    border-bottom-color: var(--neutral-800);
+  }
+
+  .comparison-row:last-child {
+    border-bottom: none;
+  }
+
+  .comparison-label {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .comparison-col-dev .comparison-label {
+    color: var(--neutral-600);
+  }
+
+  .comparison-col-code .comparison-label {
+    color: var(--neutral-300);
+  }
+
+  .comparison-value {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .comparison-col-dev .comparison-value {
+    color: var(--neutral-500);
+  }
+
+  .comparison-col-code .comparison-value {
+    color: var(--gold);
+  }
+
+  .comparison-total {
+    margin-top: 20px;
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .comparison-col-dev .comparison-total {
+    border-top: 2px solid var(--neutral-200);
+  }
+
+  .comparison-col-code .comparison-total {
+    border-top: 2px solid var(--gold);
+  }
+
+  .comparison-total-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .comparison-col-dev .comparison-total-label {
+    color: var(--stone);
+  }
+
+  .comparison-col-code .comparison-total-label {
+    color: var(--gold);
+  }
+
+  .comparison-total-value {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  .comparison-col-dev .comparison-total-value {
+    color: var(--neutral-500);
+  }
+
+  .comparison-col-code .comparison-total-value {
+    color: var(--gold);
+  }
+
+  /* ============================================
+     PIPELINE VISUAL (Build Process)
+     ============================================ */
+  .pipeline-visual {
+    margin: 48px auto;
+    max-width: 900px;
+  }
+
+  .pipeline-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ============================================
+     CLAUDE MD VISUAL
+     ============================================ */
+  .claudemd-visual {
+    margin: 48px auto;
+    max-width: 800px;
+  }
+
+  .claudemd-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ============================================
+     FAQ TOGGLES
+     ============================================ */
+  .faq-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .faq-toggle {
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+
+  .faq-toggle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .faq-toggle-header:hover { background: var(--neutral-800); }
+
+  .faq-toggle-header h4 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  .faq-toggle-icon {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--gold);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+  }
+
+  .faq-toggle.open .faq-toggle-icon { transform: rotate(45deg); }
+
+  .faq-toggle-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq-toggle.open .faq-toggle-body { max-height: 400px; }
+
+  .faq-toggle-body p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--neutral-400);
+    font-weight: 300;
+    line-height: 1.75;
+    padding: 0 28px 24px;
+  }
+
+  @media (max-width: 768px) {
+    .comparison-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .comparison-col {
+      padding: 28px;
+    }
+  }
+
+  /* ============================================
+     FIRST BUILD — COLOUR ROLES
+     ============================================ */
+  .colour-roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin: 48px 0;
+  }
+
+  .colour-role {
+    text-align: center;
+    padding: 40px 24px;
+    border: 1px solid var(--neutral-200);
+    border-radius: 4px;
+    background: var(--white);
+  }
+
+  .colour-role-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    border: 2px solid var(--neutral-200);
+  }
+
+  .colour-role-circle.surface { background: #1A1A18; border-color: #1A1A18; }
+  .colour-role-circle.text-col { background: #F5F0E8; border-color: #E0DBD3; }
+  .colour-role-circle.accent { background: #C9A84C; border-color: #C9A84C; }
+
+  .colour-role h4 {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .colour-role p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--neutral-600);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .font-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 48px 0;
+  }
+
+  .font-card {
+    padding: 40px;
+    border: 1px solid var(--neutral-200);
+    border-radius: 4px;
+    background: var(--white);
+  }
+
+  .font-card-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .font-card-sample {
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .font-card-sample.display { font-family: var(--font-heading); font-weight: 400; }
+  .font-card-sample.body { font-family: var(--font-body); font-weight: 300; }
+
+  .font-card p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--neutral-500);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* MEGA PROMPT BLOCK */
+  .mega-prompt {
+    background: var(--black);
+    border: 1px solid var(--neutral-700);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 40px;
+    margin: 48px 0;
+    position: relative;
+    overflow-x: auto;
+  }
+
+  .mega-prompt-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mega-prompt-copy {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--neutral-500);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 12px;
+    border: 1px solid var(--neutral-700);
+    border-radius: 3px;
+    background: none;
+    transition: all 0.2s ease;
+  }
+
+  .mega-prompt-copy:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .mega-prompt pre {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--neutral-300);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .mega-prompt .placeholder {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ITERATION PROMPTS */
+  .iteration-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 48px 0;
+  }
+
+  .iteration-prompt {
+    background: var(--charcoal);
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .iteration-prompt:hover {
+    background: var(--neutral-800);
+  }
+
+  .iteration-prompt-icon {
+    color: var(--gold);
+    font-family: var(--font-body);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .iteration-prompt p {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--neutral-300);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .colour-roles { grid-template-columns: 1fr; }
+    .font-pair { grid-template-columns: 1fr; }
+    .iteration-grid { grid-template-columns: 1fr; }
+    .mega-prompt { padding: 24px; }
+  }
+
+  /* ============================================
+     RESPONSIVE — MODES DIAGRAM
+     ============================================ */
+  @media (max-width: 768px) {
+    .modes-diagram {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .mode-arrow-wrap {
+      display: none;
+    }
+
+    .mode-column {
+      padding: 0;
+    }
+
+    .evidence-annotation {
+      position: static;
+      justify-content: center;
+      margin-top: 24px;
+    }
+  }
+
+  /* ============================================
      DIVIDER
      ============================================ */
   .gold-divider {
@@ -1194,76 +1866,274 @@
       <span class="brand-context">Claude Code</span>
     </div>
     <nav class="tab-nav">
-      <button class="tab-btn active" onclick="showTab('shift')">
-        <span class="tab-number">01</span>The Shift
+      <button class="tab-btn active" onclick="showTab('intro')">
+        <span class="tab-number">01</span>Introduction
       </button>
-      <button class="tab-btn" onclick="showTab('builds')">
-        <span class="tab-number">02</span>What It Builds
-      </button>
-      <button class="tab-btn" onclick="showTab('power')">
-        <span class="tab-number">03</span>Power Tools
+      <button class="tab-btn" onclick="showTab('understanding')">
+        <span class="tab-number">02</span>Understanding Claude Code
       </button>
       <button class="tab-btn" onclick="showTab('setup')">
-        <span class="tab-number">04</span>Setup
+        <span class="tab-number">03</span>The Set Up
       </button>
       <button class="tab-btn" onclick="showTab('first-build')">
-        <span class="tab-number">05</span>First Build
-      </button>
-      <button class="tab-btn" onclick="showTab('next')">
-        <span class="tab-number">06</span>What's Next
+        <span class="tab-number">04</span>Your First Build
       </button>
     </nav>
   </div>
 </div>
 
 <!-- ============================================
-     TAB 1: THE SHIFT
+     TAB 1: INTRODUCTION
      ============================================ -->
-<div id="shift" class="page active">
+<div id="intro" class="page active">
 
   <div class="hero">
-    <div class="hero-eyebrow">Claude 101 — Claude Code</div>
-    <h1 class="hero-title">Stop <em>Using</em> AI.<br>Start <em>Building</em> With It.</h1>
-    <p class="hero-subtitle">You've been using AI to work faster. This guide shows you how to use it to build things — tools, systems, pages — that run permanently inside your business. No coding required.</p>
+    <div class="hero-eyebrow">Claude 101 — Session 3</div>
+    <h1 class="hero-title">Build It <em>Once</em>.<br>It Runs <em>Forever</em>.</h1>
+    <p class="hero-subtitle">You've been asking AI for help. Today you learn to make it build things — real tools, real systems, real pages — that run permanently inside your business.</p>
     <div class="hero-line"></div>
-    <div class="hero-session">Claude 101 · Claude Code · Kaizen Collective</div>
+    <div class="hero-session">Claude Code · Kaizen Collective · April 2026</div>
   </div>
 
-  <div class="section section-dark">
+  <!-- SECTION 1: THE EVIDENCE -->
+  <div class="section">
     <div class="section-header">
-      <div class="section-number">01 — The Shift</div>
-      <div class="section-title" style="color: var(--cream);">From Asking to <em>Building</em></div>
-      <div class="section-subtitle">There's a ceiling to what AI chat can do for you. This is how you break through it.</div>
+      <div class="section-number">01 — The Evidence</div>
+      <div class="section-title">You're <em>Looking</em> at It</div>
+      <div class="section-subtitle">This page is the proof. Not a mockup. Not a concept. The real thing.</div>
     </div>
 
-    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Up until now, you've been having conversations with AI. Ask a question, get an answer. Describe a task, get a draft. That's useful — genuinely. But it's still one task at a time, one conversation at a time.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">This page — the layout, the typography, the navigation, the responsive design, the deployment to a live URL — was built with Claude Code. Not by a developer. Not by an agency. By someone describing what they wanted in plain English.</p>
 
-    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Claude Code is different. Instead of chatting back and forth, you describe what you want to exist — and Claude builds it. A landing page. A reporting tool. An automated system that pulls data from your platforms every morning and sends you a summary before you've finished your coffee.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">That's not a demo. That's the point. The teaching tool and the evidence are the same thing. You're reading the proof while you learn how to make your own.</p>
 
-    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">You don't write the code. You describe the outcome in plain English. Claude writes the code, runs it, tests it, fixes it, and delivers a finished product. That's not a productivity hack — it's a completely different category of tool.</p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-number">1</div>
-        <div class="pain-content">
-          <h3>AI Chat: Claude drafts your content</h3>
-          <p>Claude Code: Claude builds a content engine that pulls from your brand guidelines, creates a week's worth of posts, generates matching visuals, and schedules them — every week, without you touching it. The difference between asking someone to write a caption and hiring someone to run your content department.</p>
+    <div class="evidence-block">
+      <div class="evidence-browser">
+        <div class="evidence-browser-bar">
+          <div class="evidence-dot"></div>
+          <div class="evidence-dot"></div>
+          <div class="evidence-dot"></div>
+          <div class="evidence-url">code.kaizencollective.com.au</div>
+        </div>
+        <div class="evidence-body">
+          <div class="evidence-body-text">
+            This page is <em>both</em> the lesson material <em>and</em> the proof it works.
+          </div>
         </div>
       </div>
-      <div class="pain-card">
-        <div class="pain-number">2</div>
-        <div class="pain-content">
-          <h3>AI Chat: Claude checks your dashboard</h3>
-          <p>Claude Code: Claude builds a dashboard that checks itself. It logs into your platforms, pulls the numbers, compares them to last week, flags anything that needs attention, and sends you a report. You don't open a browser. You don't remember to check. The system does it for you.</p>
+      <div class="evidence-annotation">
+        <div class="evidence-annotation-line"></div>
+        <div class="evidence-annotation-text">Built with Claude Code</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: THREE MODES -->
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">02 — The Three Modes</div>
+      <div class="section-title" style="color: var(--cream);">Same AI. <em>Different Capability.</em></div>
+      <div class="section-subtitle">You've already used two of these. The third one changes what's possible.</div>
+    </div>
+
+    <div class="modes-diagram">
+      <!-- CHAT -->
+      <div class="mode-column">
+        <div class="mode-icon-wrap">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M8 8h24v18a2 2 0 01-2 2H14l-6 5V10a2 2 0 012-2z" stroke="#8C8778" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="15" cy="17" r="1.5" fill="#8C8778"/>
+            <circle cx="20" cy="17" r="1.5" fill="#8C8778"/>
+            <circle cx="25" cy="17" r="1.5" fill="#8C8778"/>
+          </svg>
+        </div>
+        <div class="mode-label">Session 1</div>
+        <div class="mode-name">Chat</div>
+        <div class="mode-detail">
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">You do</span>
+            <span class="mode-detail-val">Ask questions</span>
+          </div>
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">Claude does</span>
+            <span class="mode-detail-val">Answers</span>
+          </div>
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">What remains</span>
+            <span class="mode-detail-val">A conversation</span>
+          </div>
         </div>
       </div>
-      <div class="pain-card">
-        <div class="pain-number">3</div>
-        <div class="pain-content">
-          <h3>AI Chat: Claude writes one email</h3>
-          <p>Claude Code: Claude builds an email system. Welcome sequences. Follow-up triggers. Re-engagement campaigns. All written in your voice, all connected to your CRM, all running automatically. You built it once. It works forever.</p>
+
+      <!-- Arrow 1 -->
+      <div class="mode-arrow-wrap">
+        <svg class="mode-arrow-svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
+          <path d="M0 8h28m0 0l-5-5m5 5l-5 5" stroke="#8C8778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- COWORK -->
+      <div class="mode-column">
+        <div class="mode-icon-wrap">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="8" width="12" height="16" rx="2" stroke="#8C8778" stroke-width="1.5" fill="none"/>
+            <rect x="22" y="8" width="12" height="16" rx="2" stroke="#8C8778" stroke-width="1.5" fill="none"/>
+            <line x1="9" y1="12" x2="15" y2="12" stroke="#8C8778" stroke-width="1" opacity="0.5"/>
+            <line x1="9" y1="15" x2="14" y2="15" stroke="#8C8778" stroke-width="1" opacity="0.5"/>
+            <line x1="25" y1="12" x2="31" y2="12" stroke="#8C8778" stroke-width="1" opacity="0.5"/>
+            <line x1="25" y1="15" x2="30" y2="15" stroke="#8C8778" stroke-width="1" opacity="0.5"/>
+            <path d="M12 28h16" stroke="#8C8778" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 24v4" stroke="#8C8778" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M28 24v4" stroke="#8C8778" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="20" cy="32" r="2.5" stroke="#8C8778" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <div class="mode-label">Session 2</div>
+        <div class="mode-name">Cowork</div>
+        <div class="mode-detail">
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">You do</span>
+            <span class="mode-detail-val">Give instructions</span>
+          </div>
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">Claude does</span>
+            <span class="mode-detail-val">Executes tasks</span>
+          </div>
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">What remains</span>
+            <span class="mode-detail-val">A document</span>
+          </div>
         </div>
       </div>
+
+      <!-- Arrow 2 -->
+      <div class="mode-arrow-wrap">
+        <svg class="mode-arrow-svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
+          <path d="M0 8h28m0 0l-5-5m5 5l-5 5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- CODE -->
+      <div class="mode-column mode-active">
+        <div class="mode-icon-wrap">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="6" width="32" height="22" rx="3" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            <line x1="4" y1="12" x2="36" y2="12" stroke="#C9A84C" stroke-width="0.75" opacity="0.4"/>
+            <circle cx="9" cy="9" r="1.2" fill="#C45B4A"/>
+            <circle cx="13" cy="9" r="1.2" fill="#C4964A"/>
+            <circle cx="17" cy="9" r="1.2" fill="#5A9E6F"/>
+            <text x="9" y="19" font-family="SF Mono, monospace" font-size="4.5" fill="#C9A84C" opacity="0.9">$ claude</text>
+            <text x="9" y="24" font-family="SF Mono, monospace" font-size="4" fill="#8C8778" opacity="0.7">› building...</text>
+            <rect x="11" y="32" width="8" height="5" rx="1" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/>
+            <rect x="22" y="32" width="8" height="5" rx="1" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/>
+            <path d="M19 34.5h3" stroke="#C9A84C" stroke-width="0.75" stroke-dasharray="1.5 1.5" opacity="0.4"/>
+            <path d="M20 28v4" stroke="#C9A84C" stroke-width="0.75" opacity="0.4"/>
+            <path d="M15 32l5-4 5 4" stroke="#C9A84C" stroke-width="0.75" fill="none" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="mode-label">Session 3 — Today</div>
+        <div class="mode-name">Code</div>
+        <div class="mode-detail">
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">You do</span>
+            <span class="mode-detail-val">Describe outcomes</span>
+          </div>
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">Claude does</span>
+            <span class="mode-detail-val">Builds systems</span>
+          </div>
+          <div class="mode-detail-row">
+            <span class="mode-detail-key">What remains</span>
+            <span class="mode-detail-val">A running product</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Chat is a conversation. It's useful, but when the window closes, it's gone. Cowork is delegation — you point Claude at a task, it executes. Better. But still one task at a time, one document at a time.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Code is different. You describe what you want to exist — and Claude builds it. A landing page. A reporting tool. An automated system that pulls data from your platforms every morning and sends you a summary before you've finished your coffee. You don't write the code. You describe the outcome. Claude writes it, runs it, tests it, fixes it, and delivers a finished product.</p>
+  </div>
+
+  <!-- SECTION 3: THE MANTRA — BUILD ONCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">03 — The Mantra</div>
+      <div class="section-title">Think <em>Once</em>, Deliver Often</div>
+      <div class="section-subtitle">Every system you build becomes infrastructure. Every decision compounds.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">When you build a design system, every page after it inherits your brand. When you build a reporting tool, every morning after that the report runs itself. When you build a client onboarding flow, every new client after that gets the same experience without you lifting a finger. One decision. Permanent leverage.</p>
+
+    <!-- Build Once SVG Diagram -->
+    <div class="build-once-visual">
+      <svg class="build-once-svg" viewBox="0 0 860 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Origin cluster -->
+        <circle cx="80" cy="160" r="32" fill="#C9A84C" opacity="0.08"/>
+        <circle cx="80" cy="160" r="20" fill="#C9A84C" opacity="0.15"/>
+        <circle cx="80" cy="160" r="8" fill="#C9A84C"/>
+
+        <!-- Label: BUILD ONCE -->
+        <text x="80" y="212" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="2.5" fill="#C9A84C">BUILD ONCE</text>
+
+        <!-- Branching lines — smooth cubic beziers -->
+        <path d="M100 160 C180 160, 240 40, 320 40" stroke="#C9A84C" stroke-width="1.5" opacity="0.5" fill="none"/>
+        <path d="M100 160 C180 160, 240 100, 320 100" stroke="#C9A84C" stroke-width="1.5" opacity="0.5" fill="none"/>
+        <path d="M100 160 C180 160, 240 160, 320 160" stroke="#C9A84C" stroke-width="1.5" opacity="0.5" fill="none"/>
+        <path d="M100 160 C180 160, 240 220, 320 220" stroke="#C9A84C" stroke-width="1.5" opacity="0.5" fill="none"/>
+        <path d="M100 160 C180 160, 240 280, 320 280" stroke="#C9A84C" stroke-width="1.5" opacity="0.5" fill="none"/>
+
+        <!-- Small dot at each branch start -->
+        <circle cx="100" cy="160" r="3" fill="#C9A84C" opacity="0.6"/>
+
+        <!-- Output cards -->
+        <!-- Landing Pages -->
+        <rect x="320" y="20" width="240" height="40" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="320" y="20" width="3" height="40" rx="1.5" fill="#C9A84C"/>
+        <text x="340" y="36" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#A39D93">LANDING PAGES</text>
+        <text x="340" y="52" font-family="DM Sans, sans-serif" font-size="12" fill="#5C5850" font-weight="300">Branded, deployed, live</text>
+
+        <!-- Reports -->
+        <rect x="320" y="80" width="240" height="40" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="320" y="80" width="3" height="40" rx="1.5" fill="#C9A84C"/>
+        <text x="340" y="96" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#A39D93">DAILY REPORTS</text>
+        <text x="340" y="112" font-family="DM Sans, sans-serif" font-size="12" fill="#5C5850" font-weight="300">Pull data while you sleep</text>
+
+        <!-- Automations -->
+        <rect x="320" y="140" width="240" height="40" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="320" y="140" width="3" height="40" rx="1.5" fill="#C9A84C"/>
+        <text x="340" y="156" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#A39D93">AUTOMATIONS</text>
+        <text x="340" y="172" font-family="DM Sans, sans-serif" font-size="12" fill="#5C5850" font-weight="300">Onboarding, follow-ups, CRM</text>
+
+        <!-- Email Systems -->
+        <rect x="320" y="200" width="240" height="40" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="320" y="200" width="3" height="40" rx="1.5" fill="#C9A84C"/>
+        <text x="340" y="216" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#A39D93">EMAIL SYSTEMS</text>
+        <text x="340" y="232" font-family="DM Sans, sans-serif" font-size="12" fill="#5C5850" font-weight="300">Sequences in your voice</text>
+
+        <!-- Dashboards -->
+        <rect x="320" y="260" width="240" height="40" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="320" y="260" width="3" height="40" rx="1.5" fill="#C9A84C"/>
+        <text x="340" y="276" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#A39D93">DASHBOARDS</text>
+        <text x="340" y="292" font-family="DM Sans, sans-serif" font-size="12" fill="#5C5850" font-weight="300">Client health, metrics, alerts</text>
+
+        <!-- Recurring arrows (circular) on right side of each card -->
+        <g opacity="0.45" stroke="#C9A84C" stroke-width="1.2" fill="none" stroke-linecap="round">
+          <path d="M574 36 a8 8 0 1 1 0 8" /><path d="M574 44 l3-2 -3-2"/>
+          <path d="M574 96 a8 8 0 1 1 0 8" /><path d="M574 104 l3-2 -3-2"/>
+          <path d="M574 156 a8 8 0 1 1 0 8" /><path d="M574 164 l3-2 -3-2"/>
+          <path d="M574 216 a8 8 0 1 1 0 8" /><path d="M574 224 l3-2 -3-2"/>
+          <path d="M574 276 a8 8 0 1 1 0 8" /><path d="M574 284 l3-2 -3-2"/>
+        </g>
+
+        <!-- Connecting line from cards to label -->
+        <line x1="600" y1="40" x2="600" y2="280" stroke="#E0DBD3" stroke-width="1" stroke-dasharray="3 4"/>
+
+        <!-- RUNS FOREVER label — vertical, right side -->
+        <text x="620" y="145" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="3" fill="#A39D93">RUNS</text>
+        <text x="620" y="162" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="3" fill="#A39D93">FOREVER</text>
+        <rect x="620" y="170" width="40" height="1" fill="#C9A84C" opacity="0.4"/>
+      </svg>
     </div>
   </div>
 
@@ -1274,99 +2144,335 @@
 </div>
 
 <!-- ============================================
-     TAB 2: WHAT IT CAN BUILD
+     TAB 2: UNDERSTANDING CLAUDE CODE
      ============================================ -->
-<div id="builds" class="page">
+<div id="understanding" class="page">
 
+  <!-- IDEA 1: EARN WHILE YOU LEARN -->
   <div class="section">
     <div class="section-header">
-      <div class="section-number">02 — What It Can Build</div>
-      <div class="section-title">These Aren't <em>Hypotheticals</em></div>
-      <div class="section-subtitle">These are systems running inside real businesses right now. Built with Claude Code. By people who don't write code.</div>
+      <div class="section-number">01 — Earn While You Learn</div>
+      <div class="section-title">The Old Path Is <em>Dead</em></div>
+      <div class="section-subtitle">You don't need a computer science degree. You need clarity on what you want — and that's the skill you've been building your whole career.</div>
     </div>
 
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">I built every one of these for my own business. Some of them replaced a full-time hire. Some of them replaced a process I'd been doing manually for two years. All of them started the same way: I described what I wanted, and Claude built it.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">The old path to building software: spend 3–4 years in a degree learning theory, then spend years in junior roles before you can build anything useful. Your first lesson? Print "Hello World" on a screen. Thrilling.</p>
 
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Here's what that looks like in practice.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">With Claude Code, you learn by building real things — tools your business actually needs, right now. A dashboard that tracks your leads. A landing page that converts. An onboarding system that runs without you. Every build teaches you something new about how software works, and every build creates something that earns for your business immediately.</p>
 
-    <div class="solution-stack">
-      <div class="solution-card">
-        <div class="solution-label">Live System</div>
-        <h3>Pulse — Automated Client Health Reports</h3>
-        <p>Every morning at 7am, I get a Slack message that tells me exactly which clients need attention. Not a generic summary — a diagnostic. It pulls data from our CRM, the member management platform, and ad accounts. It compares this week to last week. It flags drops in lead flow, missed payments, declining attendance. It even tells me what to focus on in my next coaching call. I used to spend two hours every morning opening dashboards and doing this manually. Now I wake up and it's done.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">You don't need to understand how an engine works to drive a car. The learning happens as a byproduct of the building. You'll pick up terms, patterns, and concepts naturally — because they're attached to things you care about, not abstract exercises.</p>
+
+    <!-- Comparison Visual: Developer vs Code -->
+    <div class="comparison-grid">
+      <div class="comparison-col comparison-col-dev">
+        <div class="comparison-col-header">With a Developer</div>
+        <div class="comparison-row">
+          <span class="comparison-label">Landing page</span>
+          <span class="comparison-value">1–2 weeks · $2–5k</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Client dashboard</span>
+          <span class="comparison-value">4–8 weeks · $5–10k</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Email system</span>
+          <span class="comparison-value">1–2 weeks · $1–3k</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Operations tool</span>
+          <span class="comparison-value">6–12 weeks · $8–15k</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Design system</span>
+          <span class="comparison-value">2–4 weeks · $3–6k</span>
+        </div>
+        <div class="comparison-total">
+          <span class="comparison-total-label">Typical total</span>
+          <span class="comparison-total-value">$24–53k</span>
+        </div>
       </div>
-      <div class="solution-card">
-        <div class="solution-label">Live System</div>
-        <h3>Website Builds — Described, Built, Deployed</h3>
-        <p>I describe what I want — a landing page, a session guide, a full marketing site — and Claude builds it. Not a draft. Not a wireframe. A finished, styled, responsive page that works on every device. Then it deploys to a live URL. The page you're reading right now was built this way. I didn't write a single line of code. I described the structure, the content, the brand system — and Claude built the whole thing. Live on the internet. Under an hour.</p>
-      </div>
-      <div class="solution-card">
-        <div class="solution-label">Live System</div>
-        <h3>Core Reports — Data That Pulls Itself</h3>
-        <p>We manage gym locations that use Hapana Core for member management. Every day, we need attendance reports, membership numbers, revenue data, cancellation records. That used to mean someone logging in, setting date filters, downloading CSVs, and cleaning up the data in a spreadsheet. Now Claude does it at 1am. It opens the browser, logs in, navigates to the right reports, downloads everything, processes it, and delivers clean summaries. The 45-minute Monday morning ritual? It runs itself while you sleep.</p>
+
+      <div class="comparison-col comparison-col-code">
+        <div class="comparison-col-header">With Claude Code</div>
+        <div class="comparison-row">
+          <span class="comparison-label">Landing page</span>
+          <span class="comparison-value">1–2 hours</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Client dashboard</span>
+          <span class="comparison-value">2–4 hours</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Email system</span>
+          <span class="comparison-value">1–2 hours</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Operations tool</span>
+          <span class="comparison-value">3–6 hours</span>
+        </div>
+        <div class="comparison-row">
+          <span class="comparison-label">Design system</span>
+          <span class="comparison-value">1–2 hours</span>
+        </div>
+        <div class="comparison-total">
+          <span class="comparison-total-label">Typical total</span>
+          <span class="comparison-total-value">A weekend</span>
+        </div>
       </div>
     </div>
+
+    <p style="font-size: 15px; color: var(--stone); font-weight: 300; line-height: 1.7; max-width: 700px; margin-top: 8px;">The cost difference is real, but the time difference is what matters. A developer builds on their timeline. Code builds on yours — while you watch, while you iterate, while you learn. And you own every line of it.</p>
   </div>
 
-  <div class="callout-dark">
-    <p>Every one of these was built by describing what was needed in plain English. No developers. No agencies. <em>No waiting.</em></p>
-  </div>
-
-</div>
-
-<!-- ============================================
-     TAB 3: POWER TOOLS
-     ============================================ -->
-<div id="power" class="page">
-
+  <!-- IDEA 2: THE BUILD PROCESS -->
   <div class="section section-dark">
     <div class="section-header">
-      <div class="section-number">03 — The Power Tools</div>
-      <div class="section-title" style="color: var(--cream);">The Features That <em>Change Everything</em></div>
-      <div class="section-subtitle">These are the features that separate casual users from people who build real leverage. They're not in the getting-started guide. They probably should be.</div>
+      <div class="section-number">02 — The Build Process</div>
+      <div class="section-title" style="color: var(--cream);">Two Steps. <em>That's It.</em></div>
+      <div class="section-subtitle">You don't need a project manager, a sprint board, or a Jira ticket. You need a plan and a builder.</div>
     </div>
 
-    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Claude Code out of the box is already powerful. But there are three capabilities that most people don't know about — and they change what's possible. I use all three of these every single day.</p>
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">The workflow is simple. Use Chat to think — brainstorm, strategise, map out what you need. Then hand the plan to Code and let it build. One context handoff. No back-and-forth with a developer over six weeks. No design review meetings. No scope creep invoices.</p>
 
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-number">1</div>
-        <div class="pain-content">
-          <h3>The Trust Flag</h3>
-          <p>By default, Claude asks your permission before it reads a file, runs a command, or makes any change. That's responsible. It's also slow. When you're building something new and you trust the process, you can run <code style="font-family: 'SF Mono', monospace; font-size: 12px; background: var(--neutral-800); padding: 1px 6px; border-radius: 3px; color: var(--gold-light);">claude --dangerously-skip-permissions</code> — and Claude just goes. It plans the work, executes it, tests it, fixes issues — all without stopping to ask. A 20-minute build that would take 45 minutes with constant approvals. It's like the difference between micromanaging a new hire and trusting a senior employee. Use it when you're building something new. Not when you're changing something critical.</p>
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Chat creates the brief. Code executes the brief. You review the result in real time and iterate on the spot. What used to be a procurement process is now a working session.</p>
+
+    <!-- Pipeline Diagram -->
+    <div class="pipeline-visual">
+      <svg class="pipeline-svg" viewBox="0 0 900 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Step 1: Your Idea -->
+        <circle cx="70" cy="80" r="28" fill="none" stroke="#8C8778" stroke-width="1.5"/>
+        <circle cx="70" cy="80" r="4" fill="#8C8778"/>
+        <text x="70" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="1.5" fill="#8C8778">YOUR IDEA</text>
+
+        <!-- Arrow 1 -->
+        <line x1="108" y1="80" x2="168" y2="80" stroke="#5C5850" stroke-width="1" stroke-dasharray="4 3"/>
+        <path d="M164 76l8 4-8 4" stroke="#5C5850" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- Step 2: Brief in Chat -->
+        <rect x="180" y="52" width="140" height="56" rx="4" fill="none" stroke="#8C8778" stroke-width="1.5"/>
+        <svg x="196" y="62" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M3 3h10v7a1 1 0 01-1 1H5.5l-2.5 2V4a1 1 0 011-1z" stroke="#8C8778" stroke-width="1" fill="none"/>
+        </svg>
+        <text x="216" y="74" font-family="DM Sans, sans-serif" font-size="11" fill="#EDE8DC" font-weight="400">Plan in Chat</text>
+        <text x="196" y="94" font-family="DM Sans, sans-serif" font-size="10" fill="#5C5850" font-weight="300">Think · Strategise · Brief</text>
+        <text x="250" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="1.5" fill="#8C8778">STEP 1</text>
+
+        <!-- Arrow 2 — the handoff -->
+        <line x1="330" y1="80" x2="390" y2="80" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M386 76l8 4-8 4" stroke="#C9A84C" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="360" y="70" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" font-weight="500" letter-spacing="1" fill="#C9A84C">HANDOFF</text>
+
+        <!-- Step 3: Build in Code -->
+        <rect x="400" y="52" width="160" height="56" rx="4" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+        <rect x="400" y="52" width="3" height="56" rx="1.5" fill="#C9A84C"/>
+        <text x="420" y="74" font-family="'SF Mono', monospace" font-size="11" fill="#C9A84C" font-weight="500">$ claude</text>
+        <text x="420" y="94" font-family="DM Sans, sans-serif" font-size="10" fill="#5C5850" font-weight="300">Build · Test · Fix · Deploy</text>
+        <text x="480" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="1.5" fill="#C9A84C">STEP 2</text>
+
+        <!-- Arrow 3 -->
+        <line x1="570" y1="80" x2="630" y2="80" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4 3"/>
+        <path d="M626 76l8 4-8 4" stroke="#C9A84C" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- Step 4: Working Product -->
+        <rect x="642" y="48" width="180" height="64" rx="4" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1"/>
+        <text x="732" y="72" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" fill="#EDE8DC" font-weight="500">Working Product</text>
+        <text x="732" y="92" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#C9A84C" font-weight="400">Live on the internet</text>
+        <text x="732" y="130" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" font-weight="600" letter-spacing="1.5" fill="#C9A84C">DONE</text>
+
+        <!-- Iteration loop arrow under Code box -->
+        <path d="M480 118 C480 155, 520 155, 520 118" stroke="#5C5850" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+        <path d="M517 122l3-6 5 4" stroke="#5C5850" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="500" y="170" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" fill="#5C5850" font-weight="400" font-style="italic">iterate</text>
+      </svg>
+    </div>
+
+    <p style="font-size: 15px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px;">The key distinction: Chat creates a <em style="color: var(--cream);">brief</em> — a clear description of what you want. Code reads the brief and builds it. You review the result in real time. If something's off, you describe the change and Code fixes it in seconds. The iteration cycle that takes weeks with a developer takes minutes with Code.</p>
+  </div>
+
+  <!-- IDEA 3: CLAUDE.md -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">03 — CLAUDE.md</div>
+      <div class="section-title">One File. <em>Every Build.</em></div>
+      <div class="section-subtitle">The reason Claude Code doesn't build generic output — it already knows who you are.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">CLAUDE.md is a single file you write once. It tells Claude Code who you are, how your brand sounds, what your colour palette is, how you talk to clients, what your business does. It's Claude's memory — but unlike Chat's automatic memory, you control every word.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Once it exists, every build inherits it. A landing page comes out in your brand. An email sequence sounds like you. A client report uses your terminology. You wrote the identity once. Everything that follows is already personal.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">This is what separates Claude Code from asking a developer to build something. A developer needs a brief every time. Claude Code reads your CLAUDE.md and already knows the brief.</p>
+
+    <!-- CLAUDE.md Radial Diagram -->
+    <div class="claudemd-visual">
+      <svg class="claudemd-svg" viewBox="0 0 720 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central node -->
+        <rect x="260" y="150" width="200" height="100" rx="6" fill="#1A1A18" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="360" y="188" text-anchor="middle" font-family="'SF Mono', monospace" font-size="14" fill="#C9A84C" font-weight="600">CLAUDE.md</text>
+        <text x="360" y="210" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#8C8778" font-weight="300">Your identity · Your brand</text>
+        <text x="360" y="226" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#8C8778" font-weight="300">Your voice · Your rules</text>
+
+        <!-- Connection lines — simple straight lines with dots -->
+        <!-- To top-left (Landing Pages) -->
+        <line x1="290" y1="155" x2="210" y2="62" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+        <circle cx="210" cy="62" r="3" fill="#C9A84C" opacity="0.35"/>
+        <!-- To top-right (Dashboards) -->
+        <line x1="430" y1="155" x2="510" y2="62" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+        <circle cx="510" cy="62" r="3" fill="#C9A84C" opacity="0.35"/>
+        <!-- To left (Email Systems) -->
+        <line x1="260" y1="200" x2="178" y2="200" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+        <circle cx="178" cy="200" r="3" fill="#C9A84C" opacity="0.35"/>
+        <!-- To right (Reports) -->
+        <line x1="460" y1="200" x2="542" y2="200" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+        <circle cx="542" cy="200" r="3" fill="#C9A84C" opacity="0.35"/>
+        <!-- To bottom-left (Client Tools) -->
+        <line x1="290" y1="245" x2="210" y2="338" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+        <circle cx="210" cy="338" r="3" fill="#C9A84C" opacity="0.35"/>
+        <!-- To bottom-right (Automations) -->
+        <line x1="430" y1="245" x2="510" y2="338" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+        <circle cx="510" cy="338" r="3" fill="#C9A84C" opacity="0.35"/>
+
+        <!-- Output cards -->
+        <!-- Top left: Landing Pages -->
+        <rect x="80" y="30" width="170" height="44" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="80" y="30" width="3" height="44" rx="1.5" fill="#C9A84C"/>
+        <text x="96" y="48" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#A39D93">LANDING PAGES</text>
+        <text x="96" y="64" font-family="DM Sans, sans-serif" font-size="11" fill="#5C5850" font-weight="300">In your brand, every time</text>
+
+        <!-- Top right: Dashboards -->
+        <rect x="470" y="30" width="170" height="44" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="470" y="30" width="3" height="44" rx="1.5" fill="#C9A84C"/>
+        <text x="486" y="48" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#A39D93">DASHBOARDS</text>
+        <text x="486" y="64" font-family="DM Sans, sans-serif" font-size="11" fill="#5C5850" font-weight="300">Your metrics, your layout</text>
+
+        <!-- Left: Email Systems -->
+        <rect x="20" y="178" width="170" height="44" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="20" y="178" width="3" height="44" rx="1.5" fill="#C9A84C"/>
+        <text x="36" y="196" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#A39D93">EMAIL SYSTEMS</text>
+        <text x="36" y="212" font-family="DM Sans, sans-serif" font-size="11" fill="#5C5850" font-weight="300">Sounds like you wrote it</text>
+
+        <!-- Right: Reports -->
+        <rect x="530" y="178" width="170" height="44" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="530" y="178" width="3" height="44" rx="1.5" fill="#C9A84C"/>
+        <text x="546" y="196" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#A39D93">REPORTS</text>
+        <text x="546" y="212" font-family="DM Sans, sans-serif" font-size="11" fill="#5C5850" font-weight="300">Your terminology, your KPIs</text>
+
+        <!-- Bottom left: Client Tools -->
+        <rect x="80" y="320" width="170" height="44" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="80" y="320" width="3" height="44" rx="1.5" fill="#C9A84C"/>
+        <text x="96" y="338" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#A39D93">CLIENT TOOLS</text>
+        <text x="96" y="354" font-family="DM Sans, sans-serif" font-size="11" fill="#5C5850" font-weight="300">Built for your workflow</text>
+
+        <!-- Bottom right: Automations -->
+        <rect x="470" y="320" width="170" height="44" rx="3" fill="#FEFDFB" stroke="#E0DBD3" stroke-width="1"/>
+        <rect x="470" y="320" width="3" height="44" rx="1.5" fill="#C9A84C"/>
+        <text x="486" y="338" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#A39D93">AUTOMATIONS</text>
+        <text x="486" y="354" font-family="DM Sans, sans-serif" font-size="11" fill="#5C5850" font-weight="300">Knows your systems</text>
+
+        <!-- "Write once" label -->
+        <text x="360" y="284" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" letter-spacing="2.5" fill="#C9A84C" opacity="0.5">WRITE ONCE · POWERS EVERYTHING</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">Common Questions</div>
+      <div class="section-title" style="color: var(--cream);">Before You <em>Ask</em></div>
+      <div class="section-subtitle">The questions that come up every time. Answered once.</div>
+    </div>
+
+    <div class="faq-toggles">
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>What's the difference between Code and Cowork?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>Cowork runs inside a virtual machine — a simulated computer inside your computer. It can handle files and one-off tasks, but everything disappears when the session ends. Code runs directly on your machine. It builds real software that stays. A dashboard built in Code is still running next week. A document produced in Cowork needs to be rebuilt every session. Code creates assets. Cowork performs tasks.</p>
         </div>
       </div>
-      <div class="pain-card">
-        <div class="pain-number">2</div>
-        <div class="pain-content">
-          <h3>Your Mac, Claude's Hands</h3>
-          <p>This is the one that surprises people. Claude can control your actual Mac applications through AppleScript. It can open Chrome, navigate to your member management dashboard, click through to the reports section, set date ranges, download files, and come back with the data. No API needed. No developer integration. Just Claude using your computer the way you would. I use this to log into Hapana Core, pull CSV reports, extract data from GoHighLevel, and navigate platforms that don't have API access. If you can do it on your Mac, Claude can do it for you.</p>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>Do I need to know how to code?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>No. You describe what you want in plain English. Claude writes the code, runs it, tests it, fixes it. You'll pick up terms naturally — the same way you learned marketing vocabulary by doing marketing, not by studying a textbook. The skill you need is clarity on what you want. That's a business skill, not a technical one.</p>
         </div>
       </div>
-      <div class="pain-card">
-        <div class="pain-number">3</div>
-        <div class="pain-content">
-          <h3>If You Can See It, Claude Can Use It</h3>
-          <p>Computer Use is the fallback when there's no API and no AppleScript shortcut. Claude can see your screen and interact with it directly — clicking, typing, scrolling, reading text from images. It's slower than AppleScript, but it means the answer to "can Claude do this?" is almost always yes. Platform-specific dashboards, proprietary tools, anything with a visual interface — Claude can navigate it. Nothing is completely off-limits.</p>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>What does Claude Code cost?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>Claude Code requires a Pro ($20/month) or Max ($100/month) subscription. Pro gives you generous usage for most builds. Max is for heavy use — complex projects, extended sessions, lots of iteration. Start with Pro. You'll know when you need Max because you'll hit the usage limit mid-build and won't want to stop.</p>
+        </div>
+      </div>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>Can Claude Code break my computer?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>Extremely unlikely. Claude works inside project folders and asks permission before making changes. It doesn't touch system files. The worst case is it writes code that doesn't work — and then you tell it to fix it. Everything it creates is tracked through Git, so you can always undo.</p>
+        </div>
+      </div>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>What's the trust flag everyone mentions?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>By default, Claude asks permission before every action. The trust flag tells Claude to just work without asking. The name sounds scary on purpose — it means you trust Claude to act on your machine. For building new projects, it's what you want. For editing critical files, keep the default.</p>
+        </div>
+      </div>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>What's CLAUDE.md and why does it matter?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>A file you write that tells Claude Code who you are. Your brand, your voice, your rules, your preferences. Think of it as a permanent brief. Without it, Claude starts every project from zero. With it, every project already knows your business. You write it once, and every build inherits it.</p>
+        </div>
+      </div>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>Can I use what Claude builds commercially?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>Yes. Everything Claude Code builds belongs to you. The code, the design, the deployed product — it's yours. No licensing restrictions on output. You own every line.</p>
+        </div>
+      </div>
+      <div class="faq-toggle" onclick="this.classList.toggle('open')">
+        <div class="faq-toggle-header">
+          <h4>What if it builds something I don't like?</h4>
+          <span class="faq-toggle-icon">+</span>
+        </div>
+        <div class="faq-toggle-body">
+          <p>Tell it. "I don't like the colour of the header" or "this section feels too busy" or "start over on the hero." Claude iterates in seconds. The power isn't in getting it right the first time — it's in how fast you can iterate. What takes a developer days of back-and-forth takes minutes.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="callout-dark">
-    <p>Most people use Claude Code like a fancy text editor. These three features turn it into a <em>remote employee</em> with access to everything on your computer.</p>
+    <p>Three ideas. That's all you need before you build. It pays for itself while you learn. The process is two steps. And Claude already knows <em>who you are</em>.</p>
   </div>
 
 </div>
 
 <!-- ============================================
-     TAB 4: SETUP
+     TAB 3: THE SET UP
      ============================================ -->
 <div id="setup" class="page">
 
   <div class="section section-dark">
     <div class="section-header">
-      <div class="section-number">04 — Setup</div>
+      <div class="section-number">03 — The Set Up</div>
       <div class="section-title" style="color: var(--cream);">Get <em>Set Up</em></div>
       <div class="section-subtitle">This takes about 30 minutes. Put a podcast on, grab a coffee, and knock it out in one sitting. Each phase builds on the last — by the end, you'll have a fully loaded AI building tool that already knows your business.</div>
     </div>
@@ -1795,153 +2901,275 @@
 
   </div>
 
+
+  <div class="pack-footer">
+    <span class="brand-logo">Kaizen Collective</span>
+    <p>Claude Code Guide · 2026</p>
+  </div>
+
 </div>
 
 <!-- ============================================
-     TAB 5: FIRST BUILD
+     TAB 4: YOUR FIRST BUILD
      ============================================ -->
 <div id="first-build" class="page">
 
+  <div class="hero">
+    <div class="hero-eyebrow">The Build</div>
+    <h1 class="hero-title">Your <em>Design System</em>.<br>Built <em>Live</em>.</h1>
+    <p class="hero-subtitle">You're about to build the foundation every future project inherits. Your colours. Your fonts. Your rules. As a real, working HTML page — in minutes.</p>
+    <div class="hero-line"></div>
+    <div class="hero-session">Hands-On Exercise · Claude Code</div>
+  </div>
+
+  <!-- WHAT & WHY -->
   <div class="section">
     <div class="section-header">
-      <div class="section-number">05 — Your First Build</div>
-      <div class="section-title">Build Something <em>Right Now</em></div>
-      <div class="section-subtitle">You've got Claude Code installed. Let's use it. This takes about 5 minutes.</div>
+      <div class="section-number">Your First Project</div>
+      <div class="section-title">A <em>Design System</em></div>
+      <div class="section-subtitle">The foundation every future build inherits. Before you build pages, tools, or automations — you build the rules they all follow.</div>
     </div>
 
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">This is the moment it clicks. You're going to describe something in plain English — and watch Claude turn it into a working tool on your computer.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">A design system is a single source of truth for your brand — your colours, your fonts, your components, your voice. It's not a nice-to-have. It's the reason every page you build from here looks like <em>you</em> instead of a generic template.</p>
 
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 40px;">We're going to build a Revenue Calculator. Something you could actually use with a client or on your own business. Follow these steps exactly.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Without one, every new project starts from scratch. With one, every new project already knows your brand. You make the decisions once and everything built on top inherits them automatically.</p>
 
-    <div class="step-list">
-      <div class="step-item">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h4>Open Terminal</h4>
-          <p>Same as before — <code>Cmd + Space</code>, type "Terminal", hit Enter.</p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">This is what I built for myself — it covers colours, typography, components, page templates, even social media templates. Today you're going to build yours as a working HTML page you can open in a browser and reference every time you build something new.</p>
+
+    <div class="evidence-block">
+      <div class="evidence-browser">
+        <div class="evidence-browser-bar">
+          <div class="evidence-dot"></div>
+          <div class="evidence-dot"></div>
+          <div class="evidence-dot"></div>
+          <div class="evidence-url">figma.com/design — Mario Paguio Design System</div>
+        </div>
+        <div class="evidence-body" style="min-height: 200px; flex-direction: column; gap: 12px;">
+          <div style="font-family: var(--font-body); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Mario's Example</div>
+          <div style="font-family: var(--font-heading); font-size: 24px; color: var(--cream); font-weight: 400;">Cover · Colours · Typography · Components · Templates</div>
+          <div style="display: flex; gap: 12px; margin-top: 8px;">
+            <div style="width: 36px; height: 36px; background: #141F1B; border-radius: 2px;"></div>
+            <div style="width: 36px; height: 36px; background: #F5F0E8; border: 1px solid #E0DBD3; border-radius: 2px;"></div>
+            <div style="width: 36px; height: 36px; background: #BFA278; border-radius: 2px;"></div>
+            <div style="width: 36px; height: 36px; background: #7A9E8C; border-radius: 2px;"></div>
+            <div style="width: 36px; height: 36px; background: #8C8778; border-radius: 2px;"></div>
+            <div style="width: 36px; height: 36px; background: #EDE8DC; border-radius: 2px;"></div>
+          </div>
+          <div style="font-family: var(--font-body); font-size: 11px; color: var(--neutral-500); font-weight: 300; margin-top: 4px;">Dark Forest + Cream + Warm Brass · Barlow Condensed + DM Sans · Sharp corners · Zero border-radius</div>
         </div>
       </div>
-      <div class="step-item">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h4>Create a project folder</h4>
-          <p>Paste this and hit Enter: <code>mkdir ~/Desktop/my-first-build && cd ~/Desktop/my-first-build</code></p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h4>Launch Claude</h4>
-          <p>Type <code>claude</code> and hit Enter. Wait for the prompt to appear.</p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h4>Paste this prompt</h4>
-          <p>Copy the entire block below and paste it into Claude.</p>
-        </div>
+      <div class="evidence-annotation">
+        <div class="evidence-annotation-line"></div>
+        <div class="evidence-annotation-text">Built with Claude Code</div>
       </div>
     </div>
+
+    <p style="font-size: 15px; color: var(--stone); font-weight: 300; line-height: 1.7; max-width: 700px; margin-top: 56px;">Yours will look different — different colours, different fonts, different vibe. That's the point. Same structure. Your brand. Let's build it.</p>
+  </div>
+
+  <!-- STEP 1: PREP -->
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">Step 1 — Prep Your Files</div>
+      <div class="section-title" style="color: var(--cream);">Get Your Docs <em>Local</em></div>
+      <div class="section-subtitle">Claude Code reads files on your computer. Your brand docs need to be there — not in Google Drive, not in Notion. On your machine.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Download your Session 1 brand documents — your business information, preferences, anything you've already decided about who you are and how your brand sounds. Put them in a folder.</p>
+
+    <p style="font-size: 15px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 32px;">Then open Claude Code. That's it — just type <code style="font-family: 'SF Mono', monospace; font-size: 12px; background: var(--neutral-800); padding: 2px 8px; border-radius: 3px; color: var(--gold-light);">claude</code> in your terminal and hit enter. Claude will handle creating folders, finding your files, and organising everything. You don't need to worry about where things go.</p>
 
     <div class="brief-block">
-      <span class="brief-label">Your First Prompt</span>Build me a single HTML page — a Revenue Calculator for a fitness business.
+      <span class="brief-label">Start Claude Code</span>
+<span class="brief-key">claude</span></div>
 
-It should ask:
-- How many members do you have?
-- What's your average membership price per week?
-- What's your average retention (months)?
-- How many new leads per month?
-- What's your conversion rate?
+    <p style="font-size: 14px; color: var(--neutral-500); font-weight: 300; line-height: 1.8; max-width: 700px; margin-top: 24px;">When you paste the build prompt in the next step, just tell Claude where your brand docs are — "my brand docs are in my Downloads folder" is enough. Claude will find them.</p>
+  </div>
 
-Then calculate and display:
-- Current monthly revenue
-- Current annual revenue
-- Projected revenue if you improve conversion by 10%
-- Projected revenue if you improve retention by 2 months
-- The combined impact of both improvements
+  <!-- STEP 2: DECISIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Step 2 — Make Your Decisions</div>
+      <div class="section-title">Three Colours. <em>Two Fonts.</em></div>
+      <div class="section-subtitle">If you already decided these in Session 1, use those. If not, decide now. Don't overthink it — Claude can change them in seconds.</div>
+    </div>
 
-Make it look clean and professional. Dark background, modern fonts,
-mobile responsive. Add a "Reset" button. Save it as index.html.</div>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">Every design system starts with the same three colour roles. You don't need a palette of 20 colours. You need three that do specific jobs.</p>
 
-    <div class="step-list" style="margin-top: 32px;">
-      <div class="step-item">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <h4>Watch Claude build it</h4>
-          <p>Claude will plan the build, write the code, and create the file. This takes 1–2 minutes. You don't need to do anything — just watch.</p>
-        </div>
+    <div class="colour-roles">
+      <div class="colour-role">
+        <div class="colour-role-circle surface"></div>
+        <h4>Surface</h4>
+        <p>Your background. The canvas everything sits on. Dark and moody? Light and clean? This sets the entire tone.</p>
       </div>
-      <div class="step-item">
-        <div class="step-number">6</div>
-        <div class="step-content">
-          <h4>Open it in your browser</h4>
-          <p>Go to your Desktop, open the <strong style="font-weight: 500; color: var(--ink);">my-first-build</strong> folder, and double-click <strong style="font-weight: 500; color: var(--ink);">index.html</strong>. That's your finished tool — working, styled, responsive.</p>
-        </div>
+      <div class="colour-role">
+        <div class="colour-role-circle text-col"></div>
+        <h4>Text</h4>
+        <p>What sits on top. Needs to be readable. If your surface is dark, your text is light. Simple contrast.</p>
+      </div>
+      <div class="colour-role">
+        <div class="colour-role-circle accent"></div>
+        <h4>Accent</h4>
+        <p>Your one pop of personality. Buttons, highlights, the thing that draws the eye. Use it sparingly — that's what makes it powerful.</p>
       </div>
     </div>
 
-    <div class="callout-warm">
-      <p>That's a working tool on your computer. You described it in English, Claude built it in code. You could send this to a client, embed it on your website, or use it in a sales conversation. <strong>And it took less time than writing a caption.</strong></p>
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px; margin-top: 48px;">Two fonts. No more. One with character, one that disappears.</p>
+
+    <div class="font-pair">
+      <div class="font-card">
+        <div class="font-card-label">Display Font — Headlines</div>
+        <div class="font-card-sample display">The One With Character</div>
+        <p>This is the font people notice. It sets the mood. Bold, condensed, serif, script — whatever matches your brand's personality. Used for headings only.</p>
+      </div>
+      <div class="font-card">
+        <div class="font-card-label">Body Font — Everything Else</div>
+        <div class="font-card-sample body">The one that disappears</div>
+        <p>This font shouldn't be noticed. It should just read well. Clean, simple, invisible. Used for body copy, labels, buttons, navigation — everything that isn't a headline.</p>
+      </div>
     </div>
 
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-top: 48px; margin-bottom: 16px;"><strong style="font-weight: 500; color: var(--ink);">Want to try something else?</strong> Here are a few more prompts you can run the same way:</p>
+    <p style="font-size: 14px; color: var(--stone); font-weight: 300; line-height: 1.7; max-width: 700px;">Don't know your hex codes? That's fine. Describe the colour — "dark forest green", "warm terracotta", "muted gold" — Claude will find the hex. Don't have a font picked? Describe the vibe — "bold and industrial", "elegant and classic" — Claude will suggest options.</p>
+  </div>
 
-    <div class="solution-stack" style="margin-top: 24px;">
-      <div class="solution-card">
-        <div class="solution-label">Try This</div>
-        <h3>A Landing Page for Your Next Offer</h3>
-        <p>"Build a landing page for a 6-week transformation challenge. Include a hero section, three benefit blocks, social proof placeholder, and a sign-up form. Use [your brand colours]. Make it mobile responsive."</p>
+  <!-- STEP 3: THE PROMPT -->
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">Step 3 — The Prompt</div>
+      <div class="section-title" style="color: var(--cream);">Copy. Paste. <em>Build.</em></div>
+      <div class="section-subtitle">This is the brief-to-Code handoff. Replace the fields in gold with your decisions. Paste the whole thing into Claude Code.</div>
+    </div>
+
+    <div class="mega-prompt">
+      <div class="mega-prompt-label">
+        <span>Build Prompt — Copy & Paste Into Claude Code</span>
+        <button class="mega-prompt-copy" onclick="copyPrompt()">Copy</button>
       </div>
-      <div class="solution-card">
-        <div class="solution-label">Try This</div>
-        <h3>A Lead Magnet Opt-in Page</h3>
-        <p>"Build an opt-in page for a free PDF guide called '5 Things Killing Your Gym Revenue.' Include a headline, 3 bullet points about what's inside, an email capture form, and a download button. Clean, professional design."</p>
+      <pre id="build-prompt">Read my brand documents at <span class="placeholder">[path to your downloaded docs, e.g. ~/Downloads/my-brand-docs.pdf]</span>
+
+Then build me a complete design system as a single HTML page. Here are my decisions:
+
+Business: <span class="placeholder">[YOUR BUSINESS NAME]</span>
+Type: <span class="placeholder">[WHAT YOU DO — e.g. "Pilates studio in Sydney"]</span>
+
+Colours:
+- Surface (background): <span class="placeholder">[DARK OR LIGHT — e.g. "dark forest green" or "#141F1B"]</span>
+- Text: <span class="placeholder">[WHAT SITS ON TOP — e.g. "warm cream" or "#F5F0E8"]</span>
+- Accent: <span class="placeholder">[YOUR POP COLOUR — e.g. "warm brass" or "#BFA278"]</span>
+
+Fonts (from Google Fonts):
+- Display (headlines): <span class="placeholder">[e.g. "Barlow Condensed" or "bold and industrial"]</span>
+- Body (everything else): <span class="placeholder">[e.g. "DM Sans" or "clean and modern"]</span>
+
+Brand voice in 3 words: <span class="placeholder">[e.g. "bold, grounded, precise"]</span>
+
+Build the HTML page with these sections:
+1. A cover/header with my business name and "Design System"
+2. Colour palette — show every colour as a swatch with hex codes and CSS variable names
+3. Typography scale — show the display font at multiple sizes, then the body font
+4. Components — buttons (primary + secondary), cards (dark + light), dividers, and labels
+5. A sample hero section using my colours, fonts, and voice
+6. A sample content section with cards showing my actual services or offerings
+7. A footer
+
+Create a DESIGN-SYSTEM.md file with all my brand rules as CSS variables.
+
+Use zero border-radius. Sharp corners everywhere. Make it feel premium and intentional.
+
+When done, start a local server so I can see it in my browser.</pre>
+    </div>
+
+    <p style="font-size: 15px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px;">Replace every <span style="color: var(--gold); font-weight: 500;">gold field</span> with your own decisions. If you don't have an answer for something, describe what you want — Claude will figure out the rest. Then paste the whole prompt into Claude Code and hit enter.</p>
+  </div>
+
+  <!-- STEP 4: WATCH IT BUILD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Step 4 — Watch It Build</div>
+      <div class="section-title">This Is <em>the Moment</em></div>
+      <div class="section-subtitle">Claude reads your prompt, reads your brand docs, makes decisions, writes code, creates files, and starts a server. You watch it happen in real time.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">When it's done, you'll see a URL in your terminal — something like <code style="font-family: 'SF Mono', monospace; font-size: 13px; background: var(--neutral-100); padding: 2px 8px; border-radius: 3px; color: var(--neutral-700);">localhost:3000</code>. Open it in your browser.</p>
+
+    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">Your brand. As a polished, working page. Colour swatches with hex codes. A typography scale. Buttons, cards, dividers — all in your colours, your fonts, your voice. Built in minutes. By you. Without writing a single line of code.</p>
+
+    <div class="evidence-block">
+      <div class="evidence-browser">
+        <div class="evidence-browser-bar">
+          <div class="evidence-dot"></div>
+          <div class="evidence-dot"></div>
+          <div class="evidence-dot"></div>
+          <div class="evidence-url">localhost:3000</div>
+        </div>
+        <div class="evidence-body" style="min-height: 240px; flex-direction: column; gap: 16px;">
+          <div style="font-family: var(--font-body); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Your Business Name</div>
+          <div style="font-family: var(--font-heading); font-size: 28px; color: var(--cream); font-weight: 400;">Design System</div>
+          <div style="display: flex; gap: 12px; margin-top: 8px;">
+            <div style="width: 40px; height: 40px; background: #141F1B; border-radius: 2px;"></div>
+            <div style="width: 40px; height: 40px; background: #F5F0E8; border: 1px solid #E0DBD3; border-radius: 2px;"></div>
+            <div style="width: 40px; height: 40px; background: #BFA278; border-radius: 2px;"></div>
+            <div style="width: 40px; height: 40px; background: #7A9E8C; border-radius: 2px;"></div>
+            <div style="width: 40px; height: 40px; background: #8C8778; border-radius: 2px;"></div>
+          </div>
+          <div style="font-family: var(--font-body); font-size: 12px; color: var(--neutral-500); font-weight: 300;">Colours · Typography · Components · Templates</div>
+        </div>
       </div>
-      <div class="solution-card">
-        <div class="solution-label">Try This</div>
-        <h3>A Client Readiness Quiz</h3>
-        <p>"Build an interactive quiz called 'Is Your Business Ready to Scale?' with 8 multiple choice questions about systems, revenue, team, and marketing. Show a score at the end with a personalised recommendation."</p>
+      <div class="evidence-annotation">
+        <div class="evidence-annotation-line"></div>
+        <div class="evidence-annotation-text">Your brand. Live in your browser.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: ITERATE -->
+  <div class="section section-dark">
+    <div class="section-header">
+      <div class="section-number">Step 5 — Make It Yours</div>
+      <div class="section-title" style="color: var(--cream);">Say It. <em>See It.</em></div>
+      <div class="section-subtitle">Don't like something? Tell Claude. In plain English. It changes in seconds. Here are some prompts to get you started.</div>
+    </div>
+
+    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 32px;">Click any of these to copy, or just describe what you want in your own words. There's no wrong prompt — if Claude misunderstands, just tell it what's off and it'll fix it.</p>
+
+    <div class="iteration-grid">
+      <div class="iteration-prompt" onclick="copyText('Make the hero section darker with white text')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Make the hero section darker with white text"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Change the accent colour to a warmer gold')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Change the accent colour to a warmer gold"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Add a testimonial section with a quote from a client')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Add a testimonial section with a quote from a client"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Swap the feature cards for my actual services')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Swap the feature cards for my actual services"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Add my Instagram handle to the footer')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Add my Instagram handle to the footer"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Update the DESIGN-SYSTEM.md to match these changes')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Update the DESIGN-SYSTEM.md to match these changes"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Make the typography scale bigger and bolder')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Make the typography scale bigger and bolder"</p>
+      </div>
+      <div class="iteration-prompt" onclick="copyText('Add social media templates — square posts for Instagram')">
+        <span class="iteration-prompt-icon">→</span>
+        <p>"Add social media templates — square posts for Instagram"</p>
       </div>
     </div>
   </div>
 
   <div class="callout-dark">
-    <p>You just built something that would have cost <em>$500–2,000</em> from a freelancer. It took 5 minutes and a sentence.</p>
-  </div>
-
-</div>
-
-<!-- ============================================
-     TAB 6: WHAT'S NEXT
-     ============================================ -->
-<div id="next" class="page">
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-number">06 — What's Next</div>
-      <div class="section-title">Keep <em>Building</em></div>
-      <div class="section-subtitle">You've got the tool. Here's how to make it compound.</div>
-    </div>
-
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">The Revenue Calculator was a proof of concept. The real value starts when you build things that solve actual problems in your business — the report you pull manually every Monday, the landing page you've been meaning to build for three months, the onboarding flow that's still in a Google Doc.</p>
-
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">Every time you build something with Claude Code, it gets better at understanding your business. Your CLAUDE.md file is the key — keep adding to it. What platforms you use. What your brand sounds like. What your clients care about. The more context Claude has, the less you need to explain every time.</p>
-
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 24px;">The progression looks like this: you start with single builds (pages, tools, calculators). Then you move to recurring automations (reports that run themselves, data that pulls itself). Then you build full systems — connected infrastructure that makes your business run without you being the bottleneck.</p>
-
-    <p style="font-size: 16px; color: var(--neutral-600); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 48px;">If you haven't explored Claude Cowork yet, start at <a href="https://cowork.kaizencollective.com.au" style="color: var(--gold-dark); text-decoration: underline; font-weight: 400;">cowork.kaizencollective.com.au</a> — it's the delegation layer that pairs with what you've just learned here. Cowork handles the tasks. Code builds the systems. Together, they change how you operate.</p>
-
-    <div class="callout-warm">
-      <p>If you want help building more complex systems — automated reporting, client onboarding flows, tools that connect your platforms — <strong>that's what we do at Kaizen.</strong> Reach out when you're ready.</p>
-    </div>
-
-    <p style="font-size: 16px; color: var(--ink); font-weight: 400; line-height: 1.85; max-width: 700px; margin-top: 48px;">Don't just read this guide — build something.</p>
-  </div>
-
-  <div class="pack-footer">
-    <span class="brand-logo">Kaizen Collective</span>
-    <p>Claude Code Guide · 2026</p>
+    <p>You just built a design system. Not a draft. Not a mockup. A live, working brand foundation that every future build <em>inherits</em>. That's Claude Code.</p>
   </div>
 
 </div>
@@ -1956,7 +3184,7 @@ mobile responsive. Add a "Reset" button. Save it as index.html.</div>
 
     document.getElementById(tabId).classList.add('active');
 
-    const tabs = ['shift', 'builds', 'power', 'setup', 'first-build', 'next'];
+    const tabs = ['intro', 'understanding', 'setup', 'first-build'];
     const index = tabs.indexOf(tabId);
     const activeBtn = document.querySelectorAll('.tab-btn')[index];
     activeBtn.classList.add('active');
@@ -1971,12 +3199,30 @@ mobile responsive. Add a "Reset" button. Save it as index.html.</div>
     check.classList.toggle('checked');
   }
 
+  function copyPrompt() {
+    const el = document.getElementById('build-prompt');
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.mega-prompt-copy');
+      btn.textContent = 'Copied!';
+      btn.style.color = 'var(--gold)';
+      btn.style.borderColor = 'var(--gold)';
+      setTimeout(() => { btn.textContent = 'Copy'; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
+    });
+  }
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      // brief visual feedback could go here
+    });
+  }
+
   document.addEventListener('touchmove', function(e) {}, { passive: true });
 
   (function() {
     let touchStartX = 0;
     let touchEndX = 0;
-    const tabs = ['shift', 'builds', 'power', 'setup', 'first-build', 'next'];
+    const tabs = ['intro', 'understanding', 'setup', 'first-build'];
 
     document.addEventListener('touchstart', function(e) {
       touchStartX = e.changedTouches[0].screenX;
