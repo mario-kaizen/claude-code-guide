@@ -1439,7 +1439,8 @@
             <ul class="setup-substeps">
               <li>When it finishes, verify by typing: <code>claude --version</code> — you should see a version number</li>
             </ul>
-            <div class="setup-fix"><strong>"permission denied" or "EACCES" error?</strong> Your Mac is being protective. Run this instead:<br><code>sudo npm install -g @anthropic-ai/claude-code</code><br><br><strong>What is sudo?</strong> You're telling your Mac "I'm the owner, let this through." It will ask for your Mac login password. <strong>When you type your password, nothing will appear on screen</strong> — no dots, no stars, nothing. That's normal and it's a security feature. Just type it and hit Enter.</div>
+            <div class="setup-fix"><strong>"permission denied" or "EACCES" error?</strong> Your Mac is being protective. Run this instead:<br><code>sudo npm install -g @anthropic-ai/claude-code</code><br><br><strong>What is sudo?</strong> You're telling your Mac "I'm the owner, let this through."</div>
+            <div class="setup-fix" style="background: rgba(196, 75, 74, 0.1); border-left-color: var(--red); color: var(--red);"><strong style="color: var(--red);">Important: the password is invisible.</strong> When Terminal asks for your password, type your Mac login password and hit Enter. <strong style="color: var(--red);">Nothing will appear on screen while you type</strong> — no dots, no stars, no characters. It looks like nothing is happening. That's a security feature, not a bug. You ARE typing. Just type it and press Enter.</div>
             <div class="setup-fix"><strong>"claude: command not found" after install?</strong> Close Terminal with <code>Cmd + Q</code>, reopen it, and try <code>claude --version</code> again.</div>
           </div>
         </div>
