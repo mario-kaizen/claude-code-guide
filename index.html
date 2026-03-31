@@ -1399,6 +1399,215 @@
       </div>
     </div>
 
+    <!-- ======== PHASE 2 ======== -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-number">Phase 2</div>
+        <div class="phase-title">Set Up Your <em>Workspace</em></div>
+        <div class="phase-tagline">Install VS Code — the app you'll actually work in every day</div>
+      </div>
+
+      <div class="setup-list">
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Download VS Code</h4>
+            <p>Go to <strong style="color: var(--cream);">code.visualstudio.com</strong> and click the big blue download button for Mac.</p>
+            <div class="setup-explain"><strong>What is VS Code?</strong> It's a workspace app where you can see your files, write instructions, and run Claude Code all in one place — think of it as Claude Code's office. It's free, made by Microsoft, and used by millions of developers. You're about to be one of them.</div>
+            <ul class="setup-substeps">
+              <li>Open the downloaded <code>.zip</code> file</li>
+              <li>Drag <strong style="color: var(--cream);">Visual Studio Code</strong> into your <strong style="color: var(--cream);">Applications</strong> folder</li>
+              <li>Open it from Applications</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Quick Orientation</h4>
+            <p>VS Code looks overwhelming at first. Here's all you need to know:</p>
+            <ul class="setup-substeps">
+              <li><strong style="color: var(--cream);">Left sidebar</strong> = your files (like Finder)</li>
+              <li><strong style="color: var(--cream);">Bottom panel</strong> = Terminal (where Claude Code runs)</li>
+              <li><strong style="color: var(--cream);">Top menu</strong> = everything else</li>
+            </ul>
+            <div class="setup-explain">Don't worry about all the buttons. You'll use about 5% of what's here. The rest is for software engineers — and you don't need to be one.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Install the Claude Code Extension</h4>
+            <p>Click the <strong style="color: var(--cream);">Extensions</strong> icon in the left sidebar — it looks like four small squares.</p>
+            <div class="setup-explain"><strong>What are extensions?</strong> Add-ons that give VS Code new abilities — like apps on your phone. The Claude Code extension lets you use Claude directly inside VS Code instead of switching to Terminal.</div>
+            <ul class="setup-substeps">
+              <li>In the search bar, type <code>Claude Code</code></li>
+              <li>Click <strong style="color: var(--cream);">Install</strong> on the one by <strong style="color: var(--cream);">Anthropic</strong></li>
+              <li>A Claude icon will appear in the left sidebar — that's your Claude Code panel</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Open a Project Folder</h4>
+            <p>Go to <strong style="color: var(--cream);">File → Open Folder</strong> and pick your Desktop, or create a new folder called something like <code>My Projects</code>.</p>
+            <div class="setup-explain"><strong>What is a project folder?</strong> Just a regular folder. Claude Code works best when it knows which folder you're working in — it can see the files, understand the context, and build things in the right place. Think of it as giving Claude a desk to work at.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Run Claude Inside VS Code</h4>
+            <p>Open the built-in terminal: press <code>Ctrl + `</code> (backtick — the key above Tab) or go to <strong style="color: var(--cream);">View → Terminal</strong>.</p>
+            <ul class="setup-substeps">
+              <li>Type <code>claude</code> and hit Enter</li>
+              <li>Same Claude, same power — but now you can see your files and Claude side by side</li>
+            </ul>
+            <div class="setup-explain">From now on, this is where you'll work. VS Code gives you everything in one window — your files on the left, Claude at the bottom, and the results appearing in real time. No more switching between apps.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="phase-done">
+        <p>Phase 2 complete — VS Code is your new workspace. Everything in one place.</p>
+      </div>
+    </div>
+
+    <!-- ======== PHASE 3 ======== -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-number">Phase 3</div>
+        <div class="phase-title">Teach Claude <em>Your Business</em></div>
+        <div class="phase-tagline">Give Claude a cheat sheet so it already knows who you are</div>
+      </div>
+
+      <div class="setup-list">
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Understand What CLAUDE.md Is</h4>
+            <p>CLAUDE.md is a file that Claude reads at the <strong style="color: var(--cream);">start of every single conversation</strong>. It's your business cheat sheet.</p>
+            <div class="setup-explain">Think of it this way: every time you start a new conversation with Claude Chat, you have to re-explain who you are, what your business does, and how you work. CLAUDE.md removes that entirely. Claude reads it automatically and already knows your business name, your services, your platforms, your brand voice — everything. The more detail you put in here, the less you explain later.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="setup-paths">
+        <h5>Choose Your Path</h5>
+        <p style="margin-bottom: 16px;">Pick the one that applies to you:</p>
+      </div>
+
+      <div class="setup-list" style="margin-top: 16px;">
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Path A: You've Done Your Business Profile in Chat</h4>
+            <p>If you've already created a Business Profile document inside Claude Chat, you can use it to generate your CLAUDE.md automatically.</p>
+            <ul class="setup-substeps">
+              <li>Open <strong style="color: var(--cream);">claude.ai</strong> → find your Business Profile conversation</li>
+              <li>Copy or download the Business Profile output → save it to your Desktop</li>
+              <li>Open VS Code terminal (<code>Ctrl + `</code>)</li>
+              <li>Type <code>claude</code> and hit Enter</li>
+              <li>Paste this prompt:</li>
+            </ul>
+            <code class="setup-command">Read the file called [your-filename] on my Desktop and use it to create my CLAUDE.md file at ~/.claude/CLAUDE.md. Include everything relevant about my business — who I am, what I do, who I serve, my platforms, my brand voice.</code>
+            <div class="setup-explain">Replace <strong>[your-filename]</strong> with the actual name of the file you saved — e.g. <code>Business-Profile.pdf</code> or <code>business-profile.txt</code>. Claude will read the document, extract the key information, and create the file for you.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Path B: You Haven't Done a Business Profile Yet</h4>
+            <p>No worries — you can create your CLAUDE.md from scratch. Open VS Code terminal, type <code>claude</code>, and paste this:</p>
+            <code class="setup-command">Create a CLAUDE.md file at ~/.claude/CLAUDE.md with the following information about my business:
+
+- Business name: [your business name]
+- What I do: [your services/offers]
+- Who I serve: [your target market]
+- Platforms I use: [CRM, social, email, etc.]
+- How I communicate: [brand voice, tone]
+- Other context: [anything else that helps]</code>
+            <div class="setup-explain">Fill in the brackets with your own details before hitting Enter. The more specific you are, the better Claude will understand your business. You can always update this file later — it's not a one-shot deal.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Verify It Works</h4>
+            <p>Let's make sure Claude actually reads your business context:</p>
+            <ul class="setup-substeps">
+              <li>Quit Claude — type <code>/exit</code> or press <code>Ctrl + C</code></li>
+              <li>Start a new session: type <code>claude</code> and hit Enter</li>
+              <li>Ask: <code>What do you know about my business?</code></li>
+              <li>Claude should respond with details from your CLAUDE.md</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="phase-done">
+        <p>Phase 3 complete — Claude now knows your business before you say a word.</p>
+      </div>
+    </div>
+
+    <!-- ======== PHASE 4 ======== -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-number">Phase 4</div>
+        <div class="phase-title">Unlock <em>Full Power</em></div>
+        <div class="phase-tagline">Remove the training wheels</div>
+      </div>
+
+      <div class="setup-list">
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Understand What This Means</h4>
+            <p>By default, Claude asks your permission before it reads a file, runs a command, or makes any change. That's responsible — but it's slow.</p>
+            <div class="setup-explain">When you're building something new and you trust the process, you can tell Claude to just <strong>go</strong>. It's the difference between micromanaging a new hire and trusting a senior employee. Claude will plan the work, execute it, test it, and fix issues — all without stopping to ask after every step.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>How to Use It</h4>
+            <p>Instead of typing <code>claude</code>, run this:</p>
+            <code class="setup-command">claude --dangerously-skip-permissions</code>
+            <div class="setup-explain">That's it. Claude will plan, execute, test, and fix — without stopping to ask after every step. A 20-minute build becomes a 5-minute build. The name sounds scary on purpose — it's a reminder that you're giving Claude more freedom. For building new things, that's exactly what you want.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>When NOT to Use It</h4>
+            <p>Don't use this when you're changing something critical that already works. Use it when you're <strong style="color: var(--cream);">building something new</strong>.</p>
+            <div class="setup-explain">Think of it like this: you'd give a trusted employee the keys to set up a new office. You wouldn't give them the keys to rearrange your existing one without checking in first. New build? Skip permissions. Editing something important? Let Claude check with you.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="phase-done">
+        <p>Phase 4 complete — you're fully set up. Claude Code is installed, your workspace is ready, Claude knows your business, and you know how to build at full speed. Go to the next tab and build something.</p>
+      </div>
+    </div>
+
   </div>
 
 </div>
