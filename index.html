@@ -1296,57 +1296,109 @@
     <div class="section-header">
       <div class="section-number">04 — Setup</div>
       <div class="section-title" style="color: var(--cream);">Get <em>Set Up</em></div>
-      <div class="section-subtitle">This takes about 10 minutes. Each step unlocks more of what Code can do for you.</div>
+      <div class="section-subtitle">This takes about 30 minutes. Put a podcast on, grab a coffee, and knock it out in one sitting. Each phase builds on the last — by the end, you'll have a fully loaded AI building tool that already knows your business.</div>
     </div>
 
-    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 16px;">Put a podcast on, grab a coffee, and knock these out in one sitting. You'll thank yourself later.</p>
+    <!-- ======== PHASE 1 ======== -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-number">Phase 1</div>
+        <div class="phase-title">Install <em>Claude Code</em></div>
+        <div class="phase-tagline">Get Claude Code running on your Mac</div>
+      </div>
 
-    <p style="font-size: 16px; color: var(--neutral-400); font-weight: 300; line-height: 1.85; max-width: 700px; margin-bottom: 32px;">Tap each item to check it off as you go.</p>
+      <div class="setup-list">
 
-    <div class="setup-list">
-      <div class="setup-item" onclick="toggleCheck(this)">
-        <div class="setup-check"></div>
-        <div class="setup-item-content">
-          <h4>Open Terminal</h4>
-          <p>Press <code>Cmd + Space</code>, type "Terminal", hit Enter. That's it. It looks like a hacker movie — don't worry, you'll only need to paste a few commands.</p>
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Open Terminal</h4>
+            <p>Press <code>Cmd + Space</code>, type <code>Terminal</code>, hit Enter.</p>
+            <div class="setup-explain"><strong>What is Terminal?</strong> It's the text version of your computer. Instead of clicking buttons and dragging files, you type short commands. It looks like a hacker movie — that's normal. You'll only need to paste a few commands into it.</div>
+          </div>
         </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Install Xcode Command Line Tools</h4>
+            <p>Paste this into Terminal and hit Enter:</p>
+            <code class="setup-command">xcode-select --install</code>
+            <div class="setup-explain"><strong>What is this?</strong> These are background tools that let your Mac install and run developer software. You'll never open this directly — but your Mac needs it before anything else will work. Think of it as laying the foundation before building the house.</div>
+            <ul class="setup-substeps">
+              <li>A popup will appear — click <strong style="color: var(--cream);">Install</strong></li>
+              <li>Wait 5–10 minutes for it to finish</li>
+              <li>When it's done, paste this to verify: <code>xcode-select -p</code> — it should show a file path</li>
+            </ul>
+            <div class="setup-fix"><strong>Already installed?</strong> If you see "command line tools are already installed" — perfect. Skip to the next step.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Install Node.js</h4>
+            <p>Go to <strong style="color: var(--cream);">nodejs.org</strong> and click the big green button that says <strong style="color: var(--cream);">LTS</strong>. Download it, open the installer, and click through the steps.</p>
+            <div class="setup-explain"><strong>What is Node.js?</strong> It's the engine that runs Claude Code. Like how your car needs petrol to drive, Claude Code needs Node to run. You'll install it once and never think about it again. <strong>LTS</strong> stands for Long Term Support — it just means "the stable, recommended version."</div>
+            <ul class="setup-substeps">
+              <li>Once installed, <strong style="color: var(--cream);">close Terminal completely</strong> (<code>Cmd + Q</code>)</li>
+              <li>Reopen Terminal (same way — <code>Cmd + Space</code>, type Terminal)</li>
+              <li>Paste this to verify: <code>node --version</code> — you should see a number like <code>v20.x.x</code> or higher</li>
+            </ul>
+            <div class="setup-fix"><strong>"command not found"?</strong> Close Terminal completely with <code>Cmd + Q</code> (not just the window — quit the app), reopen it, and try again. Still nothing? Restart your Mac and try once more.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Install Claude Code</h4>
+            <p>Paste this into Terminal and hit Enter:</p>
+            <code class="setup-command">npm install -g @anthropic-ai/claude-code</code>
+            <div class="setup-explain"><strong>What is npm?</strong> It's Node's app store. This command downloads Claude Code from the internet and installs it on your Mac. You'll see a progress bar — wait for it to finish.</div>
+            <ul class="setup-substeps">
+              <li>When it finishes, verify by typing: <code>claude --version</code> — you should see a version number</li>
+            </ul>
+            <div class="setup-fix"><strong>"permission denied" or "EACCES" error?</strong> Your Mac is being protective. Run this instead:<br><code>sudo npm install -g @anthropic-ai/claude-code</code><br><br><strong>What is sudo?</strong> You're telling your Mac "I'm the owner, let this through." It will ask for your Mac login password. <strong>When you type your password, nothing will appear on screen</strong> — no dots, no stars, nothing. That's normal and it's a security feature. Just type it and hit Enter.</div>
+            <div class="setup-fix"><strong>"claude: command not found" after install?</strong> Close Terminal with <code>Cmd + Q</code>, reopen it, and try <code>claude --version</code> again.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>Sign In</h4>
+            <p>Type <code>claude</code> and hit Enter. It will open your browser automatically.</p>
+            <ul class="setup-substeps">
+              <li>Sign in with the <strong style="color: var(--cream);">same claude.ai account</strong> you use for Chat</li>
+              <li>Once signed in, come back to Terminal — you should see a welcome message</li>
+            </ul>
+            <div class="setup-fix"><strong>Browser didn't open?</strong> Look in Terminal for a URL — copy it and paste it into your browser manually.</div>
+          </div>
+        </div>
+
+        <div class="setup-item" onclick="toggleCheck(this)">
+          <div class="setup-check"></div>
+          <div class="setup-item-content">
+            <h4>First Test</h4>
+            <p>Let's make sure everything works. Paste these two commands one at a time:</p>
+            <code class="setup-command">cd ~/Desktop</code>
+            <code class="setup-command">claude</code>
+            <p style="margin-top: 8px;">Once Claude is running, type this:</p>
+            <code class="setup-command">Create a file called hello.txt that says Claude Code is working</code>
+            <ul class="setup-substeps">
+              <li>Check your Desktop — if <strong style="color: var(--cream);">hello.txt</strong> appears, you're live</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
-      <div class="setup-item" onclick="toggleCheck(this)">
-        <div class="setup-check"></div>
-        <div class="setup-item-content">
-          <h4>Install Node.js (if needed)</h4>
-          <p>Paste <code>node --version</code> and hit Enter. See a number like v20.x.x? Skip this step. If not: go to <strong style="color: var(--cream); font-weight: 500;">nodejs.org</strong>, click the big green button, run the installer, done.</p>
-        </div>
-      </div>
-      <div class="setup-item" onclick="toggleCheck(this)">
-        <div class="setup-check"></div>
-        <div class="setup-item-content">
-          <h4>Install Claude Code</h4>
-          <p>Paste this into Terminal and hit Enter: <code>npm install -g @anthropic-ai/claude-code</code> — wait for the progress bar to finish.</p>
-        </div>
-      </div>
-      <div class="setup-item" onclick="toggleCheck(this)">
-        <div class="setup-check"></div>
-        <div class="setup-item-content">
-          <h4>Sign In</h4>
-          <p>Type <code>claude</code> and hit Enter. Follow the prompts to sign in with your Anthropic account. You'll see a welcome message when you're connected.</p>
-        </div>
-      </div>
-      <div class="setup-item" onclick="toggleCheck(this)">
-        <div class="setup-check"></div>
-        <div class="setup-item-content">
-          <h4>Run Your First Command</h4>
-          <p>Type <code>cd ~/Desktop</code> then <code>claude</code>. Ask it: "Create a file called hello.txt that says Claude Code is working." If the file appears on your desktop — you're live.</p>
-        </div>
-      </div>
-      <div class="setup-item" onclick="toggleCheck(this)">
-        <div class="setup-check"></div>
-        <div class="setup-item-content">
-          <h4>Create Your CLAUDE.md (Optional)</h4>
-          <p>A file that tells Claude who you are, what your business does, and how you work. Every conversation starts with this context. Create it at <code>~/.claude/CLAUDE.md</code> with your business name, services, key platforms, and brand voice.</p>
-        </div>
+
+      <div class="phase-done">
+        <p>Phase 1 complete — Claude Code is installed and running on your Mac.</p>
       </div>
     </div>
+
   </div>
 
 </div>
