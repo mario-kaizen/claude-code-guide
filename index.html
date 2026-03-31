@@ -1437,7 +1437,10 @@
             <code class="setup-command">npm install -g @anthropic-ai/claude-code</code>
             <div class="setup-explain"><strong>What is npm?</strong> It's Node's app store. This command downloads Claude Code from the internet and installs it on your Mac. You'll see a progress bar — wait for it to finish.</div>
             <ul class="setup-substeps">
-              <li>When it finishes, verify by typing: <code>claude --version</code> — you should see a version number</li>
+              <li>When it finishes, you'll see something like <code>added 3 packages in 3s</code> — that means it worked</li>
+              <li>You might also see messages about "packages looking for funding" — ignore those completely</li>
+              <li><strong style="color: var(--cream);">Stay right where you are</strong> — don't close Terminal. Just type this next command and hit Enter: <code>claude --version</code></li>
+              <li>You should see a version number — that confirms Claude Code is installed</li>
             </ul>
             <div class="setup-fix"><strong>"permission denied" or "EACCES" error?</strong> Your Mac is being protective. Run this instead:<br><code>sudo npm install -g @anthropic-ai/claude-code</code><br><br><strong>What is sudo?</strong> You're telling your Mac "I'm the owner, let this through."</div>
             <div class="setup-fix" style="background: rgba(196, 75, 74, 0.1); border-left-color: var(--red); color: var(--red);"><strong style="color: var(--red);">Important: the password is invisible.</strong> When Terminal asks for your password, type your Mac login password and hit Enter. <strong style="color: var(--red);">Nothing will appear on screen while you type</strong> — no dots, no stars, no characters. It looks like nothing is happening. That's a security feature, not a bug. You ARE typing. Just type it and press Enter.</div>
