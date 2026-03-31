@@ -776,6 +776,62 @@
     line-height: 1.6;
   }
 
+  .setup-screenshot {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--neutral-700);
+  }
+
+  .setup-screenshot img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .setup-screenshot-caption {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--neutral-500);
+    font-weight: 300;
+    text-align: center;
+    padding: 8px;
+    background: var(--neutral-800);
+    font-style: italic;
+  }
+
+  /* ============================================
+     FAQ SECTION
+     ============================================ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 32px;
+  }
+
+  .faq-item {
+    background: var(--charcoal);
+    padding: 24px 28px;
+  }
+
+  .faq-item h4 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .faq-item p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--neutral-400);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
   /* ============================================
      STEP LIST (for First Build)
      ============================================ */
@@ -1078,6 +1134,18 @@
     .setup-paths {
       padding: 14px 16px;
     }
+
+    .faq-item {
+      padding: 20px;
+    }
+
+    .faq-item h4 {
+      font-size: 14px;
+    }
+
+    .faq-item p {
+      font-size: 13px;
+    }
   }
 
   /* ============================================
@@ -1315,6 +1383,10 @@
             <h4>Open Terminal</h4>
             <p>Press <code>Cmd + Space</code>, type <code>Terminal</code>, hit Enter.</p>
             <div class="setup-explain"><strong>What is Terminal?</strong> It's the text version of your computer. Instead of clicking buttons and dragging files, you type short commands. It looks like a hacker movie — that's normal. You'll only need to paste a few commands into it.</div>
+            <div class="setup-screenshot">
+              <img src="img/terminal-fresh.svg" alt="macOS Terminal window — this is what it looks like when you first open it">
+              <div class="setup-screenshot-caption">This is what Terminal looks like. Not as scary as it seems.</div>
+            </div>
           </div>
         </div>
 
@@ -1339,6 +1411,10 @@
           <div class="setup-item-content">
             <h4>Install Node.js</h4>
             <p>Go to <strong style="color: var(--cream);">nodejs.org</strong> and click the big green button that says <strong style="color: var(--cream);">LTS</strong>. Download it, open the installer, and click through the steps.</p>
+            <div class="setup-screenshot">
+              <img src="img/nodejs-download.svg" alt="nodejs.org download page — click the green LTS button">
+              <div class="setup-screenshot-caption">Click the green LTS button — ignore the other one.</div>
+            </div>
             <div class="setup-explain"><strong>What is Node.js?</strong> It's the engine that runs Claude Code. Like how your car needs petrol to drive, Claude Code needs Node to run. You'll install it once and never think about it again. <strong>LTS</strong> stands for Long Term Support — it just means "the stable, recommended version."</div>
             <ul class="setup-substeps">
               <li>Once installed, <strong style="color: var(--cream);">close Terminal completely</strong> (<code>Cmd + Q</code>)</li>
@@ -1434,6 +1510,10 @@
               <li><strong style="color: var(--cream);">Top menu</strong> = everything else</li>
             </ul>
             <div class="setup-explain">Don't worry about all the buttons. You'll use about 5% of what's here. The rest is for software engineers — and you don't need to be one.</div>
+            <div class="setup-screenshot">
+              <img src="img/vscode-orientation.svg" alt="VS Code interface — sidebar on left, editor in center, terminal at bottom">
+              <div class="setup-screenshot-caption">Your new workspace. Files on the left, Claude at the bottom.</div>
+            </div>
           </div>
         </div>
 
@@ -1443,6 +1523,10 @@
             <h4>Install the Claude Code Extension</h4>
             <p>Click the <strong style="color: var(--cream);">Extensions</strong> icon in the left sidebar — it looks like four small squares.</p>
             <div class="setup-explain"><strong>What are extensions?</strong> Add-ons that give VS Code new abilities — like apps on your phone. The Claude Code extension lets you use Claude directly inside VS Code instead of switching to Terminal.</div>
+            <div class="setup-screenshot">
+              <img src="img/vscode-extensions.svg" alt="VS Code activity bar with Extensions icon highlighted">
+              <div class="setup-screenshot-caption">Look for this icon in the left strip — it's the Extensions marketplace.</div>
+            </div>
             <ul class="setup-substeps">
               <li>In the search bar, type <code>Claude Code</code></li>
               <li>Click <strong style="color: var(--cream);">Install</strong> on the one by <strong style="color: var(--cream);">Anthropic</strong></li>
@@ -1605,6 +1689,42 @@
 
       <div class="phase-done">
         <p>Phase 4 complete — you're fully set up. Claude Code is installed, your workspace is ready, Claude knows your business, and you know how to build at full speed. Go to the next tab and build something.</p>
+      </div>
+    </div>
+
+    <!-- ======== FAQ ======== -->
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-number">Common Questions</div>
+        <div class="phase-title">Before You <em>Ask</em></div>
+        <div class="phase-tagline">Quick answers to the questions everyone has</div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>Do I need to know how to code?</h4>
+          <p>No. That's the whole point. You describe what you want in plain English — Claude writes the code. You'll paste a few commands during setup, but you don't need to understand them. You just need to follow the steps.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do I need to pay for VS Code?</h4>
+          <p>No. VS Code is completely free and always will be. It's made by Microsoft and used by millions of people. There's no trial, no subscription, no catch.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do I need a Claude Pro subscription?</h4>
+          <p>Yes. Claude Code uses your Claude Pro subscription — the same account you use for Claude Chat at claude.ai. If you're already chatting with Claude, you're already paying for it. No extra cost.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What's the difference between Claude Chat and Claude Code?</h4>
+          <p>Claude Chat is for conversations — ask questions, get answers, brainstorm ideas. Claude Code is for building — it creates files, writes code, builds tools, and deploys them. Chat is your advisor. Code is your builder.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What if I close everything and come back tomorrow?</h4>
+          <p>Just reopen VS Code (or Terminal) and type <code style="font-family: 'SF Mono', monospace; font-size: 12px; background: var(--neutral-800); padding: 1px 6px; border-radius: 3px; color: var(--gold-light);">claude</code>. Everything you've set up stays installed. Your CLAUDE.md file stays saved. You don't need to redo any of this. Just pick up where you left off.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I break anything?</h4>
+          <p>No. Claude Code works inside your project folder — it's not touching your system files, your apps, or anything outside the folder you're working in. The worst that can happen is Claude creates a file you don't want, and you delete it. That's it.</p>
+        </div>
       </div>
     </div>
 
