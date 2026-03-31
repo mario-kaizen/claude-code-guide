@@ -1605,13 +1605,18 @@
           <div class="setup-check"></div>
           <div class="setup-item-content">
             <h4>Run Claude Inside VS Code</h4>
-            <p>You need to open the <strong style="color: var(--cream);">Terminal panel</strong> inside VS Code. This is the dark bar at the <strong style="color: var(--cream);">bottom</strong> of the window — not the main editing area in the centre where you type text.</p>
+            <p>You need to open the <strong style="color: var(--cream);">Terminal panel</strong> inside VS Code. This is at the <strong style="color: var(--cream);">bottom</strong> of the window — not the main editing area in the centre.</p>
             <ul class="setup-substeps">
-              <li>Go to the top menu: <strong style="color: var(--cream);">View → Terminal</strong> (or press <code>Ctrl + `</code> — backtick, the key above Tab)</li>
-              <li>A dark panel will appear at the bottom of VS Code — this is Terminal, same as the Terminal app you used earlier</li>
-              <li>Click inside that bottom panel, type <code>claude</code> and hit Enter</li>
+              <li>Go to the top menu: <strong style="color: var(--cream);">View → Terminal</strong></li>
+              <li>A panel will appear at the bottom of VS Code. You'll see tabs along the top of it: <strong style="color: var(--cream);">PROBLEMS</strong>, <strong style="color: var(--cream);">OUTPUT</strong>, <strong style="color: var(--cream);">DEBUG CONSOLE</strong>, <strong style="color: var(--cream);">TERMINAL</strong></li>
+              <li>Click the <strong style="color: var(--cream);">TERMINAL</strong> tab — this is the one you want</li>
+              <li>Click inside the Terminal area (you'll see a blinking cursor), type <code>claude</code> and hit Enter</li>
               <li>Same Claude, same power — but now you can see your files and Claude side by side</li>
             </ul>
+            <div class="setup-fix" style="background: rgba(196, 75, 74, 0.1); border-left-color: var(--red); color: var(--red);"><strong style="color: var(--red);">There are 3 things that might look like "terminal" — only one is right.</strong><br>
+              <strong style="color: var(--red);">Use this one →</strong> The <strong style="color: var(--red);">TERMINAL</strong> tab in the bottom panel of VS Code. It looks like the Terminal app you used in Phase 1.<br>
+              <strong style="color: var(--neutral-500);">Not this →</strong> <span style="color: var(--neutral-500);">The Claude Code sidebar on the left (that's the extension — you can ignore it for now).</span><br>
+              <strong style="color: var(--neutral-500);">Not this →</strong> <span style="color: var(--neutral-500);">The macOS Terminal app you used earlier (you can close that now).</span></div>
             <div class="setup-fix" style="background: rgba(196, 75, 74, 0.1); border-left-color: var(--red); color: var(--red);"><strong style="color: var(--red);">Don't type <code style="color: var(--red);">claude</code> into a file.</strong> If you see your text appearing in the big centre area of VS Code with line numbers next to it — that's the editor, not the Terminal. You need the dark panel at the <strong style="color: var(--red);">bottom</strong> of the screen. Go to <strong style="color: var(--red);">View → Terminal</strong> to open it.</div>
             <div class="setup-explain">From now on, this is where you'll work. VS Code gives you everything in one window — your files on the left, Claude at the bottom, and the results appearing in real time. No more switching between apps.</div>
           </div>
