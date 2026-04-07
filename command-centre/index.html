@@ -192,10 +192,27 @@ body {
 /* ============================================
    WIZARD CONTAINER
    ============================================ */
+.wizard-wrapper {
+  position: relative;
+}
+
+.wizard-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, var(--forest-deep), var(--forest));
+  pointer-events: none;
+}
+
 .wizard {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 40px 80px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================
@@ -489,6 +506,16 @@ textarea.text-input {
   border-color: var(--brass);
 }
 
+.platform-count::-webkit-inner-spin-button,
+.platform-count::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.platform-count[type=number] {
+  -moz-appearance: textfield;
+}
+
 .platform-count:disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -682,6 +709,18 @@ textarea.text-input {
   border-color: var(--brass);
 }
 
+.brief-edit::-webkit-scrollbar {
+  width: 6px;
+}
+
+.brief-edit::-webkit-scrollbar-track {
+  background: var(--forest-deep);
+}
+
+.brief-edit::-webkit-scrollbar-thumb {
+  background: var(--forest-muted);
+}
+
 .brief-edit.visible {
   display: block;
 }
@@ -855,6 +894,7 @@ textarea.text-input {
 </section>
 
 <!-- Wizard -->
+<div class="wizard-wrapper">
 <div class="wizard">
 
   <!-- Section 1: Your Business -->
@@ -1003,6 +1043,7 @@ textarea.text-input {
   </div>
 
 </div>
+</div>
 
 <!-- Brief Output -->
 <div class="brief-section" id="briefSection">
@@ -1118,9 +1159,16 @@ function checkSectionRequirements() {
 
   // Brief section visibility
   const briefVisible = unlockedSections.has(5);
+  const wasBriefHidden = !briefSection.classList.contains('visible');
   if (briefVisible) {
     briefSection.classList.add('visible');
     debouncedGenerate();
+    // Scroll to brief on first reveal
+    if (wasBriefHidden) {
+      setTimeout(() => {
+        briefSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
   } else {
     briefSection.classList.remove('visible');
   }
