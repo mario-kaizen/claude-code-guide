@@ -1521,6 +1521,14 @@ You already have my business context in CLAUDE.md and my design system from our 
 
 My business: ${businessName} — ${businessDesc} (${industry})
 
+## IMPORTANT: Setup Instructions
+
+1. Create a new directory called \`command-centre\` inside my current project folder
+2. BEFORE running create-next-app, back up my CLAUDE.md and DESIGN-SYSTEM.md files (Next.js scaffolding overwrites CLAUDE.md)
+3. Scaffold the Next.js app inside the \`command-centre\` directory using: \`npx create-next-app@latest command-centre --typescript --tailwind --eslint --app --src-dir --turbopack --no-git\`
+4. After scaffolding, restore my CLAUDE.md and DESIGN-SYSTEM.md into the command-centre directory
+5. Copy my CLAUDE.md to the command-centre root so the project has my business context
+
 ## What to Build
 
 ### The Shell
@@ -1533,40 +1541,48 @@ Build a Next.js application with a sticky sidebar navigation and a main content 
     - Content Pipeline (active — this is what we're building today)
 ${moduleNavLines}- Main area: clean layout using my brand colours and fonts throughout
 - Responsive — works on desktop and tablet
-- Run \`npm install\` then \`npm run dev\` so I can see it in my browser
+- Derive any additional UI colours (hover states, disabled states, pillar tag colours, borders) from the three base colours in my design system. Lighten or darken them as needed. Do not introduce unrelated colours.
 
 ### Module 1: Content Pipeline
 
-Build this as the main page of the app. It has three tabs or sections:
+Build this as the main page of the app. Use a layout with a **persistent media drawer on the left** (collapsible) and the **content calendar as the main view**. NOT tabs — both need to be visible so I can drag assets from the library into calendar slots.
 
-**Media Library**
-- Drag-and-drop upload area for images and videos
-- Grid view showing thumbnails of uploaded media
+**Media Library (Left Drawer)**
+- Drag-and-drop upload area for images (no video — images only for now)
+- Grid view showing thumbnails of uploaded images
 - Each asset can be tagged with one or more content pillars: ${pillarsStr}
 - Filter by pillar, search by filename
-- Assets stored locally in the project (public folder or similar)
+- Store uploaded images in \`public/uploads/\` folder
+- **Persist all media library data (filenames, tags, pillar assignments) in localStorage** so nothing is lost on page refresh
 
-**Content Calendar**
+**Content Calendar (Main View)**
 - Weekly view grid showing each day
 - Platforms and frequency:
 ${platformLines}- Each slot shows: assigned pillar colour, thumbnail if asset attached, caption preview if generated
 - Click a slot to assign a pillar and attach an asset from the media library
-- Drag assets from the media library into calendar slots
+- Drag assets from the media drawer into calendar slots
+- **Persist all calendar data (slot assignments, pillar selections, caption text) in localStorage** so nothing is lost on page refresh
 
 **Caption Generator**
 - When a calendar slot has an asset and pillar assigned, show a "Generate Caption" button
-- ${voiceLine}
-- Generate platform-specific caption variations for: ${platformNames}
-- Each generated caption has a "Copy" button
-- Captions should feel natural, not robotic — match my brand's tone and language
+- When clicked, the button should **copy a pre-written prompt to the user's clipboard** that they can paste into Claude Desktop (chat). The prompt should include:
+  - The selected content pillar
+  - The asset filename for context
+  - The posting platform
+  - Instructions to write in the brand voice: ${voiceLine}
+- Show a message like "Caption prompt copied! Paste into Claude to generate your caption."
+- Also include a text field where the user can paste the generated caption back and save it to the calendar slot
+- Each saved caption has a "Copy" button for easy posting
+- **Persist all captions in localStorage**
 
 ## Technical Notes
-- Use my existing design system (colours, fonts, spacing) from my design system files — do not introduce new styling
+- Use my existing design system (colours, fonts, spacing) from my design system files — do not introduce new styling beyond what's needed to derive hover/active/disabled states from my base colours
 - Keep the file structure clean and organised
 - This is a local tool — no deployment needed, just runs on my machine
 - Build it so I can add new modules to the sidebar in future sessions
 - Use Next.js App Router with file-based routing
-- After building, start the dev server so I can see it immediately`;
+- All interactive components need \`'use client'\` at the top of the file
+- After building, run \`npm install\` then \`npm run dev\` and tell me which localhost URL to open`;
 
   return brief;
 }
