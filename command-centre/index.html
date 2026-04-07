@@ -366,6 +366,17 @@ textarea.text-input {
   border-color: var(--brass);
   color: var(--forest-deep);
   font-weight: 500;
+  transform: scale(1);
+}
+
+@keyframes pillPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pill.pop {
+  animation: pillPop 0.2s ease;
 }
 
 /* ============================================
@@ -789,6 +800,19 @@ textarea.text-input {
 }
 
 /* ============================================
+   FOCUS-VISIBLE
+   ============================================ */
+.pill:focus-visible,
+.add-btn:focus-visible,
+.edit-toggle:focus-visible,
+.copy-btn:focus-visible,
+.platform-checkbox:focus-visible,
+.radio-option:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+/* ============================================
    CUSTOM OTHER INPUT (INDUSTRY)
    ============================================ */
 .other-input-wrapper {
@@ -1087,6 +1111,13 @@ const state = {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
+function popPill(pill) {
+  pill.classList.remove('pop');
+  // Force reflow to restart animation
+  void pill.offsetWidth;
+  pill.classList.add('pop');
+}
+
 const progressFill = $('#progressFill');
 const sections = $$('.wizard-section');
 const briefSection = $('#briefSection');
@@ -1223,6 +1254,7 @@ $('#industryPills').addEventListener('click', (e) => {
   // Deselect all
   $$('#industryPills .pill').forEach(p => p.classList.remove('selected'));
   pill.classList.add('selected');
+  popPill(pill);
   state.industry = pill.dataset.value;
 
   // Show/hide other input
@@ -1268,6 +1300,7 @@ $('#pillarPills').addEventListener('click', (e) => {
     state.pillars = state.pillars.filter(p => p !== value);
   } else {
     pill.classList.add('selected');
+    popPill(pill);
     state.pillars.push(value);
   }
 
@@ -1288,6 +1321,7 @@ function addCustomPillar() {
   pill.dataset.value = value;
   pill.textContent = value;
   $('#pillarPills').appendChild(pill);
+  popPill(pill);
   state.pillars.push(value);
   input.value = '';
 
@@ -1372,6 +1406,7 @@ $('#modulePills').addEventListener('click', (e) => {
     state.modules = state.modules.filter(m => m !== value);
   } else {
     pill.classList.add('selected');
+    popPill(pill);
     state.modules.push(value);
   }
 
@@ -1389,6 +1424,7 @@ function addCustomModule() {
   pill.dataset.value = value;
   pill.textContent = value;
   $('#modulePills').appendChild(pill);
+  popPill(pill);
   state.modules.push(value);
   input.value = '';
 
