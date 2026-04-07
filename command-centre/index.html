@@ -181,7 +181,7 @@ body {
   font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--forest-muted);
+  color: var(--stone);
   font-weight: 500;
   opacity: 0;
   animation: slideUp 0.5s ease 1s forwards;
@@ -205,6 +205,7 @@ body {
   padding: 64px 0;
   border-bottom: 1px solid rgba(36, 61, 53, 0.5);
   transition: opacity 0.5s ease, filter 0.5s ease;
+  scroll-margin-top: 24px;
 }
 
 .wizard-section:last-of-type {
@@ -587,6 +588,7 @@ textarea.text-input {
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
   pointer-events: none;
+  scroll-margin-top: 24px;
 }
 
 .brief-section.visible {
@@ -1128,12 +1130,12 @@ function checkSectionRequirements() {
 }
 
 function updateProgress() {
-  const totalSteps = 5;
-  let progress = 0;
-  // Each unlocked section = 20%
-  progress = (unlockedSections.size / totalSteps) * 100;
-  // If brief is visible, that's 100%
-  if (briefSection.classList.contains('visible')) {
+  // Completed sections drive the progress, not unlocked ones
+  // Section 1 starts unlocked (0%), completing it = 20%, etc.
+  const completedCount = completedSections.size;
+  let progress = (completedCount / 5) * 100;
+  // Section 5 being unlocked (brief visible) = 100%
+  if (unlockedSections.has(5)) {
     progress = 100;
   }
   progressFill.style.width = progress + '%';
@@ -1145,11 +1147,13 @@ function updateProgress() {
 $('#businessName').addEventListener('input', (e) => {
   state.businessName = e.target.value;
   checkSectionRequirements();
+  debouncedGenerate();
 });
 
 $('#businessDesc').addEventListener('input', (e) => {
   state.businessDesc = e.target.value;
   checkSectionRequirements();
+  debouncedGenerate();
 });
 
 // Industry pills (single-select)
@@ -1173,11 +1177,13 @@ $('#industryPills').addEventListener('click', (e) => {
   }
 
   checkSectionRequirements();
+  debouncedGenerate();
 });
 
 $('#otherIndustry').addEventListener('input', (e) => {
   state.otherIndustry = e.target.value;
   checkSectionRequirements();
+  debouncedGenerate();
 });
 
 /* ============================================
@@ -1208,6 +1214,7 @@ $('#pillarPills').addEventListener('click', (e) => {
 
   updatePillarCounter();
   checkSectionRequirements();
+  debouncedGenerate();
 });
 
 function addCustomPillar() {
@@ -1227,6 +1234,7 @@ function addCustomPillar() {
 
   updatePillarCounter();
   checkSectionRequirements();
+  debouncedGenerate();
 }
 
 $('#addPillarBtn').addEventListener('click', addCustomPillar);
@@ -1253,6 +1261,7 @@ $$('.platform-row').forEach(row => {
       delete state.platforms[platform];
     }
     checkSectionRequirements();
+    debouncedGenerate();
   });
 
   countInput.addEventListener('input', () => {
@@ -1281,12 +1290,14 @@ $$('.radio-option').forEach(option => {
     }
 
     checkSectionRequirements();
+    debouncedGenerate();
   });
 });
 
 $('#voiceDescription').addEventListener('input', (e) => {
   state.voiceDescription = e.target.value;
   checkSectionRequirements();
+  debouncedGenerate();
 });
 
 /* ============================================
