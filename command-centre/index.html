@@ -1122,14 +1122,16 @@ function checkSectionRequirements() {
   if (s3Complete) completedSections.add(3); else completedSections.delete(3);
   if (s4Complete) completedSections.add(4); else completedSections.delete(4);
 
-  // Unlock cascade
+  // Unlock cascade (bidirectional: lock sections back if prereqs no longer met)
   const wasUnlocked = new Set(unlockedSections);
-  if (s1Complete) unlockedSections.add(2);
-  if (s1Complete && s2Complete) unlockedSections.add(3);
-  if (s1Complete && s2Complete && s3Complete) unlockedSections.add(4);
-  if (s1Complete && s2Complete && s3Complete && s4Complete) unlockedSections.add(5);
+
+  if (s1Complete) unlockedSections.add(2); else { unlockedSections.delete(2); unlockedSections.delete(3); unlockedSections.delete(4); unlockedSections.delete(5); }
+  if (s1Complete && s2Complete) unlockedSections.add(3); else { unlockedSections.delete(3); unlockedSections.delete(4); unlockedSections.delete(5); }
+  if (s1Complete && s2Complete && s3Complete) unlockedSections.add(4); else { unlockedSections.delete(4); unlockedSections.delete(5); }
+  if (s1Complete && s2Complete && s3Complete && s4Complete) unlockedSections.add(5); else { unlockedSections.delete(5); }
 
   // Apply to DOM
+  const newlyUnlockedSections = [];
   sections.forEach((sec) => {
     const num = parseInt(sec.dataset.section);
     const isUnlocked = unlockedSections.has(num);
@@ -1140,11 +1142,8 @@ function checkSectionRequirements() {
       sec.classList.remove('locked');
       if (wasLocked) {
         sec.classList.add('unlocking');
-        // Smooth scroll to newly unlocked section
-        setTimeout(() => {
-          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
         setTimeout(() => sec.classList.remove('unlocking'), 500);
+        newlyUnlockedSections.push(sec);
       }
     } else {
       sec.classList.add('locked');
@@ -1156,6 +1155,18 @@ function checkSectionRequirements() {
       sec.classList.remove('completed');
     }
   });
+
+  // Scroll to the last newly unlocked section (skip if brief will also appear)
+  if (newlyUnlockedSections.length > 0) {
+    const scrollTarget = newlyUnlockedSections[newlyUnlockedSections.length - 1];
+    // Only scroll to section if brief won't also appear (brief scroll takes priority)
+    const briefAlsoAppearing = unlockedSections.has(5) && !briefSection.classList.contains('visible');
+    if (!briefAlsoAppearing) {
+      setTimeout(() => {
+        scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
 
   // Brief section visibility
   const briefVisible = unlockedSections.has(5);
