@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Build Your Command Centre | Kaizen Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+:root {
+  --forest: #141F1B;
+  --forest-deep: #0D1512;
+  --forest-light: #1B2E28;
+  --forest-muted: #243D35;
+  --brass: #BFA278;
+  --brass-dark: #9E8560;
+  --brass-light: #DDD0BC;
+  --cream: #F5F0E8;
+  --stone: #8C8778;
+  --sage: #7A9E8C;
+  --green: #5A9E6F;
+  --amber: #C4964A;
+  --font-heading: 'Barlow Condensed', -apple-system, sans-serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--forest);
+  color: var(--cream);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 3px;
+  background: var(--forest-muted);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--brass);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpSmall {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--forest-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 20%, rgba(191,162,120,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 20% 80%, rgba(191,162,120,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 36px;
+  font-weight: 500;
+  opacity: 0;
+  animation: slideUp 0.7s ease 0.2s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: slideUp 0.7s ease 0.4s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title .brass {
+  color: var(--brass);
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--stone);
+  max-width: 560px;
+  margin: 0 auto 52px;
+  font-weight: 300;
+  line-height: 1.75;
+  opacity: 0;
+  animation: slideUp 0.7s ease 0.6s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-line {
+  width: 48px;
+  height: 1px;
+  background: var(--brass);
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: slideUp 0.5s ease 0.8s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-session {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forest-muted);
+  font-weight: 500;
+  opacity: 0;
+  animation: slideUp 0.5s ease 1s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   WIZARD CONTAINER
+   ============================================ */
+.wizard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+/* ============================================
+   WIZARD SECTIONS
+   ============================================ */
+.wizard-section {
+  padding: 64px 0;
+  border-bottom: 1px solid rgba(36, 61, 53, 0.5);
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+.wizard-section:last-of-type {
+  border-bottom: none;
+}
+
+.wizard-section.locked {
+  opacity: 0.3;
+  filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.wizard-section.unlocking {
+  animation: slideUpSmall 0.5s ease forwards;
+}
+
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+  margin-bottom: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-eyebrow .checkmark {
+  display: none;
+  color: var(--green);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.wizard-section.completed .section-eyebrow .checkmark {
+  display: inline;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.section-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--stone);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 640px;
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+.field-group {
+  margin-bottom: 24px;
+}
+
+.field-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.text-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.text-input::placeholder {
+  color: var(--stone);
+  opacity: 0.5;
+}
+
+.text-input:focus {
+  border-color: var(--brass);
+}
+
+textarea.text-input {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   PILL SELECTORS
+   ============================================ */
+.pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pill {
+  padding: 10px 20px;
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  color: var(--stone);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 0;
+  user-select: none;
+}
+
+.pill:hover {
+  border-color: var(--brass-dark);
+  color: var(--cream);
+}
+
+.pill.selected {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: var(--forest-deep);
+  font-weight: 500;
+}
+
+/* ============================================
+   CUSTOM ADD INPUT
+   ============================================ */
+.add-input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.add-input-row .text-input {
+  flex: 1;
+}
+
+.add-btn {
+  padding: 14px 24px;
+  background: var(--forest-light);
+  border: 1px solid var(--forest-muted);
+  color: var(--brass);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: var(--forest-muted);
+  color: var(--brass-light);
+}
+
+/* ============================================
+   COUNTER
+   ============================================ */
+.pill-counter {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 8px;
+  transition: color 0.3s ease;
+}
+
+.pill-counter.under { color: var(--stone); }
+.pill-counter.good { color: var(--green); }
+.pill-counter.over { color: var(--amber); }
+
+/* ============================================
+   PLATFORM ROWS
+   ============================================ */
+.platform-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.platform-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  transition: border-color 0.3s ease;
+}
+
+.platform-row.active {
+  border-color: var(--brass-dark);
+}
+
+.platform-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 1px solid var(--forest-muted);
+  background: var(--forest);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.platform-checkbox:checked {
+  background: var(--brass);
+  border-color: var(--brass);
+}
+
+.platform-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--forest-deep);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.platform-name {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.platform-row:not(.active) .platform-name {
+  color: var(--stone);
+}
+
+.platform-count-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.platform-count {
+  width: 56px;
+  padding: 8px 12px;
+  background: var(--forest);
+  border: 1px solid var(--forest-muted);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 0;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.platform-count:focus {
+  border-color: var(--brass);
+}
+
+.platform-count:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.platform-count-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--stone);
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+/* ============================================
+   RADIO GROUP
+   ============================================ */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-option:hover {
+  border-color: var(--brass-dark);
+}
+
+.radio-option.selected {
+  border-color: var(--brass);
+}
+
+.radio-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 1px solid var(--forest-muted);
+  border-radius: 50%;
+  background: var(--forest);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.radio-option.selected .radio-input {
+  border-color: var(--brass);
+}
+
+.radio-option.selected .radio-input::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brass);
+}
+
+.radio-label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.voice-textarea-wrapper {
+  margin-top: 16px;
+  display: none;
+}
+
+.voice-textarea-wrapper.visible {
+  display: block;
+  animation: slideUpSmall 0.3s ease forwards;
+}
+
+/* ============================================
+   BRIEF OUTPUT
+   ============================================ */
+.brief-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+
+.brief-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.brief-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(36, 61, 53, 0.5);
+}
+
+.brief-title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 600;
+  color: var(--cream);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.edit-toggle {
+  padding: 8px 20px;
+  background: none;
+  border: 1px solid var(--forest-muted);
+  color: var(--brass);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.edit-toggle:hover {
+  border-color: var(--brass-dark);
+  background: var(--forest-light);
+}
+
+.brief-preview {
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  padding: 32px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--cream);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.brief-preview::-webkit-scrollbar {
+  width: 6px;
+}
+
+.brief-preview::-webkit-scrollbar-track {
+  background: var(--forest-deep);
+}
+
+.brief-preview::-webkit-scrollbar-thumb {
+  background: var(--forest-muted);
+}
+
+.brief-edit {
+  display: none;
+  width: 100%;
+  min-height: 500px;
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  padding: 32px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--cream);
+  resize: vertical;
+  outline: none;
+  border-radius: 0;
+}
+
+.brief-edit:focus {
+  border-color: var(--brass);
+}
+
+.brief-edit.visible {
+  display: block;
+}
+
+.copy-btn {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 18px 32px;
+  background: var(--brass);
+  border: none;
+  color: var(--forest-deep);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: var(--brass-light);
+}
+
+.copy-btn.copied {
+  background: var(--green);
+  color: var(--cream);
+}
+
+.brief-helper {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--stone);
+  font-weight: 300;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  text-align: center;
+  padding: 48px 40px;
+  border-top: 1px solid rgba(36, 61, 53, 0.5);
+}
+
+.footer-brand {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.footer-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--stone);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   CUSTOM OTHER INPUT (INDUSTRY)
+   ============================================ */
+.other-input-wrapper {
+  display: none;
+  margin-top: 12px;
+}
+
+.other-input-wrapper.visible {
+  display: block;
+  animation: slideUpSmall 0.3s ease forwards;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 24px;
+    min-height: 90vh;
+  }
+
+  .wizard {
+    padding: 0 24px 60px;
+  }
+
+  .wizard-section {
+    padding: 48px 0;
+  }
+
+  .brief-section {
+    padding: 0 24px 60px;
+  }
+
+  .platform-row {
+    flex-wrap: wrap;
+  }
+
+  .platform-count-wrapper {
+    margin-left: 36px;
+  }
+
+  .brief-preview,
+  .brief-edit {
+    padding: 20px;
+    font-size: 12px;
+  }
+
+  .brief-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .add-input-row {
+    flex-direction: column;
+  }
+
+  .add-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer {
+    padding: 36px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .section-heading {
+    font-size: 28px;
+  }
+
+  .pill {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .platform-count-wrapper {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar">
+  <div class="progress-bar-fill" id="progressFill"></div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">Session 4 &middot; Build</div>
+  <h1 class="hero-title">Build Your<br><span class="brass">Command Centre</span></h1>
+  <p class="hero-subtitle">Your business operating system. Every tool you build from here lives under one roof. Fill in the details below, copy the brief, paste it into Claude Code.</p>
+  <div class="hero-line"></div>
+  <div class="hero-session">Week 4 &middot; Wednesday Training</div>
+</section>
+
+<!-- Wizard -->
+<div class="wizard">
+
+  <!-- Section 1: Your Business -->
+  <div class="wizard-section" id="section1" data-section="1">
+    <div class="section-eyebrow"><span class="checkmark">&#10003;</span> Step 1</div>
+    <h2 class="section-heading">Your Business</h2>
+    <p class="section-desc">The basics. Claude Code already has your CLAUDE.md, but the brief needs to know what to name things and where to focus.</p>
+
+    <div class="field-group">
+      <label class="field-label" for="businessName">Business Name</label>
+      <input type="text" class="text-input" id="businessName" placeholder="e.g., Bondi Reformer">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Industry</label>
+      <div class="pill-grid" id="industryPills">
+        <div class="pill" data-value="Gym">Gym</div>
+        <div class="pill" data-value="Pilates Studio">Pilates Studio</div>
+        <div class="pill" data-value="Yoga Studio">Yoga Studio</div>
+        <div class="pill" data-value="CrossFit Box">CrossFit Box</div>
+        <div class="pill" data-value="Personal Training">Personal Training</div>
+        <div class="pill" data-value="Coaching">Coaching</div>
+        <div class="pill" data-value="Other">Other</div>
+      </div>
+      <div class="other-input-wrapper" id="otherIndustryWrapper">
+        <input type="text" class="text-input" id="otherIndustry" placeholder="Enter your industry">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="businessDesc">One-liner Description</label>
+      <input type="text" class="text-input" id="businessDesc" placeholder="e.g., Boutique Pilates studio in Bondi specialising in reformer classes">
+    </div>
+  </div>
+
+  <!-- Section 2: Content Pillars -->
+  <div class="wizard-section locked" id="section2" data-section="2">
+    <div class="section-eyebrow"><span class="checkmark">&#10003;</span> Step 2</div>
+    <h2 class="section-heading">Content Pillars</h2>
+    <p class="section-desc">The 3-6 themes you always come back to when you post. Pick from the suggestions or add your own.</p>
+
+    <div class="pill-grid" id="pillarPills">
+      <div class="pill" data-value="Transformations">Transformations</div>
+      <div class="pill" data-value="Behind the Scenes">Behind the Scenes</div>
+      <div class="pill" data-value="Education / Tips">Education / Tips</div>
+      <div class="pill" data-value="Community">Community</div>
+      <div class="pill" data-value="Promotions">Promotions</div>
+      <div class="pill" data-value="Team / Culture">Team / Culture</div>
+      <div class="pill" data-value="Client Spotlights">Client Spotlights</div>
+      <div class="pill" data-value="Events">Events</div>
+    </div>
+
+    <div class="add-input-row">
+      <input type="text" class="text-input" id="customPillarInput" placeholder="Add a custom pillar">
+      <button class="add-btn" id="addPillarBtn">Add</button>
+    </div>
+
+    <div class="pill-counter under" id="pillarCounter">0 selected</div>
+  </div>
+
+  <!-- Section 3: Posting Schedule -->
+  <div class="wizard-section locked" id="section3" data-section="3">
+    <div class="section-eyebrow"><span class="checkmark">&#10003;</span> Step 3</div>
+    <h2 class="section-heading">Posting Schedule</h2>
+    <p class="section-desc">Which platforms do you post on, and how often? This builds your content calendar slots.</p>
+
+    <div class="platform-list" id="platformList">
+      <div class="platform-row" data-platform="Instagram">
+        <input type="checkbox" class="platform-checkbox">
+        <span class="platform-name">Instagram</span>
+        <div class="platform-count-wrapper">
+          <input type="number" class="platform-count" value="3" min="1" max="14" disabled>
+          <span class="platform-count-label">posts/week</span>
+        </div>
+      </div>
+      <div class="platform-row" data-platform="Facebook">
+        <input type="checkbox" class="platform-checkbox">
+        <span class="platform-name">Facebook</span>
+        <div class="platform-count-wrapper">
+          <input type="number" class="platform-count" value="3" min="1" max="14" disabled>
+          <span class="platform-count-label">posts/week</span>
+        </div>
+      </div>
+      <div class="platform-row" data-platform="TikTok">
+        <input type="checkbox" class="platform-checkbox">
+        <span class="platform-name">TikTok</span>
+        <div class="platform-count-wrapper">
+          <input type="number" class="platform-count" value="3" min="1" max="14" disabled>
+          <span class="platform-count-label">posts/week</span>
+        </div>
+      </div>
+      <div class="platform-row" data-platform="LinkedIn">
+        <input type="checkbox" class="platform-checkbox">
+        <span class="platform-name">LinkedIn</span>
+        <div class="platform-count-wrapper">
+          <input type="number" class="platform-count" value="2" min="1" max="14" disabled>
+          <span class="platform-count-label">posts/week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Brand Voice -->
+  <div class="wizard-section locked" id="section4" data-section="4">
+    <div class="section-eyebrow"><span class="checkmark">&#10003;</span> Step 4</div>
+    <h2 class="section-heading">Brand Voice</h2>
+    <p class="section-desc">Your captions need to sound like you. If you set up your CLAUDE.md in Week 3, your voice is already saved. Otherwise, describe it here.</p>
+
+    <div class="radio-group" id="voiceRadioGroup">
+      <div class="radio-option selected" data-value="claudemd">
+        <div class="radio-input"></div>
+        <span class="radio-label">It's in my CLAUDE.md</span>
+      </div>
+      <div class="radio-option" data-value="describe">
+        <div class="radio-input"></div>
+        <span class="radio-label">Let me describe it</span>
+      </div>
+    </div>
+
+    <div class="voice-textarea-wrapper" id="voiceTextareaWrapper">
+      <textarea class="text-input" id="voiceDescription" placeholder="e.g., Casual, encouraging, uses fitness slang, speaks directly to busy mums who want to feel strong. Short punchy sentences. Never corporate."></textarea>
+    </div>
+  </div>
+
+  <!-- Section 5: Future Modules -->
+  <div class="wizard-section locked" id="section5" data-section="5">
+    <div class="section-eyebrow"><span class="checkmark">&#10003;</span> Step 5</div>
+    <h2 class="section-heading">Future Modules</h2>
+    <p class="section-desc">These won't be built today. But they'll show up in your sidebar as 'coming soon' so you can see where this is heading. What else would live in your Command Centre?</p>
+
+    <div class="pill-grid" id="modulePills">
+      <div class="pill" data-value="Bookings Dashboard">Bookings Dashboard</div>
+      <div class="pill" data-value="Client Tracker">Client Tracker</div>
+      <div class="pill" data-value="Lead Pipeline">Lead Pipeline</div>
+      <div class="pill" data-value="Analytics">Analytics</div>
+      <div class="pill" data-value="Staff Roster">Staff Roster</div>
+      <div class="pill" data-value="Class Timetable">Class Timetable</div>
+      <div class="pill" data-value="Financials">Financials</div>
+      <div class="pill" data-value="Membership Retention">Membership Retention</div>
+    </div>
+
+    <div class="add-input-row">
+      <input type="text" class="text-input" id="customModuleInput" placeholder="Add a custom module">
+      <button class="add-btn" id="addModuleBtn">Add</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Brief Output -->
+<div class="brief-section" id="briefSection">
+  <div class="brief-header">
+    <h2 class="brief-title">Your Brief</h2>
+    <button class="edit-toggle" id="editToggle">Edit Brief</button>
+  </div>
+  <div class="brief-preview" id="briefPreview"></div>
+  <textarea class="brief-edit" id="briefEdit"></textarea>
+  <button class="copy-btn" id="copyBtn">Copy Brief to Clipboard</button>
+  <p class="brief-helper">Paste this into Claude Code and hit enter. Then watch it build.</p>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-brand">Kaizen Collective</div>
+  <div class="footer-sub">Command Centre Builder &middot; 2026</div>
+</footer>
+
+<script>
+/* ============================================
+   STATE
+   ============================================ */
+const state = {
+  businessName: '',
+  industry: '',
+  otherIndustry: '',
+  businessDesc: '',
+  pillars: [],
+  platforms: {},
+  voiceSource: 'claudemd',
+  voiceDescription: '',
+  modules: [],
+  briefEdited: false,
+  editedBrief: ''
+};
+
+/* ============================================
+   DOM REFS
+   ============================================ */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+const progressFill = $('#progressFill');
+const sections = $$('.wizard-section');
+const briefSection = $('#briefSection');
+const briefPreview = $('#briefPreview');
+const briefEdit = $('#briefEdit');
+const editToggle = $('#editToggle');
+const copyBtn = $('#copyBtn');
+
+/* ============================================
+   PROGRESSIVE DISCLOSURE
+   ============================================ */
+let unlockedSections = new Set([1]);
+let completedSections = new Set();
+
+function checkSectionRequirements() {
+  // Section 1 -> 2: business name + industry + description
+  const industryVal = state.industry === 'Other' ? state.otherIndustry.trim() : state.industry;
+  const s1Complete = state.businessName.trim() && industryVal && state.businessDesc.trim();
+
+  // Section 2 -> 3: 3+ pillars
+  const s2Complete = state.pillars.length >= 3;
+
+  // Section 3 -> 4: 1+ platform selected
+  const s3Complete = Object.keys(state.platforms).length > 0;
+
+  // Section 4 -> 5: voice chosen
+  const s4Complete = state.voiceSource === 'claudemd' ||
+    (state.voiceSource === 'describe' && state.voiceDescription.trim().length >= 10);
+
+  // Update completed states
+  if (s1Complete) completedSections.add(1); else completedSections.delete(1);
+  if (s2Complete) completedSections.add(2); else completedSections.delete(2);
+  if (s3Complete) completedSections.add(3); else completedSections.delete(3);
+  if (s4Complete) completedSections.add(4); else completedSections.delete(4);
+
+  // Unlock cascade
+  const wasUnlocked = new Set(unlockedSections);
+  if (s1Complete) unlockedSections.add(2);
+  if (s1Complete && s2Complete) unlockedSections.add(3);
+  if (s1Complete && s2Complete && s3Complete) unlockedSections.add(4);
+  if (s1Complete && s2Complete && s3Complete && s4Complete) unlockedSections.add(5);
+
+  // Apply to DOM
+  sections.forEach((sec) => {
+    const num = parseInt(sec.dataset.section);
+    const isUnlocked = unlockedSections.has(num);
+    const isCompleted = completedSections.has(num);
+    const wasLocked = !wasUnlocked.has(num);
+
+    if (isUnlocked) {
+      sec.classList.remove('locked');
+      if (wasLocked) {
+        sec.classList.add('unlocking');
+        // Smooth scroll to newly unlocked section
+        setTimeout(() => {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+        setTimeout(() => sec.classList.remove('unlocking'), 500);
+      }
+    } else {
+      sec.classList.add('locked');
+    }
+
+    if (isCompleted) {
+      sec.classList.add('completed');
+    } else {
+      sec.classList.remove('completed');
+    }
+  });
+
+  // Brief section visibility
+  const briefVisible = unlockedSections.has(5);
+  if (briefVisible) {
+    briefSection.classList.add('visible');
+    debouncedGenerate();
+  } else {
+    briefSection.classList.remove('visible');
+  }
+
+  // Progress bar
+  updateProgress();
+}
+
+function updateProgress() {
+  const totalSteps = 5;
+  let progress = 0;
+  // Each unlocked section = 20%
+  progress = (unlockedSections.size / totalSteps) * 100;
+  // If brief is visible, that's 100%
+  if (briefSection.classList.contains('visible')) {
+    progress = 100;
+  }
+  progressFill.style.width = progress + '%';
+}
+
+/* ============================================
+   SECTION 1: YOUR BUSINESS
+   ============================================ */
+$('#businessName').addEventListener('input', (e) => {
+  state.businessName = e.target.value;
+  checkSectionRequirements();
+});
+
+$('#businessDesc').addEventListener('input', (e) => {
+  state.businessDesc = e.target.value;
+  checkSectionRequirements();
+});
+
+// Industry pills (single-select)
+$('#industryPills').addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+
+  // Deselect all
+  $$('#industryPills .pill').forEach(p => p.classList.remove('selected'));
+  pill.classList.add('selected');
+  state.industry = pill.dataset.value;
+
+  // Show/hide other input
+  const otherWrapper = $('#otherIndustryWrapper');
+  if (state.industry === 'Other') {
+    otherWrapper.classList.add('visible');
+    $('#otherIndustry').focus();
+  } else {
+    otherWrapper.classList.remove('visible');
+    state.otherIndustry = '';
+  }
+
+  checkSectionRequirements();
+});
+
+$('#otherIndustry').addEventListener('input', (e) => {
+  state.otherIndustry = e.target.value;
+  checkSectionRequirements();
+});
+
+/* ============================================
+   SECTION 2: CONTENT PILLARS
+   ============================================ */
+function updatePillarCounter() {
+  const counter = $('#pillarCounter');
+  const count = state.pillars.length;
+  counter.textContent = count + ' selected';
+  counter.className = 'pill-counter';
+  if (count < 3) counter.classList.add('under');
+  else if (count <= 6) counter.classList.add('good');
+  else counter.classList.add('over');
+}
+
+$('#pillarPills').addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+
+  const value = pill.dataset.value;
+  if (pill.classList.contains('selected')) {
+    pill.classList.remove('selected');
+    state.pillars = state.pillars.filter(p => p !== value);
+  } else {
+    pill.classList.add('selected');
+    state.pillars.push(value);
+  }
+
+  updatePillarCounter();
+  checkSectionRequirements();
+});
+
+function addCustomPillar() {
+  const input = $('#customPillarInput');
+  const value = input.value.trim();
+  if (!value) return;
+  if (state.pillars.includes(value)) { input.value = ''; return; }
+
+  // Create pill
+  const pill = document.createElement('div');
+  pill.className = 'pill selected';
+  pill.dataset.value = value;
+  pill.textContent = value;
+  $('#pillarPills').appendChild(pill);
+  state.pillars.push(value);
+  input.value = '';
+
+  updatePillarCounter();
+  checkSectionRequirements();
+}
+
+$('#addPillarBtn').addEventListener('click', addCustomPillar);
+$('#customPillarInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); addCustomPillar(); }
+});
+
+/* ============================================
+   SECTION 3: POSTING SCHEDULE
+   ============================================ */
+$$('.platform-row').forEach(row => {
+  const checkbox = row.querySelector('.platform-checkbox');
+  const countInput = row.querySelector('.platform-count');
+  const platform = row.dataset.platform;
+
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      row.classList.add('active');
+      countInput.disabled = false;
+      state.platforms[platform] = parseInt(countInput.value) || 3;
+    } else {
+      row.classList.remove('active');
+      countInput.disabled = true;
+      delete state.platforms[platform];
+    }
+    checkSectionRequirements();
+  });
+
+  countInput.addEventListener('input', () => {
+    if (checkbox.checked) {
+      state.platforms[platform] = parseInt(countInput.value) || 1;
+      debouncedGenerate();
+    }
+  });
+});
+
+/* ============================================
+   SECTION 4: BRAND VOICE
+   ============================================ */
+$$('.radio-option').forEach(option => {
+  option.addEventListener('click', () => {
+    $$('.radio-option').forEach(o => o.classList.remove('selected'));
+    option.classList.add('selected');
+    state.voiceSource = option.dataset.value;
+
+    const wrapper = $('#voiceTextareaWrapper');
+    if (state.voiceSource === 'describe') {
+      wrapper.classList.add('visible');
+      $('#voiceDescription').focus();
+    } else {
+      wrapper.classList.remove('visible');
+    }
+
+    checkSectionRequirements();
+  });
+});
+
+$('#voiceDescription').addEventListener('input', (e) => {
+  state.voiceDescription = e.target.value;
+  checkSectionRequirements();
+});
+
+/* ============================================
+   SECTION 5: FUTURE MODULES
+   ============================================ */
+$('#modulePills').addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+
+  const value = pill.dataset.value;
+  if (pill.classList.contains('selected')) {
+    pill.classList.remove('selected');
+    state.modules = state.modules.filter(m => m !== value);
+  } else {
+    pill.classList.add('selected');
+    state.modules.push(value);
+  }
+
+  debouncedGenerate();
+});
+
+function addCustomModule() {
+  const input = $('#customModuleInput');
+  const value = input.value.trim();
+  if (!value) return;
+  if (state.modules.includes(value)) { input.value = ''; return; }
+
+  const pill = document.createElement('div');
+  pill.className = 'pill selected';
+  pill.dataset.value = value;
+  pill.textContent = value;
+  $('#modulePills').appendChild(pill);
+  state.modules.push(value);
+  input.value = '';
+
+  debouncedGenerate();
+}
+
+$('#addModuleBtn').addEventListener('click', addCustomModule);
+$('#customModuleInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); addCustomModule(); }
+});
+
+/* ============================================
+   BRIEF GENERATION
+   ============================================ */
+function categorizeModules(modules) {
+  const categories = {
+    'Operations': [],
+    'Clients': [],
+    'Analytics': [],
+    'Other': []
+  };
+
+  const mapping = {
+    'Bookings Dashboard': 'Operations',
+    'Staff Roster': 'Operations',
+    'Class Timetable': 'Operations',
+    'Client Tracker': 'Clients',
+    'Lead Pipeline': 'Clients',
+    'Membership Retention': 'Clients',
+    'Analytics': 'Analytics',
+    'Financials': 'Analytics'
+  };
+
+  modules.forEach(mod => {
+    const cat = mapping[mod] || 'Other';
+    categories[cat].push(mod);
+  });
+
+  return categories;
+}
+
+function generateBrief() {
+  const businessName = state.businessName.trim() || 'My Business';
+  const businessDesc = state.businessDesc.trim() || 'A fitness business';
+  const industry = state.industry === 'Other'
+    ? (state.otherIndustry.trim() || 'Fitness')
+    : (state.industry || 'Fitness');
+
+  // Module nav lines
+  const categorized = categorizeModules(state.modules);
+  let moduleNavLines = '';
+  const categoryOrder = ['Operations', 'Clients', 'Analytics', 'Other'];
+  categoryOrder.forEach(cat => {
+    if (categorized[cat].length > 0) {
+      moduleNavLines += `  - **${cat}** (section header)\n`;
+      categorized[cat].forEach(mod => {
+        moduleNavLines += `    - ${mod} (coming soon, greyed out)\n`;
+      });
+    }
+  });
+
+  if (!moduleNavLines) {
+    moduleNavLines = '  (No future modules selected)\n';
+  }
+
+  // Pillars
+  const pillarsStr = state.pillars.join(', ') || 'None selected';
+
+  // Platform lines
+  let platformLines = '';
+  const platformEntries = Object.entries(state.platforms);
+  if (platformEntries.length > 0) {
+    platformEntries.forEach(([platform, count]) => {
+      platformLines += `  - ${platform}: ${count} posts/week\n`;
+    });
+  } else {
+    platformLines = '  - No platforms selected\n';
+  }
+
+  // Platform names for caption generator
+  const platformNames = Object.keys(state.platforms).join(', ') || 'None selected';
+
+  // Voice line
+  let voiceLine;
+  if (state.voiceSource === 'claudemd') {
+    voiceLine = 'Use the brand voice defined in my CLAUDE.md';
+  } else {
+    voiceLine = 'Brand voice: ' + (state.voiceDescription.trim() || 'Not described');
+  }
+
+  const brief = `I want you to build me a Command Centre — a personal business operating system called "${businessName} Command Centre".
+
+You already have my business context in CLAUDE.md and my design system from our previous session. Use those as the foundation for all styling and brand voice decisions.
+
+My business: ${businessName} — ${businessDesc} (${industry})
+
+## What to Build
+
+### The Shell
+Build a Next.js application with a sticky sidebar navigation and a main content area.
+
+- Sidebar header: "${businessName}" in my brand heading font
+- Sidebar should be collapsible (default expanded)
+- Navigation structure:
+  - **Marketing** (section header)
+    - Content Pipeline (active — this is what we're building today)
+${moduleNavLines}- Main area: clean layout using my brand colours and fonts throughout
+- Responsive — works on desktop and tablet
+- Run \`npm install\` then \`npm run dev\` so I can see it in my browser
+
+### Module 1: Content Pipeline
+
+Build this as the main page of the app. It has three tabs or sections:
+
+**Media Library**
+- Drag-and-drop upload area for images and videos
+- Grid view showing thumbnails of uploaded media
+- Each asset can be tagged with one or more content pillars: ${pillarsStr}
+- Filter by pillar, search by filename
+- Assets stored locally in the project (public folder or similar)
+
+**Content Calendar**
+- Weekly view grid showing each day
+- Platforms and frequency:
+${platformLines}- Each slot shows: assigned pillar colour, thumbnail if asset attached, caption preview if generated
+- Click a slot to assign a pillar and attach an asset from the media library
+- Drag assets from the media library into calendar slots
+
+**Caption Generator**
+- When a calendar slot has an asset and pillar assigned, show a "Generate Caption" button
+- ${voiceLine}
+- Generate platform-specific caption variations for: ${platformNames}
+- Each generated caption has a "Copy" button
+- Captions should feel natural, not robotic — match my brand's tone and language
+
+## Technical Notes
+- Use my existing design system (colours, fonts, spacing) from my design system files — do not introduce new styling
+- Keep the file structure clean and organised
+- This is a local tool — no deployment needed, just runs on my machine
+- Build it so I can add new modules to the sidebar in future sessions
+- Use Next.js App Router with file-based routing
+- After building, start the dev server so I can see it immediately`;
+
+  return brief;
+}
+
+let generateTimeout;
+function debouncedGenerate() {
+  if (!briefSection.classList.contains('visible')) return;
+  clearTimeout(generateTimeout);
+  generateTimeout = setTimeout(() => {
+    if (!state.briefEdited) {
+      const brief = generateBrief();
+      briefPreview.textContent = brief;
+      briefEdit.value = brief;
+    }
+  }, 300);
+}
+
+/* ============================================
+   BRIEF EDIT TOGGLE
+   ============================================ */
+let isEditing = false;
+
+editToggle.addEventListener('click', () => {
+  isEditing = !isEditing;
+
+  if (isEditing) {
+    editToggle.textContent = 'Preview Brief';
+    briefPreview.style.display = 'none';
+    briefEdit.classList.add('visible');
+    briefEdit.focus();
+    state.briefEdited = true;
+  } else {
+    editToggle.textContent = 'Edit Brief';
+    briefPreview.style.display = 'block';
+    briefEdit.classList.remove('visible');
+    // Sync edited content to preview
+    briefPreview.textContent = briefEdit.value;
+  }
+});
+
+briefEdit.addEventListener('input', () => {
+  state.briefEdited = true;
+  state.editedBrief = briefEdit.value;
+});
+
+/* ============================================
+   COPY TO CLIPBOARD
+   ============================================ */
+copyBtn.addEventListener('click', async () => {
+  const text = isEditing ? briefEdit.value : briefPreview.textContent;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = 'Copied!';
+    copyBtn.classList.add('copied');
+
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy Brief to Clipboard';
+      copyBtn.classList.remove('copied');
+    }, 2000);
+  } catch (err) {
+    // Fallback
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    copyBtn.textContent = 'Copied!';
+    copyBtn.classList.add('copied');
+
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy Brief to Clipboard';
+      copyBtn.classList.remove('copied');
+    }, 2000);
+  }
+});
+
+/* ============================================
+   INITIAL STATE
+   ============================================ */
+updateProgress();
+</script>
+</body>
+</html>
