@@ -46,11 +46,47 @@ body {
 }
 
 /* ============================================
+   TOP BAR
+   ============================================ */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 101;
+  background: var(--forest-deep);
+  border-bottom: 1px solid var(--forest-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 40px;
+}
+
+.top-bar-brand {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.top-bar-context {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone);
+  font-weight: 500;
+}
+
+/* ============================================
    PROGRESS BAR
    ============================================ */
 .progress-bar {
   position: fixed;
-  top: 0;
+  top: 56px;
   left: 0;
   right: 0;
   z-index: 100;
@@ -93,7 +129,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 80px 40px;
+  padding: 136px 40px 80px;
   background: var(--forest-deep);
   position: relative;
   overflow: hidden;
@@ -151,6 +187,10 @@ body {
   color: var(--brass);
 }
 
+.brass {
+  color: var(--brass);
+}
+
 .hero-subtitle {
   font-family: var(--font-body);
   font-size: 17px;
@@ -190,6 +230,740 @@ body {
 }
 
 /* ============================================
+   HERO PREVIEW
+   ============================================ */
+.hero-preview {
+  margin-top: 64px;
+  max-width: 720px;
+  width: 100%;
+  opacity: 0;
+  animation: slideUp 0.8s ease 1.2s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.preview-browser {
+  background: #0A0F0D;
+  border: 1px solid var(--forest-muted);
+  overflow: hidden;
+}
+
+.preview-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--forest-deep);
+  border-bottom: 1px solid var(--forest-muted);
+}
+
+.preview-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--forest-muted);
+}
+
+.preview-url {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--stone);
+  letter-spacing: 0.02em;
+}
+
+.preview-body {
+  display: flex;
+  min-height: 320px;
+}
+
+.preview-sidebar {
+  width: 140px;
+  min-width: 140px;
+  background: var(--forest-deep);
+  border-right: 1px solid var(--forest-muted);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preview-sidebar-brand {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: var(--cream);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--forest-muted);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.preview-sidebar-section {
+  font-family: var(--font-body);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.preview-sidebar-item {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--stone);
+  padding: 5px 8px;
+  font-weight: 400;
+}
+
+.preview-sidebar-item.active {
+  color: var(--brass);
+  background: rgba(191, 162, 120, 0.08);
+  border-left: 2px solid var(--brass);
+  font-weight: 500;
+}
+
+.preview-sidebar-item.coming-soon {
+  opacity: 0.35;
+  font-size: 10px;
+}
+
+/* --- Main content area (animated phases) --- */
+.preview-main {
+  flex: 1;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-main-header {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--cream);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+}
+
+/* Tabs with animated underline */
+.preview-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--forest-muted);
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.preview-tab {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--stone);
+  padding: 6px 14px;
+  letter-spacing: 0.05em;
+  position: relative;
+  transition: color 0.4s ease;
+}
+
+.preview-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--brass);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+/* Tab active states driven by animation phases */
+.preview-tab.tab-media::after { animation: tabMedia 11s ease infinite; }
+.preview-tab.tab-calendar::after { animation: tabCalendar 11s ease infinite; }
+.preview-tab.tab-captions::after { animation: tabCaptions 11s ease infinite; }
+
+.preview-tab.tab-media { animation: tabMediaColor 11s ease infinite; }
+.preview-tab.tab-calendar { animation: tabCalendarColor 11s ease infinite; }
+.preview-tab.tab-captions { animation: tabCaptionsColor 11s ease infinite; }
+
+@keyframes tabMedia {
+  0%, 1% { transform: scaleX(1); }
+  25% { transform: scaleX(1); }
+  27% { transform: scaleX(0); }
+  100% { transform: scaleX(0); }
+}
+@keyframes tabCalendar {
+  0%, 25% { transform: scaleX(0); }
+  27%, 54% { transform: scaleX(1); }
+  56% { transform: scaleX(0); }
+  100% { transform: scaleX(0); }
+}
+@keyframes tabCaptions {
+  0%, 54% { transform: scaleX(0); }
+  56%, 81% { transform: scaleX(1); }
+  83% { transform: scaleX(0); }
+  100% { transform: scaleX(0); }
+}
+@keyframes tabMediaColor {
+  0%, 1% { color: var(--brass); }
+  25% { color: var(--brass); }
+  27% { color: var(--stone); }
+  100% { color: var(--stone); }
+}
+@keyframes tabCalendarColor {
+  0%, 25% { color: var(--stone); }
+  27%, 54% { color: var(--brass); }
+  56% { color: var(--stone); }
+  100% { color: var(--stone); }
+}
+@keyframes tabCaptionsColor {
+  0%, 54% { color: var(--stone); }
+  56%, 81% { color: var(--brass); }
+  83% { color: var(--stone); }
+  100% { color: var(--stone); }
+}
+
+/* --- Phase containers --- */
+.phase-container {
+  position: absolute;
+  top: 68px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+}
+
+/* ========== PHASE 1: Media Library ========== */
+.phase-media {
+  animation: phaseMedia 11s ease infinite;
+}
+@keyframes phaseMedia {
+  0% { opacity: 0; }
+  2% { opacity: 1; }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.media-card {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(8px) scale(0.95);
+  animation: mediaCardIn 11s ease infinite;
+}
+
+.media-card:nth-child(1) { background: linear-gradient(135deg, #C45B4A 0%, #E8856F 100%); animation-delay: 0s; }
+.media-card:nth-child(2) { background: linear-gradient(135deg, #5A9E6F 0%, #7AC48A 100%); animation-delay: 0s; }
+.media-card:nth-child(3) { background: linear-gradient(135deg, #BFA278 0%, #DDD0BC 100%); animation-delay: 0s; }
+.media-card:nth-child(4) { background: linear-gradient(135deg, #7A9E8C 0%, #A0C4B4 100%); animation-delay: 0s; }
+.media-card:nth-child(5) { background: linear-gradient(135deg, #4A7A9E 0%, #6FA0C4 100%); animation-delay: 0s; }
+.media-card:nth-child(6) { background: linear-gradient(135deg, #9E7A8C 0%, #C4A0B4 100%); animation-delay: 0s; }
+.media-card:nth-child(7) { background: linear-gradient(135deg, #C49E6F 0%, #E8C48A 100%); animation-delay: 0s; }
+.media-card:nth-child(8) { background: linear-gradient(135deg, #6F8CA0 0%, #8AAEC4 100%); animation-delay: 0s; }
+
+/* Staggered entrance for each card */
+@keyframes mediaCard1 {
+  0%, 1% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  4% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; transform: translateY(0) scale(1); }
+  27% { opacity: 0; transform: translateY(0) scale(1); }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard2 {
+  0%, 2.5% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  5.5% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard3 {
+  0%, 4% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  7% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard4 {
+  0%, 5.5% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  8.5% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard5 {
+  0%, 7% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  10% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard6 {
+  0%, 8.5% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  11.5% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard7 {
+  0%, 10% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  13% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes mediaCard8 {
+  0%, 11.5% { opacity: 0; transform: translateY(8px) scale(0.95); }
+  14.5% { opacity: 1; transform: translateY(0) scale(1); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.media-card:nth-child(1) { animation-name: mediaCard1; }
+.media-card:nth-child(2) { animation-name: mediaCard2; }
+.media-card:nth-child(3) { animation-name: mediaCard3; }
+.media-card:nth-child(4) { animation-name: mediaCard4; }
+.media-card:nth-child(5) { animation-name: mediaCard5; }
+.media-card:nth-child(6) { animation-name: mediaCard6; }
+.media-card:nth-child(7) { animation-name: mediaCard7; }
+.media-card:nth-child(8) { animation-name: mediaCard8; }
+
+/* Pillar tags on media cards */
+.pillar-tag {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  background: var(--brass);
+  color: var(--forest-deep);
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateX(-4px);
+  animation: pillarTagIn 11s ease infinite;
+}
+
+.media-card:nth-child(1) .pillar-tag { animation-delay: 0.3s; }
+.media-card:nth-child(2) .pillar-tag { animation-delay: 0.3s; }
+.media-card:nth-child(3) .pillar-tag { animation-delay: 0.3s; }
+.media-card:nth-child(4) .pillar-tag { animation-delay: 0.3s; }
+.media-card:nth-child(5) .pillar-tag { animation-delay: 0.3s; }
+.media-card:nth-child(6) .pillar-tag { animation-delay: 0.3s; }
+
+@keyframes pillarTagIn {
+  0%, 6% { opacity: 0; transform: translateX(-4px); }
+  9% { opacity: 1; transform: translateX(0); }
+  25% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ========== PHASE 2: Calendar ========== */
+.phase-calendar {
+  animation: phaseCalendar 11s ease infinite;
+}
+@keyframes phaseCalendar {
+  0%, 25% { opacity: 0; }
+  27% { opacity: 1; }
+  54% { opacity: 1; }
+  56% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 28px repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.calendar-day-header {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--stone);
+  text-align: center;
+  padding: 4px 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.calendar-platform-label {
+  font-family: var(--font-body);
+  font-size: 7px;
+  color: var(--stone);
+  text-align: center;
+  padding: 2px 0 4px;
+  opacity: 0.5;
+}
+
+.calendar-slot {
+  aspect-ratio: 1.2;
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Flying card animations: cards from library land in calendar slots */
+.calendar-slot.slot-mon-ig {
+  animation: slotFillMon 11s ease infinite;
+}
+.calendar-slot.slot-wed-ig {
+  animation: slotFillWed 11s ease infinite;
+}
+.calendar-slot.slot-fri-ig {
+  animation: slotFillFri 11s ease infinite;
+}
+
+/* Monday slot: warm gradient (card 1) */
+@keyframes slotFillMon {
+  0%, 31% { background: var(--forest-deep); box-shadow: none; }
+  33% { background: var(--forest-deep); }
+  36% { background: linear-gradient(135deg, #C45B4A 0%, #E8856F 100%); box-shadow: 0 0 8px rgba(196, 91, 74, 0.3); }
+  54% { background: linear-gradient(135deg, #C45B4A 0%, #E8856F 100%); }
+  56% { background: var(--forest-deep); box-shadow: none; }
+  100% { background: var(--forest-deep); }
+}
+
+/* Wednesday slot: green gradient (card 2) */
+@keyframes slotFillWed {
+  0%, 36% { background: var(--forest-deep); box-shadow: none; }
+  38% { background: var(--forest-deep); }
+  41% { background: linear-gradient(135deg, #5A9E6F 0%, #7AC48A 100%); box-shadow: 0 0 8px rgba(90, 158, 111, 0.3); }
+  54% { background: linear-gradient(135deg, #5A9E6F 0%, #7AC48A 100%); }
+  56% { background: var(--forest-deep); box-shadow: none; }
+  100% { background: var(--forest-deep); }
+}
+
+/* Friday slot: brass gradient (card 3) */
+@keyframes slotFillFri {
+  0%, 41% { background: var(--forest-deep); box-shadow: none; }
+  43% { background: var(--forest-deep); }
+  46% { background: linear-gradient(135deg, #BFA278 0%, #DDD0BC 100%); box-shadow: 0 0 8px rgba(191, 162, 120, 0.3); }
+  54% { background: linear-gradient(135deg, #BFA278 0%, #DDD0BC 100%); }
+  56% { background: var(--forest-deep); box-shadow: none; }
+  100% { background: var(--forest-deep); }
+}
+
+/* Bounce effect when card lands */
+.slot-bounce-indicator {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--brass);
+  border-radius: 2px;
+  opacity: 0;
+}
+.calendar-slot.slot-mon-ig .slot-bounce-indicator { animation: slotBounce 11s ease infinite; animation-delay: 0s; }
+.calendar-slot.slot-wed-ig .slot-bounce-indicator { animation: slotBounce 11s ease infinite; animation-delay: 0.55s; }
+.calendar-slot.slot-fri-ig .slot-bounce-indicator { animation: slotBounce 11s ease infinite; animation-delay: 1.1s; }
+
+@keyframes slotBounce {
+  0%, 32% { opacity: 0; transform: scale(1); }
+  35% { opacity: 0.6; transform: scale(1.08); }
+  38% { opacity: 0; transform: scale(1); }
+  100% { opacity: 0; }
+}
+
+/* Platform row labels (IG / FB) */
+.calendar-row-label {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--stone);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.calendar-section {
+  display: grid;
+  grid-template-columns: 28px repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+/* ========== PHASE 3: Captions ========== */
+.phase-captions {
+  animation: phaseCaptions 11s ease infinite;
+}
+@keyframes phaseCaptions {
+  0%, 54% { opacity: 0; }
+  56% { opacity: 1; }
+  81% { opacity: 1; }
+  83% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.caption-card {
+  background: var(--forest-deep);
+  border: 1px solid var(--forest-muted);
+  border-radius: 2px;
+  padding: 12px;
+}
+
+.caption-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.caption-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #C45B4A 0%, #E8856F 100%);
+  flex-shrink: 0;
+}
+
+.caption-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.caption-platform {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.caption-pillar-tag {
+  display: inline-block;
+  background: var(--brass);
+  color: var(--forest-deep);
+  font-family: var(--font-body);
+  font-size: 7px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.caption-text {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 11px;
+  color: var(--cream);
+  line-height: 1.6;
+  min-height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Typing animation: wrapper clips text, reveal line by line */
+.caption-typing-wrapper {
+  display: block;
+  overflow: hidden;
+  animation: typingReveal 11s steps(60, end) infinite;
+  max-height: 0;
+}
+
+.caption-typing {
+  display: block;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+@keyframes typingReveal {
+  0%, 58% { max-height: 0; }
+  60% { max-height: 0; }
+  76% { max-height: 80px; }
+  81% { max-height: 80px; }
+  83% { max-height: 0; }
+  100% { max-height: 0; }
+}
+
+/* Blinking cursor */
+.caption-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 13px;
+  background: var(--brass);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: cursorBlink 0.6s step-end infinite, cursorShow 11s ease infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+@keyframes cursorShow {
+  0%, 56% { opacity: 0; }
+  58% { opacity: 1; }
+  81% { opacity: 1; }
+  83% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Copy button that fades in */
+.caption-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 12px;
+  background: var(--forest-light);
+  border: 1px solid var(--forest-muted);
+  color: var(--brass);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  opacity: 0;
+  animation: copyFadeIn 11s ease infinite;
+}
+
+@keyframes copyFadeIn {
+  0%, 74% { opacity: 0; }
+  76% { opacity: 1; }
+  81% { opacity: 1; }
+  83% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Copied checkmark flash */
+.caption-copied {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--green);
+  font-weight: 500;
+  opacity: 0;
+  animation: copiedFlash 11s ease infinite;
+}
+
+@keyframes copiedFlash {
+  0%, 77% { opacity: 0; }
+  78% { opacity: 1; }
+  80% { opacity: 1; }
+  81% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ========== PHASE 4: Reset ========== */
+/* Handled naturally by all phases looping back to 0% */
+
+/* --- Preview annotation --- */
+.preview-annotation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: center;
+}
+
+.preview-annotation-line {
+  width: 32px;
+  height: 1px;
+  background: var(--brass);
+  opacity: 0.4;
+}
+
+.preview-annotation-text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+  font-weight: 500;
+}
+
+/* ============================================
+   HERO DIVIDER
+   ============================================ */
+.hero-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass), transparent);
+  max-width: 200px;
+  margin: 0 auto;
+  opacity: 0.4;
+}
+
+/* ============================================
+   WIZARD HINT
+   ============================================ */
+.wizard-hint {
+  padding: 20px 24px;
+  background: rgba(191, 162, 120, 0.06);
+  border-left: 2px solid var(--brass-dark);
+  margin-bottom: 32px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--stone);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.wizard-hint strong {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+/* ============================================
+   VISION CALLOUT
+   ============================================ */
+.vision-callout {
+  margin-top: 40px;
+  padding: 40px;
+  background: rgba(191, 162, 120, 0.04);
+  border: 1px solid rgba(191, 162, 120, 0.12);
+  text-align: center;
+  position: relative;
+}
+
+.vision-callout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass-light), transparent);
+  opacity: 0.3;
+}
+
+.vision-callout p {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2.2vw, 24px);
+  color: var(--cream);
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
    WIZARD CONTAINER
    ============================================ */
 .wizard-wrapper {
@@ -207,6 +981,16 @@ body {
   pointer-events: none;
 }
 
+.wizard-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
 .wizard {
   max-width: 900px;
   margin: 0 auto;
@@ -222,7 +1006,17 @@ body {
   padding: 64px 0;
   border-bottom: 1px solid rgba(36, 61, 53, 0.5);
   transition: opacity 0.5s ease, filter 0.5s ease;
-  scroll-margin-top: 24px;
+  scroll-margin-top: 80px;
+  border-left: 3px solid transparent;
+  padding-left: 32px;
+}
+
+.wizard-section:not(.locked):not(.completed) {
+  border-left-color: var(--brass);
+}
+
+.wizard-section.completed {
+  border-left-color: var(--green);
 }
 
 .wizard-section:last-of-type {
@@ -324,6 +1118,7 @@ body {
 
 .text-input:focus {
   border-color: var(--brass);
+  box-shadow: 0 0 0 1px rgba(191, 162, 120, 0.15);
 }
 
 textarea.text-input {
@@ -367,6 +1162,7 @@ textarea.text-input {
   color: var(--forest-deep);
   font-weight: 500;
   transform: scale(1);
+  box-shadow: 0 0 12px rgba(191, 162, 120, 0.15);
 }
 
 @keyframes pillPop {
@@ -626,7 +1422,7 @@ textarea.text-input {
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
   pointer-events: none;
-  scroll-margin-top: 24px;
+  scroll-margin-top: 80px;
 }
 
 .brief-section.visible {
@@ -641,7 +1437,18 @@ textarea.text-input {
   justify-content: space-between;
   margin-bottom: 24px;
   padding-top: 32px;
-  border-top: 1px solid rgba(36, 61, 53, 0.5);
+  border-top: none;
+  position: relative;
+}
+
+.brief-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--brass), rgba(191, 162, 120, 0.2));
 }
 
 .brief-title {
@@ -676,6 +1483,7 @@ textarea.text-input {
 .brief-preview {
   background: var(--forest-deep);
   border: 1px solid var(--forest-muted);
+  border-left: 3px solid var(--brass);
   padding: 32px;
   font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
   font-size: 13px;
@@ -737,12 +1545,15 @@ textarea.text-input {
 }
 
 .copy-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   margin-top: 24px;
   padding: 18px 32px;
   background: var(--brass);
-  border: none;
+  border: 2px solid var(--brass);
   color: var(--forest-deep);
   font-family: var(--font-heading);
   font-size: 16px;
@@ -755,12 +1566,21 @@ textarea.text-input {
 }
 
 .copy-btn:hover {
-  background: var(--brass-light);
+  background: transparent;
+  color: var(--brass);
+}
+
+@keyframes copyPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+  100% { transform: scale(1); }
 }
 
 .copy-btn.copied {
   background: var(--green);
+  border-color: var(--green);
   color: var(--cream);
+  animation: copyPulse 0.3s ease;
 }
 
 .brief-helper {
@@ -779,6 +1599,18 @@ textarea.text-input {
   text-align: center;
   padding: 48px 40px;
   border-top: 1px solid rgba(36, 61, 53, 0.5);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass-light), transparent);
+  opacity: 0.3;
 }
 
 .footer-brand {
@@ -789,6 +1621,15 @@ textarea.text-input {
   color: var(--brass);
   font-weight: 500;
   margin-bottom: 8px;
+}
+
+.footer-cta {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--stone);
+  font-weight: 300;
+  margin-top: 12px;
+  line-height: 1.7;
 }
 
 .footer-sub {
@@ -830,9 +1671,19 @@ textarea.text-input {
    ============================================ */
 @media (max-width: 768px) {
   .hero {
-    padding: 60px 24px;
+    padding: 116px 24px 60px;
     min-height: 90vh;
   }
+
+  .hero-preview { max-width: 100%; margin-top: 48px; }
+  .preview-sidebar { width: 110px; min-width: 110px; padding: 12px 8px; }
+  .preview-sidebar-brand { font-size: 10px; }
+  .preview-sidebar-item { font-size: 10px; padding: 4px 8px; }
+  .media-grid { grid-template-columns: repeat(3, 1fr); }
+  .preview-main { padding: 12px; }
+  .calendar-grid { grid-template-columns: 22px repeat(7, 1fr); }
+  .calendar-section { grid-template-columns: 22px repeat(7, 1fr); }
+  .media-card:nth-child(7), .media-card:nth-child(8) { display: none; }
 
   .wizard {
     padding: 0 24px 60px;
@@ -898,10 +1749,26 @@ textarea.text-input {
     margin-left: 0;
     width: 100%;
   }
+
+  .preview-sidebar { display: none; }
+  .media-grid { grid-template-columns: repeat(2, 1fr); }
+  .media-card:nth-child(5), .media-card:nth-child(6),
+  .media-card:nth-child(7), .media-card:nth-child(8) { display: none; }
+  .calendar-grid { grid-template-columns: 20px repeat(7, 1fr); }
+  .calendar-section { grid-template-columns: 20px repeat(7, 1fr); }
+  .calendar-day-header { font-size: 7px; }
+  .calendar-row-label { font-size: 7px; }
+  .caption-text { font-size: 10px; }
 }
 </style>
 </head>
 <body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <span class="top-bar-brand">Kaizen Collective</span>
+  <span class="top-bar-context">Command Centre Builder</span>
+</div>
 
 <!-- Progress Bar -->
 <div class="progress-bar">
@@ -915,7 +1782,118 @@ textarea.text-input {
   <p class="hero-subtitle">Your business operating system. Every tool you build from here lives under one roof. Fill in the details below, copy the brief, paste it into Claude Code.</p>
   <div class="hero-line"></div>
   <div class="hero-session">Week 4 &middot; Wednesday Training</div>
+
+  <div class="hero-preview">
+    <div class="preview-browser">
+      <div class="preview-browser-bar">
+        <div class="preview-dot"></div>
+        <div class="preview-dot"></div>
+        <div class="preview-dot"></div>
+        <div class="preview-url">localhost:3000</div>
+      </div>
+      <div class="preview-body">
+        <div class="preview-sidebar">
+          <div class="preview-sidebar-brand" id="previewBrand">Your Business</div>
+          <div class="preview-sidebar-section">Marketing</div>
+          <div class="preview-sidebar-item active">Content Pipeline</div>
+          <div class="preview-sidebar-section">Operations</div>
+          <div class="preview-sidebar-item coming-soon">Bookings</div>
+          <div class="preview-sidebar-item coming-soon">Timetable</div>
+          <div class="preview-sidebar-section">Clients</div>
+          <div class="preview-sidebar-item coming-soon">Tracker</div>
+          <div class="preview-sidebar-item coming-soon">Leads</div>
+        </div>
+        <div class="preview-main">
+          <div class="preview-main-header">Content Pipeline</div>
+          <div class="preview-tabs">
+            <div class="preview-tab tab-media">Media Library</div>
+            <div class="preview-tab tab-calendar">Calendar</div>
+            <div class="preview-tab tab-captions">Captions</div>
+          </div>
+
+          <!-- Phase 1: Media Library -->
+          <div class="phase-container phase-media">
+            <div class="media-grid">
+              <div class="media-card"><span class="pillar-tag">Energy</span></div>
+              <div class="media-card"><span class="pillar-tag">Lifestyle</span></div>
+              <div class="media-card"><span class="pillar-tag">Promo</span></div>
+              <div class="media-card"><span class="pillar-tag">Results</span></div>
+              <div class="media-card"><span class="pillar-tag">Energy</span></div>
+              <div class="media-card"><span class="pillar-tag">Community</span></div>
+              <div class="media-card"></div>
+              <div class="media-card"></div>
+            </div>
+          </div>
+
+          <!-- Phase 2: Calendar -->
+          <div class="phase-container phase-calendar">
+            <div class="calendar-grid">
+              <div></div><!-- spacer for row label column -->
+              <div class="calendar-day-header">Mon</div>
+              <div class="calendar-day-header">Tue</div>
+              <div class="calendar-day-header">Wed</div>
+              <div class="calendar-day-header">Thu</div>
+              <div class="calendar-day-header">Fri</div>
+              <div class="calendar-day-header">Sat</div>
+              <div class="calendar-day-header">Sun</div>
+            </div>
+            <!-- IG Row -->
+            <div class="calendar-section">
+              <div class="calendar-row-label">IG</div>
+              <div class="calendar-slot slot-mon-ig"><div class="slot-bounce-indicator"></div></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot slot-wed-ig"><div class="slot-bounce-indicator"></div></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot slot-fri-ig"><div class="slot-bounce-indicator"></div></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+            </div>
+            <!-- FB Row -->
+            <div class="calendar-section">
+              <div class="calendar-row-label">FB</div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+              <div class="calendar-slot"></div>
+            </div>
+          </div>
+
+          <!-- Phase 3: Captions -->
+          <div class="phase-container phase-captions">
+            <div class="caption-card">
+              <div class="caption-header">
+                <div class="caption-thumb"></div>
+                <div class="caption-meta">
+                  <span class="caption-platform">Instagram &middot; Monday</span>
+                  <span class="caption-pillar-tag">Energy</span>
+                </div>
+              </div>
+              <div class="caption-text">
+                <div class="caption-typing-wrapper"><span class="caption-typing">Ready to feel the burn? Monday morning reformer is calling your name. &#x1F4AA;</span></div>
+                <span class="caption-cursor"></span>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <div class="caption-copy-btn">Copy</div>
+                <span class="caption-copied">&#10003; Copied</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="preview-annotation">
+      <div class="preview-annotation-line"></div>
+      <div class="preview-annotation-text">What you're building today</div>
+      <div class="preview-annotation-line"></div>
+    </div>
+  </div>
 </section>
+
+<div class="hero-divider"></div>
 
 <!-- Wizard -->
 <div class="wizard-wrapper">
@@ -926,6 +1904,10 @@ textarea.text-input {
     <div class="section-eyebrow"><span class="checkmark">&#10003;</span> Step 1</div>
     <h2 class="section-heading">Your Business</h2>
     <p class="section-desc">The basics. Claude Code already has your CLAUDE.md, but the brief needs to know what to name things and where to focus.</p>
+
+    <div class="wizard-hint">
+      <strong>Start typing and watch the page come alive.</strong> Each section unlocks as you go. By the end, you'll have a ready-to-paste brief for Claude Code.
+    </div>
 
     <div class="field-group">
       <label class="field-label" for="businessName">Business Name</label>
@@ -1064,6 +2046,10 @@ textarea.text-input {
       <input type="text" class="text-input" id="customModuleInput" placeholder="Add a custom module">
       <button class="add-btn" id="addModuleBtn">Add</button>
     </div>
+
+    <div class="vision-callout">
+      <p>Content Pipeline is <span class="brass">Module One</span>.<br>Every session adds another.</p>
+    </div>
   </div>
 
 </div>
@@ -1084,7 +2070,8 @@ textarea.text-input {
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-brand">Kaizen Collective</div>
-  <div class="footer-sub">Command Centre Builder &middot; 2026</div>
+  <div class="footer-cta">Paste the brief into Claude Code. Watch it build.</div>
+  <div class="footer-sub">Session 4 &middot; 2026</div>
 </footer>
 
 <script>
@@ -1236,6 +2223,11 @@ function updateProgress() {
    ============================================ */
 $('#businessName').addEventListener('input', (e) => {
   state.businessName = e.target.value;
+  // Update hero preview sidebar with real business name
+  const previewBrand = document.getElementById('previewBrand');
+  if (previewBrand) {
+    previewBrand.textContent = state.businessName.trim() || 'Your Business';
+  }
   checkSectionRequirements();
   debouncedGenerate();
 });
@@ -1637,7 +2629,7 @@ copyBtn.addEventListener('click', async () => {
 
   try {
     await navigator.clipboard.writeText(text);
-    copyBtn.textContent = 'Copied!';
+    copyBtn.textContent = '\u2713 Copied to clipboard';
     copyBtn.classList.add('copied');
 
     setTimeout(() => {
@@ -1655,7 +2647,7 @@ copyBtn.addEventListener('click', async () => {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    copyBtn.textContent = 'Copied!';
+    copyBtn.textContent = '\u2713 Copied to clipboard';
     copyBtn.classList.add('copied');
 
     setTimeout(() => {
@@ -1669,6 +2661,10 @@ copyBtn.addEventListener('click', async () => {
    INITIAL STATE
    ============================================ */
 updateProgress();
+
+/* ============================================
+   HERO PREVIEW BRAND (updates on input)
+   ============================================ */
 </script>
 </body>
 </html>
