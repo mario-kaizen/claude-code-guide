@@ -2512,12 +2512,10 @@ My business: ${businessName} — ${businessDesc} (${industry})
 
 ## IMPORTANT: Setup Instructions
 
-1. Move my CLAUDE.md and DESIGN-SYSTEM.md somewhere safe (e.g. /tmp/) — Next.js scaffolding will overwrite CLAUDE.md
-2. Scaffold the Next.js app in the current directory using: \`npx create-next-app@latest command-centre --typescript --tailwind --eslint --app --src-dir --turbopack --no-git\`
-3. Move my CLAUDE.md and DESIGN-SYSTEM.md INTO the new \`command-centre\` directory
-4. Delete the AGENTS.md file that create-next-app generated (it conflicts with my CLAUDE.md)
-5. Delete any boilerplate SVGs from \`public/\` (next.svg, vercel.svg, file.svg, globe.svg, window.svg)
-6. From now on, work entirely inside the \`command-centre\` directory — that is my project root
+1. Scaffold the Next.js app using: \`npx create-next-app@latest command-centre --typescript --tailwind --eslint --app --src-dir --turbopack --no-git\`
+2. Copy my CLAUDE.md and DESIGN-SYSTEM.md into the new \`command-centre\` directory (this overwrites the generated CLAUDE.md — that's intentional, mine has my business context)
+3. Delete any boilerplate SVGs from \`command-centre/public/\` (next.svg, vercel.svg, etc.)
+4. From now on, work entirely inside the \`command-centre\` directory
 
 ## What to Build
 
