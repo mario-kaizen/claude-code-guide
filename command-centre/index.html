@@ -964,6 +964,51 @@ body {
 }
 
 /* ============================================
+   CONTINUE BUTTONS
+   ============================================ */
+.continue-btn {
+  display: block;
+  width: 100%;
+  margin-top: 32px;
+  padding: 16px 32px;
+  background: transparent;
+  border: 1px solid var(--brass);
+  color: var(--brass);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.3s ease;
+}
+
+.continue-btn:hover:not(.disabled) {
+  background: var(--brass);
+  color: var(--forest-deep);
+}
+
+.continue-btn.disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.continue-btn.generate-btn {
+  background: var(--brass);
+  color: var(--forest-deep);
+  border: 2px solid var(--brass);
+  font-size: 16px;
+  padding: 18px 32px;
+}
+
+.continue-btn.generate-btn:hover {
+  background: var(--brass-light);
+  border-color: var(--brass-light);
+}
+
+/* ============================================
    WIZARD CONTAINER
    ============================================ */
 .wizard-wrapper {
@@ -1931,6 +1976,7 @@ textarea.text-input {
     </div>
 
     <!-- One-liner description removed: CLAUDE.md already has their business context -->
+    <button class="continue-btn disabled" id="continueBtn1" disabled>Continue</button>
   </div>
 
   <!-- Section 2: Content Pillars -->
@@ -1956,6 +2002,7 @@ textarea.text-input {
     </div>
 
     <div class="pill-counter under" id="pillarCounter">0 selected</div>
+    <button class="continue-btn disabled" id="continueBtn2" disabled>Continue</button>
   </div>
 
   <!-- Section 3: Posting Schedule -->
@@ -1998,6 +2045,7 @@ textarea.text-input {
         </div>
       </div>
     </div>
+    <button class="continue-btn disabled" id="continueBtn3" disabled>Continue</button>
   </div>
 
   <!-- Section 4: Brand Voice -->
@@ -2020,6 +2068,7 @@ textarea.text-input {
     <div class="voice-textarea-wrapper" id="voiceTextareaWrapper">
       <textarea class="text-input" id="voiceDescription" placeholder="e.g., Casual, encouraging, uses fitness slang, speaks directly to busy mums who want to feel strong. Short punchy sentences. Never corporate."></textarea>
     </div>
+    <button class="continue-btn disabled" id="continueBtn4" disabled>Continue</button>
   </div>
 
   <!-- Section 5: Future Modules -->
@@ -2047,6 +2096,7 @@ textarea.text-input {
     <div class="vision-callout">
       <p>Content Pipeline is <span class="brass">Module One</span>.<br>Every session adds another.</p>
     </div>
+    <button class="continue-btn generate-btn" id="continueBtn5">Generate My Brief</button>
   </div>
 
 </div>
@@ -2171,30 +2221,28 @@ function checkSectionRequirements() {
     }
   });
 
-  // Scroll to the first newly unlocked section (not the last — avoids skipping past cascade)
-  if (newlyUnlockedSections.length > 0) {
-    const scrollTarget = newlyUnlockedSections[0];
-    const briefAlsoAppearing = unlockedSections.has(5) && !briefSection.classList.contains('visible');
-    if (!briefAlsoAppearing) {
-      setTimeout(() => {
-        scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
-  }
+  // No auto-scroll — Continue buttons handle scrolling
 
-  // Brief section visibility
-  const briefVisible = unlockedSections.has(5);
-  const wasBriefHidden = !briefSection.classList.contains('visible');
-  if (briefVisible) {
-    briefSection.classList.add('visible');
+  // Update Continue button states
+  const btn1 = document.getElementById('continueBtn1');
+  const btn2 = document.getElementById('continueBtn2');
+  const btn3 = document.getElementById('continueBtn3');
+  const btn4 = document.getElementById('continueBtn4');
+  if (s1Complete) { btn1.classList.remove('disabled'); btn1.disabled = false; }
+  else { btn1.classList.add('disabled'); btn1.disabled = true; }
+  if (s2Complete) { btn2.classList.remove('disabled'); btn2.disabled = false; }
+  else { btn2.classList.add('disabled'); btn2.disabled = true; }
+  if (s3Complete) { btn3.classList.remove('disabled'); btn3.disabled = false; }
+  else { btn3.classList.add('disabled'); btn3.disabled = true; }
+  if (s4Complete) { btn4.classList.remove('disabled'); btn4.disabled = false; }
+  else { btn4.classList.add('disabled'); btn4.disabled = true; }
+
+  // Brief section — only show when user clicks "Generate My Brief" (handled by button listener)
+  // But keep generating in background so it's ready when they click
+  if (unlockedSections.has(5)) {
     debouncedGenerate();
-    // Scroll to brief on first reveal
-    if (wasBriefHidden) {
-      setTimeout(() => {
-        briefSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300);
-    }
-  } else {
+  }
+  if (!unlockedSections.has(5)) {
     briefSection.classList.remove('visible');
   }
 
@@ -2671,6 +2719,46 @@ updateProgress();
 /* ============================================
    HERO PREVIEW BRAND (updates on input)
    ============================================ */
+
+/* ============================================
+   CONTINUE BUTTON HANDLERS
+   ============================================ */
+document.getElementById('continueBtn1').addEventListener('click', () => {
+  const target = document.getElementById('section2');
+  if (target && !target.classList.contains('locked')) {
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+});
+
+document.getElementById('continueBtn2').addEventListener('click', () => {
+  const target = document.getElementById('section3');
+  if (target && !target.classList.contains('locked')) {
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+});
+
+document.getElementById('continueBtn3').addEventListener('click', () => {
+  const target = document.getElementById('section4');
+  if (target && !target.classList.contains('locked')) {
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+});
+
+document.getElementById('continueBtn4').addEventListener('click', () => {
+  const target = document.getElementById('section5');
+  if (target && !target.classList.contains('locked')) {
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+});
+
+document.getElementById('continueBtn5').addEventListener('click', () => {
+  briefSection.classList.add('visible');
+  debouncedGenerate();
+  setTimeout(() => {
+    briefSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+});
+
 </script>
 </body>
 </html>
