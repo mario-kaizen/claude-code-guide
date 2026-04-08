@@ -1930,10 +1930,7 @@ textarea.text-input {
       </div>
     </div>
 
-    <div class="field-group">
-      <label class="field-label" for="businessDesc">One-liner Description</label>
-      <input type="text" class="text-input" id="businessDesc" placeholder="e.g., Boutique Pilates studio in Bondi specialising in reformer classes">
-    </div>
+    <!-- One-liner description removed: CLAUDE.md already has their business context -->
   </div>
 
   <!-- Section 2: Content Pillars -->
@@ -2122,7 +2119,7 @@ let completedSections = new Set();
 function checkSectionRequirements() {
   // Section 1 -> 2: business name + industry + description
   const industryVal = state.industry === 'Other' ? state.otherIndustry.trim() : state.industry;
-  const s1Complete = state.businessName.trim() && industryVal && state.businessDesc.trim();
+  const s1Complete = state.businessName.trim() && industryVal;
 
   // Section 2 -> 3: 3+ pillars
   const s2Complete = state.pillars.length >= 3;
@@ -2460,7 +2457,7 @@ function categorizeModules(modules) {
 
 function generateBrief() {
   const businessName = state.businessName.trim() || 'My Business';
-  const businessDesc = state.businessDesc.trim() || 'A fitness business';
+  const businessDesc = '(see CLAUDE.md for full business context)';
   const industry = state.industry === 'Other'
     ? (state.otherIndustry.trim() || 'Fitness')
     : (state.industry || 'Fitness');
