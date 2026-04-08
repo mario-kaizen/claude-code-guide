@@ -2171,10 +2171,9 @@ function checkSectionRequirements() {
     }
   });
 
-  // Scroll to the last newly unlocked section (skip if brief will also appear)
+  // Scroll to the first newly unlocked section (not the last — avoids skipping past cascade)
   if (newlyUnlockedSections.length > 0) {
-    const scrollTarget = newlyUnlockedSections[newlyUnlockedSections.length - 1];
-    // Only scroll to section if brief won't also appear (brief scroll takes priority)
+    const scrollTarget = newlyUnlockedSections[0];
     const briefAlsoAppearing = unlockedSections.has(5) && !briefSection.classList.contains('visible');
     if (!briefAlsoAppearing) {
       setTimeout(() => {
