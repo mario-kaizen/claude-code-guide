@@ -2142,8 +2142,8 @@ const state = {
 /* ============================================
    DOM REFS
    ============================================ */
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => document.querySelectorAll(sel);
+var $ = (sel) => document.querySelector(sel);
+var $$ = (sel) => document.querySelectorAll(sel);
 
 function popPill(pill) {
   pill.classList.remove('pop');
@@ -2272,12 +2272,6 @@ $('#businessName').addEventListener('input', (e) => {
   if (previewBrand) {
     previewBrand.textContent = state.businessName.trim() || 'Your Business';
   }
-  checkSectionRequirements();
-  debouncedGenerate();
-});
-
-$('#businessDesc').addEventListener('input', (e) => {
-  state.businessDesc = e.target.value;
   checkSectionRequirements();
   debouncedGenerate();
 });
